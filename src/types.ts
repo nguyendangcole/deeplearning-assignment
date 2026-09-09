@@ -8,12 +8,14 @@ export type ModalType =
   | 'video-2'
   | 'author-profile';
 
+export type ViewType = 'home' | 'assignment-1' | 'assignment-2' | 'assignment-3';
+
 export interface Assignment {
   id: string;
   modalKey: 'assignment-1' | 'assignment-2' | 'assignment-3';
+  viewKey: 'assignment-1' | 'assignment-2' | 'assignment-3';
   number: string;
-  status: 'Completed' | 'In Progress' | 'Upcoming';
-  statusColor: string;
+  weight?: string;
   title: string;
   subtitle: string;
   tags: string[];

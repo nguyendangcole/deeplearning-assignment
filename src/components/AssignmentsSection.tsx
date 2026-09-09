@@ -1,12 +1,12 @@
 import { ArrowRight } from 'lucide-react';
 import { ASSIGNMENTS } from '../data';
-import { ModalType } from '../types';
+import { ViewType } from '../types';
 
 interface AssignmentsSectionProps {
-  onOpenModal: (type: ModalType) => void;
+  onNavigateView: (view: ViewType) => void;
 }
 
-export default function AssignmentsSection({ onOpenModal }: AssignmentsSectionProps) {
+export default function AssignmentsSection({ onNavigateView }: AssignmentsSectionProps) {
   return (
     <section id="assignments" className="w-full py-12 lg:py-16 bg-[#faf8ff]">
       <div className="max-w-[1140px] mx-auto px-4 lg:px-8 space-y-8">
@@ -24,7 +24,7 @@ export default function AssignmentsSection({ onOpenModal }: AssignmentsSectionPr
             </p>
           </div>
           <span className="font-mono text-[11px] text-[#515f74]">
-            3 Deliverables (2024–2025)
+            3 Core Deliverables · Semester 261
           </span>
         </div>
 
@@ -36,16 +36,16 @@ export default function AssignmentsSection({ onOpenModal }: AssignmentsSectionPr
               className="bg-white p-6 rounded-lg border border-[#eaedff] shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow group"
             >
               <div className="space-y-4">
-                {/* Header row: Number & Status Badge */}
+                {/* Header row: Number & Weight Badge (no in-progress status) */}
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[12px] text-[#515f74] uppercase font-semibold">
                     {asg.number}
                   </span>
-                  <span
-                    className={`px-2.5 py-0.5 font-mono text-[11px] rounded uppercase font-medium ${asg.statusColor}`}
-                  >
-                    {asg.status}
-                  </span>
+                  {asg.weight && (
+                    <span className="px-2.5 py-0.5 font-mono text-[11px] rounded bg-[#eef2ff] text-[#0037b0] font-medium border border-[#eaedff]">
+                      {asg.weight}
+                    </span>
+                  )}
                 </div>
 
                 {/* Title & Short excerpt */}
@@ -70,7 +70,7 @@ export default function AssignmentsSection({ onOpenModal }: AssignmentsSectionPr
                   ))}
                 </div>
 
-                {/* Mini Benchmark Preview */}
+                {/* Specification & Scope Preview */}
                 <div className="p-3 bg-[#f2f3ff] rounded border border-[#eaedff] space-y-1.5 font-mono text-[11px] text-[#515f74]">
                   <div className="flex justify-between items-center">
                     <span>{asg.metrics.label1}</span>
@@ -87,13 +87,16 @@ export default function AssignmentsSection({ onOpenModal }: AssignmentsSectionPr
                 </div>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: View Assignment */}
               <div className="pt-6 mt-4">
                 <button
-                  onClick={() => onOpenModal(asg.modalKey)}
+                  onClick={() => {
+                    onNavigateView(asg.viewKey);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   className="w-full inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-[#e2e7ff] hover:bg-[#0037b0] hover:text-white text-[#131b2e] rounded text-[14px] font-semibold transition-colors cursor-pointer"
                 >
-                  <span>{asg.buttonLabel}</span>
+                  <span>View Assignment</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

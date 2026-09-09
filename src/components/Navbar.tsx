@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
 import { ExternalLink, User, Menu, X } from 'lucide-react';
 import { COURSE_INFO } from '../data';
-import { ModalType } from '../types';
+import { ModalType, ViewType } from '../types';
 
 interface NavbarProps {
   onOpenModal: (type: ModalType) => void;
+  currentView?: ViewType;
+  onNavigateView?: (view: ViewType) => void;
 }
 
-export default function Navbar({ onOpenModal }: NavbarProps) {
+export default function Navbar({ onOpenModal, currentView = 'home', onNavigateView }: NavbarProps) {
   const [activeSection, setActiveSection] = useState<string>('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (currentView !== 'home') return;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const assignmentsEl = document.getElementById('assignments');
@@ -31,13 +35,25 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentView]);
 
-  const scrollTo = (id: string) => {
+  const handleNavClick = (sectionId: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentView !== 'home') {
+      onNavigateView?.('home');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 50);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -46,7 +62,7 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
       <div className="h-16 max-w-[1140px] mx-auto px-4 lg:px-8 flex items-center justify-between">
         {/* Left Branding */}
         <div 
-          onClick={() => scrollTo('hero')} 
+          onClick={() => handleNavClick('hero')} 
           className="flex items-center space-x-3 cursor-pointer group"
         >
           <div className="flex flex-col">
@@ -62,9 +78,9 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
         {/* Desktop Nav Items */}
         <nav className="hidden md:flex items-center space-x-1 font-sans">
           <button
-            onClick={() => scrollTo('hero')}
-            className={`px-3 py-1 text-[13px] rounded transition-colors ${
-              activeSection === 'home'
+            onClick={() => handleNavClick('hero')}
+            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
+              currentView === 'home' && activeSection === 'home'
                 ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
                 : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
             }`}
@@ -72,19 +88,21 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
             Home
           </button>
           <button
-            onClick={() => scrollTo('assignments')}
-            className={`px-3 py-1 text-[13px] rounded transition-colors ${
-              activeSection === 'assignments'
+            onClick={() => handleNavClick('assignments')}
+            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
+              currentView === 'home' && activeSection === 'assignments'
                 ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
+                : currentView !== 'home'
+                ? 'text-[#0037b0] font-medium bg-[#f2f3ff]'
                 : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
             }`}
           >
-            Assignments
+            {currentView !== 'home' ? 'Assignments (Viewing Page)' : 'Assignments'}
           </button>
           <button
-            onClick={() => scrollTo('videos')}
-            className={`px-3 py-1 text-[13px] rounded transition-colors ${
-              activeSection === 'videos'
+            onClick={() => handleNavClick('videos')}
+            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
+              currentView === 'home' && activeSection === 'videos'
                 ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
                 : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
             }`}
@@ -92,9 +110,9 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
             Videos
           </button>
           <button
-            onClick={() => scrollTo('ai-usage')}
-            className={`px-3 py-1 text-[13px] rounded transition-colors ${
-              activeSection === 'ai-usage'
+            onClick={() => handleNavClick('ai-usage')}
+            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
+              currentView === 'home' && activeSection === 'ai-usage'
                 ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
                 : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
             }`}
@@ -118,7 +136,7 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
 
           <button
             onClick={() => onOpenModal('author-profile')}
-            className="w-8 h-8 rounded-full bg-[#0037b0] text-white flex items-center justify-center hover:bg-[#1d4ed8] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0037b0]/40"
+            className="w-8 h-8 rounded-full bg-[#0037b0] text-white flex items-center justify-center hover:bg-[#1d4ed8] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0037b0]/40 cursor-pointer"
             title="Student Profile: Đặng Duy Nguyên"
           >
             <User className="w-4 h-4 text-white" />
@@ -139,25 +157,25 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-[#eaedff] bg-white px-4 py-3 space-y-2">
           <button
-            onClick={() => scrollTo('hero')}
+            onClick={() => handleNavClick('hero')}
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             Home
           </button>
           <button
-            onClick={() => scrollTo('assignments')}
+            onClick={() => handleNavClick('assignments')}
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             Assignments
           </button>
           <button
-            onClick={() => scrollTo('videos')}
+            onClick={() => handleNavClick('videos')}
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             Videos
           </button>
           <button
-            onClick={() => scrollTo('ai-usage')}
+            onClick={() => handleNavClick('ai-usage')}
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             AI Usage
