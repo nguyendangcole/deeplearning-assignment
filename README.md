@@ -5,7 +5,7 @@
 ![HCMUT](https://img.shields.io/badge/HCMUT-VNU--HCM-003366?style=for-the-badge&logo=react)
 ![Course](https://img.shields.io/badge/Course-CO3133%20Deep%20Learning-blue?style=for-the-badge)
 ![Semester](https://img.shields.io/badge/Semester-261%20(2026--2027)-informational?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
 
 **Official Course Project Landing Page & Technical Portfolio**  
 *Faculty of Computer Science and Engineering — Ho Chi Minh City University of Technology (HCMUT)*
@@ -50,24 +50,7 @@ As specified in the **Course Project Handbook (Section 2.1)**, every registered 
 
 The course project consists of **three core assignments** contributing to 100% of the course project grade (BTL):
 
-```mermaid
-gantt
-    title CO3133 Course Project Timeline (Semester 261)
-    dateFormat  YYYY-MM-DD
-    section General
-    Group & Web Skeleton (Gate) :milestone, 2026-09-09, 0d
-    section Assignment 1 (40%)
-    M1 Draft (EDA & Pipeline)  :done, 2026-09-09, 2026-09-23
-    M2 Final (Full Comparison) :active, 2026-09-23, 2026-10-21
-    section Assignment 2 (30%)
-    M1 Dataset Proposal        :2026-10-01, 2026-10-07
-    M2 Draft (Baseline)        :2026-10-07, 2026-10-28
-    M3 Final (Controlled Exp)  :2026-10-28, 2026-11-11
-    section Assignment 3 (30%)
-    M1 Dataset Proposal        :2026-11-11, 2026-11-18
-    M2 Draft (Unimodal/Fusion) :2026-11-18, 2026-11-25
-    M3 Final (Multimodal Exp)  :2026-11-25, 2026-12-02
-```
+
 
 ### Summary of Assignments
 
@@ -190,7 +173,7 @@ deep-learning-&-applications---co3133/
 ## 📬 8. Contact & References
 
 - **Student:** Đặng Duy Nguyên
-- **Email:** `nguyenduydang225@gmail.com`
+- **Email:** `nguyen.dangcolece@hcmut.edu.vn`
 - **GitHub:** [@nguyenduy-dang](https://github.com/nguyenduy-dang) / [@nguyendangcole](https://github.com/nguyendangcole)
 - **Course LMS:** [HCMUT LMS - CO3133](https://lms.hcmut.edu.vn/course/view.php?id=142848)
 - **Course Handbook:** Refer to [handbook-ene.pdf](file:///Users/nguyencolece/Desktop/deep-learning-&-applications---co3133/handbook-ene.pdf) in this repository for detailed course guidelines.
