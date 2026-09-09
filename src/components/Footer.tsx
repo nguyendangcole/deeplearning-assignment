@@ -40,7 +40,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-4 border-t border-[#f2f3ff] flex flex-col sm:flex-row justify-between items-center text-[#515f74] font-mono text-[11px] gap-2">
           <span>Academic Research &amp; Coursework Portfolio</span>
-          <span>Published via Distill-Grade Technical Paper Standard</span>
+          <span></span>
         </div>
       </div>
     </footer>
