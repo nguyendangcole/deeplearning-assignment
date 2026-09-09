@@ -90,7 +90,7 @@ export default function AiUsageModal({ isOpen, onClose }: AiUsageModalProps) {
         {/* Modal Footer */}
         <div className="sticky bottom-0 bg-white px-6 py-4 border-t border-[#eaedff] flex items-center justify-between">
           <span className="font-mono text-[11px] text-[#515f74]">
-            Compliance: HCMUT CSE CO3133
+            Compliance: HCMUT CSE CO3133.   
           </span>
           <button
             onClick={onClose}
