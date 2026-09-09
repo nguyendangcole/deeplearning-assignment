@@ -77,7 +77,7 @@ export default function AuthorProfileModal({ isOpen, onClose }: AuthorProfileMod
               <div>
                 <span className="text-[#131b2e] font-semibold block">Contact &amp; Student Email</span>
                 <p className="text-[#434655] text-[13px] font-mono">
-                  nguyenduydang225@gmail.com
+                 nguyen.dangcolece@hcmut.edu.vn  
                 </p>
               </div>
             </div>
