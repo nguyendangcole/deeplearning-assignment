@@ -48,9 +48,6 @@ export default function Assignment2View({ onNavigate, onOpenModal }: AssignmentV
             <span className="px-2.5 py-1 bg-[#d5e3fc] text-[#001d31] font-mono text-[11px] font-semibold uppercase rounded">
               CO3133 Course Project · Assignment 02
             </span>
-            <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] font-medium rounded border border-[#eaedff]">
-              Weight: 30% of Total Course Project
-            </span>
             <span className="px-2.5 py-1 bg-[#e2e7ff] text-[#0037b0] font-mono text-[11px] font-medium rounded">
               Topic: Large-Scale Data &amp; Specialized Tasks
             </span>

@@ -36,16 +36,11 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
               className="bg-white p-6 rounded-lg border border-[#eaedff] shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow group"
             >
               <div className="space-y-4">
-                {/* Header row: Number & Weight Badge (no in-progress status) */}
+                {/* Header row: Number only */}
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[12px] text-[#515f74] uppercase font-semibold">
                     {asg.number}
                   </span>
-                  {asg.weight && (
-                    <span className="px-2.5 py-0.5 font-mono text-[11px] rounded bg-[#eef2ff] text-[#0037b0] font-medium border border-[#eaedff]">
-                      {asg.weight}
-                    </span>
-                  )}
                 </div>
 
                 {/* Title & Short excerpt */}

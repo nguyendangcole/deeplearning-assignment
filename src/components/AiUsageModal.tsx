@@ -96,7 +96,7 @@ export default function AiUsageModal({ isOpen, onClose }: AiUsageModalProps) {
             onClick={onClose}
             className="px-5 py-2 bg-[#0037b0] text-white rounded text-[14px] font-semibold hover:bg-[#1d4ed8] transition-colors cursor-pointer"
           >
-            Return to Research Page
+            Return to Landing Page
           </button>
         </div>
       </div>
