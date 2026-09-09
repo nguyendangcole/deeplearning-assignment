@@ -27,6 +27,7 @@
 | **Instructor** | Dr. Lê Thành Sách |
 | **Student** | **Đặng Duy Nguyên** (Student ID: `2352821`) |
 | **Program** | Undergraduate Student |
+| **Live Showcase (GitHub Pages)** | **[https://nguyendangcole.github.io/deeplearning-assignment/](https://nguyendangcole.github.io/deeplearning-assignment/)** |
 | **Code Repository**| [nguyendangcole/deeplearning-assignment](https://github.com/nguyendangcole/deeplearning-assignment) |
 
 ---

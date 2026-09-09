@@ -90,20 +90,28 @@ export default function AuthorProfileModal({ isOpen, onClose }: AuthorProfileMod
             </p>
           </div>
 
-          <div className="pt-2 flex gap-3">
+          <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
             <a
-              href={COURSE_INFO.githubUrl}
+              href={COURSE_INFO.liveUrl}
               target="_blank"
               rel="noreferrer"
               className="flex-1 inline-flex items-center justify-center space-x-2 py-2.5 bg-[#0037b0] text-white rounded font-semibold text-[13px] hover:bg-[#1d4ed8] transition-colors"
             >
-              <Code className="w-4 h-4" />
-              <span>GitHub Profile</span>
+              <span>Live Portfolio (.github.io)</span>
               <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href={COURSE_INFO.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-[#f2f3ff] text-[#131b2e] border border-[#eaedff] rounded font-semibold text-[13px] hover:bg-[#e6e8ff] transition-colors"
+            >
+              <Code className="w-4 h-4" />
+              <span>GitHub</span>
             </a>
             <button
               onClick={onClose}
-              className="px-5 py-2.5 bg-[#eaedff] text-[#131b2e] hover:bg-[#d5e3fc] rounded font-semibold text-[13px] transition-colors cursor-pointer"
+              className="px-4 py-2.5 bg-[#eaedff] text-[#131b2e] hover:bg-[#d5e3fc] rounded font-semibold text-[13px] transition-colors cursor-pointer"
             >
               Close
             </button>

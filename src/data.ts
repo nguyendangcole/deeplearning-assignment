@@ -16,6 +16,7 @@ export const COURSE_INFO = {
   program: 'Undergraduate student',
   githubUrl: 'https://github.com/nguyenduy-dang',
   repoUrl: 'https://github.com/nguyendangcole/deeplearning-assignment',
+  liveUrl: 'https://nguyendangcole.github.io/deeplearning-assignment/',
   abstract:
     'Course project landing page presenting three core Deep Learning research assignments developed throughout Semester 261. The technical portfolio spans mathematical derivations of custom gradient pipelines, empirical benchmarking across modern convolutional and sequence networks, scaling methodologies on distributed data regimes, and cross-modal attention representation frameworks.',
 };
