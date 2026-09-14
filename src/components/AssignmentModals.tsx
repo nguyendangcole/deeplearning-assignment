@@ -97,13 +97,6 @@ export default function AssignmentModals({
                     <span>GitHub Codebase</span>
                   </a>
                   <button
-                    onClick={() => onOpenVideo('video-1')}
-                    className="hover:underline flex items-center gap-1 font-medium text-[#0037b0] cursor-pointer"
-                  >
-                    <Play className="w-3.5 h-3.5" />
-                    <span>Presentation Video (12:40)</span>
-                  </button>
-                  <button
                     onClick={handleCopyBibtex}
                     className="hover:underline flex items-center gap-1 font-medium text-[#515f74] cursor-pointer"
                   >
@@ -298,15 +291,8 @@ export default function AssignmentModals({
                   3. Defense Video Presentation
                 </h3>
                 <p className="text-[#434655]">
-                  A 15-minute technical recording detailing distributed multi-GPU training setup and loss curves is available:
+                  The technical defense walkthrough detailing distributed multi-GPU training setup and loss curves will be recorded and published upon final benchmark completion.
                 </p>
-                <button
-                  onClick={() => onOpenVideo('video-2')}
-                  className="inline-flex items-center space-x-2 px-4 py-2 bg-[#eaedff] text-[#0037b0] hover:bg-[#d5e3fc] rounded font-semibold text-[14px] cursor-pointer"
-                >
-                  <Play className="w-4 h-4 fill-[#0037b0]" />
-                  <span>Watch Assignment 02 Presentation (15:20)</span>
-                </button>
               </section>
             </div>
 

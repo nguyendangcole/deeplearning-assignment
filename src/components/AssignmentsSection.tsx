@@ -14,82 +14,49 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div className="space-y-1.5">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase tracking-wider block">
-              Project Portfolio
+              Course Work
             </span>
             <h2 className="font-serif text-[28px] text-[#131b2e] font-medium tracking-tight">
-              Assignments &amp; Research Modules
+              Assignments
             </h2>
             <p className="text-[15px] text-[#434655] max-w-[68ch]">
-              Three core course assignments spanning custom deep learning foundations, large-scale architectures, and multimodal cross-attention.
+              Three core course assignments for Deep Learning and Its Applications (CO3133).
             </p>
           </div>
           <span className="font-mono text-[11px] text-[#515f74]">
-            3 Core Deliverables · Semester 261
+            Semester 261
           </span>
         </div>
 
-        {/* 3 Research Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3 Streamlined Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {ASSIGNMENTS.map((asg) => (
             <div
               key={asg.id}
-              className="bg-white p-6 rounded-lg border border-[#eaedff] shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow group"
+              className="bg-white p-6 rounded-xl border border-[#eaedff] shadow-xs flex flex-col justify-between hover:shadow-md hover:border-[#d0d7ff] transition-all group"
             >
-              <div className="space-y-4">
-                {/* Header row: Number only */}
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[12px] text-[#515f74] uppercase font-semibold">
-                    {asg.number}
-                  </span>
-                </div>
+              <div className="space-y-3">
+                <span className="font-mono text-[12px] text-[#0037b0] uppercase font-semibold block">
+                  {asg.number}
+                </span>
 
-                {/* Title & Short excerpt */}
-                <div className="space-y-2">
-                  <h3 className="text-[18px] font-semibold text-[#131b2e] group-hover:text-[#0037b0] transition-colors leading-snug">
-                    {asg.title}
-                  </h3>
-                  <p className="text-[13px] text-[#434655] line-clamp-2 leading-relaxed">
-                    {asg.subtitle}
-                  </p>
-                </div>
-
-                {/* Technical Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-1 font-mono text-[11px] text-[#515f74]">
-                  {asg.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-[#f2f3ff] rounded border border-[#eaedff]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Specification & Scope Preview */}
-                <div className="p-3 bg-[#f2f3ff] rounded border border-[#eaedff] space-y-1.5 font-mono text-[11px] text-[#515f74]">
-                  <div className="flex justify-between items-center">
-                    <span>{asg.metrics.label1}</span>
-                    <span className="font-semibold text-[#131b2e]">
-                      {asg.metrics.value1}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>{asg.metrics.label2}</span>
-                    <span className="font-semibold text-[#131b2e]">
-                      {asg.metrics.value2}
-                    </span>
-                  </div>
-                </div>
+                <h3 className="text-[17px] font-semibold text-[#131b2e] group-hover:text-[#0037b0] transition-colors leading-snug">
+                  {asg.title}
+                </h3>
+                
+                <p className="text-[13px] text-[#515f74] leading-relaxed">
+                  {asg.subtitle}
+                </p>
               </div>
 
               {/* Action Button: View Assignment */}
-              <div className="pt-6 mt-4">
+              <div className="pt-6 mt-2">
                 <button
                   onClick={() => {
                     onNavigateView(asg.viewKey);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="w-full inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-[#e2e7ff] hover:bg-[#0037b0] hover:text-white text-[#131b2e] rounded text-[14px] font-semibold transition-colors cursor-pointer"
+                  className="w-full inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-[#e2e7ff] hover:bg-[#0037b0] hover:text-white text-[#0037b0] rounded-lg text-[13px] font-semibold transition-colors cursor-pointer"
                 >
                   <span>View Assignment</span>
                   <ArrowRight className="w-4 h-4" />

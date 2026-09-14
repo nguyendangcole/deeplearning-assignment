@@ -1,4 +1,22 @@
-import { ArrowLeft, ExternalLink, FileText, Github, CheckCircle2, Database, Cpu, Layers, GitBranch, ShieldCheck } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  ExternalLink, 
+  FileText, 
+  Github, 
+  Layers, 
+  Database, 
+  Cpu, 
+  GitBranch, 
+  ShieldCheck, 
+  Terminal, 
+  BarChart3, 
+  AlertCircle, 
+  HelpCircle, 
+  Users, 
+  Video, 
+  BookOpen,
+  Clock
+} from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
 
@@ -7,7 +25,7 @@ interface AssignmentViewProps {
   onOpenModal?: (type: ModalType) => void;
 }
 
-export default function Assignment3View({ onNavigate, onOpenModal }: AssignmentViewProps) {
+export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
   return (
     <div className="min-h-screen bg-[#faf8ff] text-[#131b2e] pb-24">
       {/* Top Breadcrumbs & Navigation Bar */}
@@ -35,53 +53,84 @@ export default function Assignment3View({ onNavigate, onOpenModal }: AssignmentV
         </div>
       </div>
 
-      <div className="max-w-[1140px] mx-auto px-4 lg:px-8 pt-8 space-y-8">
-        {/* Header Title Section */}
+      <div className="max-w-[1140px] mx-auto px-4 lg:px-8 pt-8 space-y-6">
+        
+        {/* =========================================================================
+            1. ASSIGNMENT TITLE & BASIC INFORMATION (Item 1, 2, 3)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-1 bg-[#d5e3fc] text-[#001d31] font-mono text-[11px] font-semibold uppercase rounded">
               CO3133 Course Project · Assignment 03
             </span>
             <span className="px-2.5 py-1 bg-[#e2e7ff] text-[#0037b0] font-mono text-[11px] font-medium rounded">
-              Topic: Multimodal Deep Learning
+              Weight: 30%
+            </span>
+            <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] font-medium rounded">
+              Semester 261
             </span>
           </div>
 
-          <div className="space-y-3">
-            <h1 className="font-serif text-[28px] sm:text-[34px] font-medium text-[#131b2e] tracking-tight leading-snug">
-              Multimodal Deep Learning: Representation, Fusion, and Evaluation
+          <div className="space-y-2">
+            {/* Item 1: Assignment Title */}
+            <h1 className="font-serif text-[28px] sm:text-[32px] font-medium text-[#131b2e] tracking-tight leading-snug">
+              Assignment 3: Multimodal Deep Learning
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#434655] leading-relaxed max-w-[85ch]">
-              Designing, training, and benchmarking an end-to-end multimodal architecture operating on at least two genuinely paired modalities. Contrasts unimodal baselines against simple and advanced cross-modal fusion strategies, isolating modality support vs. conflict scenarios.
+            <p className="text-[15px] text-[#0037b0] font-medium">
+              Topic: Multimodal Deep Learning: Representation, Fusion, and Evaluation
             </p>
           </div>
 
-          {/* Academic Metadata Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Student Author</span>
-              <span className="font-semibold text-[#131b2e]">{COURSE_INFO.author}</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">ID: {COURSE_INFO.studentId}</span>
+          {/* Item 2 & 3: Group Members & Instructor */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Users className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Group Member(s)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">{COURSE_INFO.author}</div>
+              <div className="font-mono text-[11px] text-[#515f74]">Student ID: {COURSE_INFO.studentId}</div>
+              <a 
+                href={COURSE_INFO.githubUrl} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center text-[11px] text-[#0037b0] hover:underline font-mono"
+              >
+                <span>GitHub Profile</span>
+                <ExternalLink className="w-2.5 h-2.5 ml-0.5" />
+              </a>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Instructor</span>
-              <span className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">HCMUT CSE</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <BookOpen className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Instructor</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</div>
+              <div className="text-[11px] text-[#515f74]">Faculty of Computer Science and Engineering, HCMUT</div>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Milestone 1 (Proposal)</span>
-              <span className="font-semibold text-[#131b2e]">18 Nov 2026 (15%)</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">Multimodal Task &amp; Data Proposal</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Milestone 1 (Proposal)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">18 Nov 2026</div>
+              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 15% of A3</div>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Milestone 3 (Final)</span>
-              <span className="font-semibold text-[#131b2e]">02 Dec 2026 (60%)</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">Cross-Modal Fusion &amp; Defense</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Milestone 3 (Final)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">02 Dec 2026</div>
+              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 60% of A3</div>
             </div>
           </div>
 
-          {/* Quick Deliverable Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Quick Deliverable Action Links */}
+          <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
               href={COURSE_INFO.repoUrl}
               target="_blank"
@@ -89,17 +138,9 @@ export default function Assignment3View({ onNavigate, onOpenModal }: AssignmentV
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
             >
               <Github className="w-4 h-4" />
-              <span>Source Code Repository</span>
+              <span>Source Code Repo</span>
               <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
             </a>
-
-            <button
-              onClick={() => onOpenModal?.('ai-usage')}
-              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#0037b0]" />
-              <span>AI Disclosure Log</span>
-            </button>
 
             <a
               href="handbook-ene.pdf"
@@ -108,140 +149,227 @@ export default function Assignment3View({ onNavigate, onOpenModal }: AssignmentV
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff]"
             >
               <FileText className="w-4 h-4" />
-              <span>Handbook Spec (PDF)</span>
+              <span>Course Handbook (PDF)</span>
             </a>
           </div>
         </div>
 
-        {/* Notice Badge */}
-        <div className="p-4 bg-[#eef2ff] border-l-4 border-[#0037b0] rounded-r-lg text-[13px] text-[#3b4758] flex items-start space-x-3">
-          <CheckCircle2 className="w-5 h-5 text-[#0037b0] shrink-0 mt-0.5" />
-          <div>
-            <span className="font-semibold text-[#131b2e] block">Week 3 Gate Milestone: Specification &amp; Multimodal Task Options</span>
-            <p className="mt-0.5 leading-relaxed">
-              Assignment 03 explores multimodal representation and fusion scheduled for the second half of Semester 261. Formal proposals will be submitted at Milestone M1 (18 Nov 2026).
-            </p>
-          </div>
-        </div>
-
-        {/* Section 1: Candidate Multimodal Task Options */}
-        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-4">
-            <Layers className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              1. Candidate Multimodal Task Options (Section 26)
+        {/* =========================================================================
+            4. PROBLEM STATEMENT (Item 4)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <BookOpen className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Problem Statement
             </h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 1</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Image–Text Classification</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                ≥ 5 semantic classes, ≥ 5,000 paired image–text instances. Joint representation learning for multi-label or categorical predictions.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 2</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Image–Text Retrieval</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Contrastive learning (CLIP-like objective) across shared embedding spaces. Metrics: Recall@1, Recall@5, Recall@10, Median Rank.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 3</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Visual Question Answering (VQA)</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                ≥ 10,000 question–image pairs. Requires bidirectional co-attention to locate image regions relevant to question phrases.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 4</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Image Captioning</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Autoregressive natural language generation conditioned on visual encodings. Metrics: CIDEr, BLEU-4, METEOR.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 5</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">RGB–Depth Scene Prediction</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                ≥ 5,000 spatially aligned RGB and Depth maps. Explores depth-guided semantic segmentation or 3D bounding-box estimation.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Option 6</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Video–Text Retrieval</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Temporal video frame sequence encoding paired with textual query descriptions using cross-modal transformer encoders.
-              </p>
-            </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Nội dung chi tiết về bài toán đa phương thức (Multimodal Task Selection: Image-Text classification, VQA, Captioning, Retrieval,...), bản chất tương tác giữa các phương thức (Modality interaction: support vs. conflict) đang được chuẩn bị.
           </div>
         </div>
 
-        {/* Section 2: Four Mandatory Benchmark Models */}
+        {/* =========================================================================
+            5. DATASET DESCRIPTION AND EDA (Item 5)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-4">
-            <Cpu className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              2. Mandatory Four-Model Comparative Framework (Section 29)
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Database className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Dataset Description &amp; EDA
             </h2>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-[13px]">
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1.5">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] block uppercase">Model 1</span>
-              <span className="font-semibold text-[#131b2e] block">Unimodal Baseline A</span>
-              <span className="text-[#515f74] text-[12px] block">Trained exclusively on Modality A (e.g. Vision-only)</span>
-            </div>
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1.5">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] block uppercase">Model 2</span>
-              <span className="font-semibold text-[#131b2e] block">Unimodal Baseline B</span>
-              <span className="text-[#515f74] text-[12px] block">Trained exclusively on Modality B (e.g. Text-only)</span>
-            </div>
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1.5">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] block uppercase">Model 3</span>
-              <span className="font-semibold text-[#131b2e] block">Simple Fusion Baseline</span>
-              <span className="text-[#515f74] text-[12px] block">Direct vector concatenation or linear projection combination</span>
-            </div>
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1.5">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] block uppercase">Model 4</span>
-              <span className="font-semibold text-[#131b2e] block">Advanced Cross-Modal Model</span>
-              <span className="text-[#515f74] text-[12px] block">Cross-attention, bilinear pooling, or alignment loss</span>
-            </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Mô tả tập dữ liệu đa phương thức (≥ 5,000 cặp dữ liệu liên kết thực tế, kiểm tra chất lượng cặp dữ liệu, phân tích phân bố và chiến lược phân chia chống rò rỉ) đang được chuẩn bị theo Milestone M1 Proposal.
           </div>
         </div>
 
-        {/* Section 3: Modality Interaction Protocol */}
+        {/* =========================================================================
+            6. METHODOLOGY (Item 6)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
             <GitBranch className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              3. Modality Interaction &amp; Ablation Protocol (Section 30)
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Methodology
             </h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13px] text-[#434655]">
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-semibold text-[#131b2e] block">Complementary Evidence (Support Cases):</span>
-              <p className="leading-relaxed">
-                Identifying cases where neither modality alone succeeds, but joint fusion produces accurate predictions.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-semibold text-[#131b2e] block">Conflicting Evidence (Noise &amp; Misalignment):</span>
-              <p className="leading-relaxed">
-                Analyzing scenarios where one noisy modality degrades the stronger modality, and evaluating attention weights.
-              </p>
-            </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Phương pháp nghiên cứu (Bộ mã hóa Unimodal Baselines, chiến lược dung hợp Simple Fusion Baseline, mô hình nâng cao Improved Multimodal Fusion, hàm mất mát liên phương thức) đang được thiết kế.
           </div>
         </div>
+
+        {/* =========================================================================
+            7. EXPERIMENTAL SETUP (Item 7)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Cpu className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Experimental Setup
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Thiết lập thực nghiệm (Môi trường huấn luyện, siêu tham số, thiết kế các nhánh so sánh Unimodal vs. Multimodal và nghiên cứu cắt bỏ thành phần dung hợp) đang được chuẩn bị.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            8. RESULTS (Item 8)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <BarChart3 className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Results
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Bảng kết quả định lượng (So sánh Unimodal A, Unimodal B, Simple Fusion và Improved Multimodal Model) cùng các ví dụ dự đoán trực quan sẽ được cập nhật khi có kết quả chạy thực nghiệm.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            9. COMPARISON AND DISCUSSION (Item 9)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Layers className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Comparison and Discussion
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Phân tích so sánh (Trường hợp các phương thức bổ trợ lẫn nhau Support cases vs. xung đột dữ liệu Conflict cases, kết quả nghiên cứu cắt bỏ Ablation study) sẽ được cập nhật khi hoàn thành thực nghiệm.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            10. ERROR ANALYSIS (Item 10)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <AlertCircle className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Error Analysis
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Phân tích lỗi (Các ca dự đoán sai do lệch phương thức, nhiễu dữ liệu hoặc giới hạn cơ chế Attention) đang được tiến hành.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            11. LIMITATIONS AND CONCLUSION (Item 11)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <HelpCircle className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Limitations and Conclusion
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Giới hạn của bài toán đa phương thức, chi phí tính toán và kết luận tổng quan toàn bộ đề tài đang được hoàn thiện.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            12. LINK TO SOURCE CODE (Item 12)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Github className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Source Code
+            </h2>
+          </div>
+          <div className="flex items-center justify-between p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px]">
+            <span className="text-[#434655]">GitHub Source Code Repository:</span>
+            <a
+              href={COURSE_INFO.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-1.5 text-[#0037b0] hover:underline font-mono text-[12px] font-semibold"
+            >
+              <span>{COURSE_INFO.repoUrl}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            13. LINK TO CHECKPOINTS OR REPRODUCTION (Item 13)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Terminal className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Checkpoint(s) / Reproduction Instructions
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Liên kết tải model checkpoints và hướng dẫn tái lập huấn luyện đa phương thức sẽ được cập nhật khi hoàn thành các mô hình.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            14. LINK TO REPORT / SLIDES (Item 14)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <FileText className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Report / Slides
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Báo cáo kỹ thuật (Report PDF) và slide trình bày (Slides) sẽ được đính kèm tại đây trước hạn chót Milestone M3 Final.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            15. LINK TO YOUTUBE PRESENTATION VIDEO (Item 15)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Video className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to YouTube Presentation Video
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74] space-y-1">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">Status: In Progress</span>
+            <p>Video thuyết trình sẽ được tải lên YouTube và gắn link tại đây theo định dạng tiêu đề chuẩn: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 3</code>.</p>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            16. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Item 16)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <ShieldCheck className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Assignment-Specific AI Usage Disclosure
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Nhật ký khai báo sử dụng các công cụ AI cho Assignment 3 sẽ được ghi nhận và cập nhật đầy đủ trong quá trình triển khai bài tập.
+          </div>
+        </div>
+
       </div>
     </div>
   );

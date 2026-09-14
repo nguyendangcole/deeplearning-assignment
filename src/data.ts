@@ -75,39 +75,21 @@ export const ASSIGNMENTS: Assignment[] = [
 export const VIDEO_PRESENTATIONS: VideoPresentation[] = [
   {
     id: 'vid-01',
-    modalKey: 'video-1',
     assignmentTag: 'ASSIGNMENT 01 DEFENSE',
     title: 'Foundations & Benchmark Walkthrough',
     description:
       'Mathematical review of custom backward pass with comparative empirical CIFAR-10 classification tables.',
-    duration: '12:40',
-    thumbnailUrl:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAbv-p-sQPIVQt-m7EJwoMZqwdgkOuC2eBu8bew54CBqQzTmv9V9Z-olwL8kM0NlExc4olbgncvsIFhN1u3jCQEWLDBioYTb7Gq6hJKNLvr577Ila5iXJzExIO1XiJpplV0GT9qkZWqyA6Y9ifkcdoC8p9y7a_okuo-n3Uy7JpCj_72jtsrnjgxxRXvieKhZdgJV_IN0Lyr06LpUUKFc9yclf_cqww9ugyfBuwB09Te5dlF40UgzqDP2A',
-    isUpcoming: false,
-    chapters: [
-      { time: '00:00', title: 'Problem Formulation & CIFAR-10 Pipeline' },
-      { time: '03:15', title: 'Manual Matrix Derivatives vs PyTorch Autograd' },
-      { time: '07:40', title: 'Empirical Benchmark Table (MLP vs LeNet vs ResNet-18)' },
-      { time: '10:20', title: 'Error Analysis & Gradient Norm Vanishing Proof' },
-    ],
+    duration: 'TBD',
+    isUpcoming: true,
   },
   {
     id: 'vid-02',
-    modalKey: 'video-2',
     assignmentTag: 'ASSIGNMENT 02 DEFENSE',
     title: 'Large-Scale Training & Specialized Tasks',
     description:
       'Distributed data-parallel scaling, gradient accumulation ablation, and vision transformer convergence.',
-    duration: '15:20',
-    thumbnailUrl:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD5Se0lTeNA6rHiqUQOt_qzuTcFbFM3PE317bLlR9IXXxXDW--SLXLiHkyxKATNh_gQV5GHto9D7eedSXd9zXexihBa9inDAkmaStfNbECcONVRCVQ1BbrwbZKPHFoXr3M7WFnUSbmH0CWcG1SB3oePJHtcLJ7Lu-LxEP9zpMwjq7TNKgNbEfr7J-mdaM0gCqGKwszShjrE9Gc8CAXWA56xVZBMLW8eWHzfXwUPPcwCX3iZx0Co9el5kQ',
-    isUpcoming: false,
-    chapters: [
-      { time: '00:00', title: 'Distributed Cluster Configuration (4x NVIDIA A100)' },
-      { time: '04:10', title: 'AMP Mixed Precision (FP16/BF16) Speedups' },
-      { time: '09:30', title: 'Vision Transformer vs ConvNeXt Scaling Curves' },
-      { time: '13:00', title: 'Mid-term Checkpoint Analysis & Epoch 45 Results' },
-    ],
+    duration: 'TBD',
+    isUpcoming: true,
   },
   {
     id: 'vid-03',

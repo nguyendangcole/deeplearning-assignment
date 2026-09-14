@@ -1,4 +1,22 @@
-import { ArrowLeft, ExternalLink, FileText, Github, Play, CheckCircle2, Database, Cpu, Layers, GitBranch, ShieldCheck } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  ExternalLink, 
+  FileText, 
+  Github, 
+  Layers, 
+  Database, 
+  Cpu, 
+  GitBranch, 
+  ShieldCheck, 
+  Terminal, 
+  BarChart3, 
+  AlertCircle, 
+  HelpCircle, 
+  Users, 
+  Video, 
+  BookOpen,
+  Clock
+} from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
 
@@ -36,53 +54,84 @@ export default function Assignment1View({ onNavigate, onOpenModal }: AssignmentV
         </div>
       </div>
 
-      <div className="max-w-[1140px] mx-auto px-4 lg:px-8 pt-8 space-y-8">
-        {/* Header Title Section */}
+      <div className="max-w-[1140px] mx-auto px-4 lg:px-8 pt-8 space-y-6">
+        
+        {/* =========================================================================
+            1. ASSIGNMENT TITLE & BASIC INFORMATION (Item 1, 2, 3)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-1 bg-[#d5e3fc] text-[#001d31] font-mono text-[11px] font-semibold uppercase rounded">
               CO3133 Course Project · Assignment 01
             </span>
             <span className="px-2.5 py-1 bg-[#e2e7ff] text-[#0037b0] font-mono text-[11px] font-medium rounded">
-              Topic: Foundations of DL Pipelines &amp; Architectures
+              Weight: 40%
+            </span>
+            <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] font-medium rounded">
+              Semester 261
             </span>
           </div>
 
-          <div className="space-y-3">
-            <h1 className="font-serif text-[28px] sm:text-[34px] font-medium text-[#131b2e] tracking-tight leading-snug">
-              From Linear Models to Modern Sequence Models: A Comparative Study for Image Classification
+          <div className="space-y-2">
+            {/* Item 1: Assignment Title */}
+            <h1 className="font-serif text-[28px] sm:text-[32px] font-medium text-[#131b2e] tracking-tight leading-snug">
+              Assignment 1: Foundations of Deep Learning Pipelines and Architectures
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#434655] leading-relaxed max-w-[85ch]">
-              An end-to-end empirical study constructing a modular deep learning pipeline in PyTorch to train, benchmark, and analyze five distinct neural architecture families under strict fairness protocols on Fashion-MNIST.
+            <p className="text-[15px] text-[#0037b0] font-medium">
+              Topic: From Linear Models to Modern Sequence Models: A Comparative Study for Image Classification
             </p>
           </div>
 
-          {/* Academic Metadata Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Student Author</span>
-              <span className="font-semibold text-[#131b2e]">{COURSE_INFO.author}</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">ID: {COURSE_INFO.studentId}</span>
+          {/* Item 2 & 3: Group Members & Instructor */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Users className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Group Member(s)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">{COURSE_INFO.author}</div>
+              <div className="font-mono text-[11px] text-[#515f74]">Student ID: {COURSE_INFO.studentId}</div>
+              <a 
+                href={COURSE_INFO.githubUrl} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center text-[11px] text-[#0037b0] hover:underline font-mono"
+              >
+                <span>GitHub Profile</span>
+                <ExternalLink className="w-2.5 h-2.5 ml-0.5" />
+              </a>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Instructor</span>
-              <span className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">HCMUT CSE</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <BookOpen className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Instructor</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</div>
+              <div className="text-[11px] text-[#515f74]">Faculty of Computer Science and Engineering, HCMUT</div>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Milestone 1 (Draft)</span>
-              <span className="font-semibold text-[#131b2e]">23 Sep 2026 (25%)</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">EDA, Pipeline, Linear/MLP</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Milestone 1 (Draft)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">23 Sep 2026</div>
+              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 25% of A1</div>
             </div>
-            <div>
-              <span className="block font-mono text-[11px] text-[#515f74] uppercase">Milestone 2 (Final)</span>
-              <span className="font-semibold text-[#131b2e]">21 Oct 2026 (75%)</span>
-              <span className="block font-mono text-[11px] text-[#515f74]">All 5 Models, Report &amp; Video</span>
+
+            <div className="space-y-1">
+              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
+                <span>Milestone 2 (Final)</span>
+              </span>
+              <div className="font-semibold text-[#131b2e]">21 Oct 2026</div>
+              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 75% of A1</div>
             </div>
           </div>
 
-          {/* Quick Deliverable Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Quick Deliverable Action Links */}
+          <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
               href={COURSE_INFO.repoUrl}
               target="_blank"
@@ -90,25 +139,9 @@ export default function Assignment1View({ onNavigate, onOpenModal }: AssignmentV
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
             >
               <Github className="w-4 h-4" />
-              <span>Source Code Repository</span>
+              <span>Source Code Repo</span>
               <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
             </a>
-
-            <button
-              onClick={() => onOpenModal?.('video-1')}
-              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#e2e7ff] hover:bg-[#d0d7ff] text-[#0037b0] rounded-lg text-[13px] font-medium transition-colors cursor-pointer"
-            >
-              <Play className="w-4 h-4" />
-              <span>Watch Defense Video</span>
-            </button>
-
-            <button
-              onClick={() => onOpenModal?.('ai-usage')}
-              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#0037b0]" />
-              <span>AI Disclosure Log</span>
-            </button>
 
             <a
               href="handbook-ene.pdf"
@@ -117,277 +150,227 @@ export default function Assignment1View({ onNavigate, onOpenModal }: AssignmentV
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff]"
             >
               <FileText className="w-4 h-4" />
-              <span>Handbook Spec (PDF)</span>
+              <span>Course Handbook (PDF)</span>
             </a>
           </div>
         </div>
 
-        {/* Notice Badge */}
-        <div className="p-4 bg-[#eef2ff] border-l-4 border-[#0037b0] rounded-r-lg text-[13px] text-[#3b4758] flex items-start space-x-3">
-          <CheckCircle2 className="w-5 h-5 text-[#0037b0] shrink-0 mt-0.5" />
-          <div>
-            <span className="font-semibold text-[#131b2e] block">Week 3 Gate Milestone: Specification &amp; Architecture Showcase</span>
-            <p className="mt-0.5 leading-relaxed">
-              This page defines the formal specifications, dataset splits, architecture criteria, and evaluation rubrics for Assignment 01 as prescribed in the Course Project Handbook. Experimental benchmarks and artifact checkpoints will be populated upon completing Milestones M1 (Draft) and M2 (Final).
-            </p>
-          </div>
-        </div>
-
-        {/* Section 1: Five Mandatory Architecture Families */}
-        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-4">
-            <Layers className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              1. Five Mandatory Deep Learning Architecture Families
+        {/* =========================================================================
+            4. PROBLEM STATEMENT (Item 4)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <BookOpen className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Problem Statement
             </h2>
           </div>
-
-          <p className="text-[14px] text-[#434655] leading-relaxed">
-            As mandated by Section 11.1 of the handbook, all five models must be implemented, trained from scratch, and systematically compared under identical training/validation splits and random seeds:
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Model 1</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Linear / Softmax Classifier</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Flattens 28×28 input images into 784-dimensional vectors. Direct linear projection producing 10 logits trained with Cross-Entropy loss without redundant prior softmax.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Parameters: ~7,850 weights
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Model 2</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Multilayer Perceptron (MLP)</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Deep fully connected network with non-linear activation functions (ReLU/GELU), Dropout, and LayerNorm/BatchNorm to explore non-linear representation capacity.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Hidden Layers: ≥ 2 layers
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Model 3</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Convolutional Neural Network (CNN)</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Self-designed custom architecture leveraging translation invariance, local receptive fields, 2D convolution kernels, pooling layers, and spatial feature hierarchies.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Inductive Bias: Spatial translation
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Model 4</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Recurrent Network (LSTM / GRU)</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Treats 2D images as sequences of rows (28 timesteps × 28 features) or patches. Evaluates sequential memory mechanisms and vanishing/exploding gradient behavior.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Sequential modeling of 2D pixels
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase">Model 5</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Vision Transformer (ViT)</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Patch projection / row token embeddings paired with learned 1D positional encodings and multi-head self-attention mechanisms to test global context learning without conv inductive bias.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Self-Attention &amp; Positional Encodings
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[#515f74] uppercase">Optional Extensions</span>
-              <h3 className="font-semibold text-[#131b2e] text-[15px]">Robustness &amp; Ablation</h3>
-              <p className="text-[13px] text-[#515f74] leading-relaxed">
-                Ablation studies comparing LSTM vs. GRU, Mamba state-space models, parameter-matched budget comparisons, and perturbation noise robustness tests.
-              </p>
-              <div className="font-mono text-[11px] text-[#515f74] pt-2 border-t border-[#eaedff]">
-                Controlled budget matching
-              </div>
-            </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Nội dung chi tiết về bài toán (Problem Formulation, Real-world motivation, Input/Output, Mathematical formulation, và các khó khăn chính) đang được cập nhật.
           </div>
         </div>
 
-        {/* Section 2: Pipeline & Dataset Protocol */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Dataset Card */}
-          <div className="bg-white p-6 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-            <div className="flex items-center space-x-2 text-[#0037b0]">
-              <Database className="w-5 h-5" />
-              <h3 className="font-serif text-[18px] font-medium text-[#131b2e]">Dataset Requirements &amp; EDA</h3>
-            </div>
-            <ul className="space-y-2.5 text-[13px] text-[#434655]">
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Primary Dataset:</span>
-                <span>Fashion-MNIST (10 classes, 60,000 train, 10,000 test, 28×28 grayscale).</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Debugging Dataset:</span>
-                <span>MNIST used solely for development sanity and autograd checks.</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Splitting Strategy:</span>
-                <span>Stratified 80/20 train-validation split with fixed seed across all 5 models to guarantee zero data leakage.</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Preprocessing:</span>
-                <span>Normalization (mean=0.2860, std=0.3530), random horizontal flip, and tensor resizing.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Fairness Constraints Card */}
-          <div className="bg-white p-6 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-            <div className="flex items-center space-x-2 text-[#0037b0]">
-              <Cpu className="w-5 h-5" />
-              <h3 className="font-serif text-[18px] font-medium text-[#131b2e]">Fairness &amp; Evaluation Constraints</h3>
-            </div>
-            <ul className="space-y-2.5 text-[13px] text-[#434655]">
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Beyond Accuracy:</span>
-                <span>Evaluation mandates Macro-F1, parameter counts, training wall-clock time, and inference throughput (ms/sample).</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Fixed Seed:</span>
-                <span>Deterministic reproducibility for weight initialization, batch shuffling, and split partitions.</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Qualitative Evidence:</span>
-                <span>Confusion matrix analysis, hardest misclassified test cases, and class-wise boundary inspection.</span>
-              </li>
-              <li className="flex items-start space-x-2">
-                <span className="font-semibold text-[#131b2e] shrink-0">• Inductive Bias:</span>
-                <span>Comparative analysis of why CNNs exploit 2D spatial locality whereas ViTs require higher data density.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Section 3: Training Pipeline Architecture */}
+        {/* =========================================================================
+            5. DATASET DESCRIPTION AND EDA (Item 5)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Database className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Dataset Description &amp; EDA
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Nội dung mô tả tập dữ liệu (Fashion-MNIST, MNIST debug, CIFAR-10 extension), thống kê phân bố lớp (EDA), phân chia tập dữ liệu (Train/Val/Test split) và tiền xử lý dữ liệu đang được thực hiện.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            6. METHODOLOGY (Item 6)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
             <GitBranch className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              2. End-to-End PyTorch Pipeline Workflow
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Methodology
             </h2>
           </div>
-
-          <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] font-mono text-[12px] text-[#131b2e] overflow-x-auto leading-relaxed">
-            Raw Fashion-MNIST ➔ Custom Dataset &amp; Augmentations ➔ DataLoader (Batched &amp; Shuffled) ➔ Model Forward Pass ➔ Cross-Entropy Loss ➔ PyTorch Autograd Optimizer Step ➔ Epoch Validation ➔ Checkpoint Selection ➔ Confusion Matrix &amp; Error Taxonomy
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Sơ đồ luồng xử lý Pipeline (Raw data → preprocessing → data loader → model → loss → optimization → prediction → post-processing → evaluation) và chi tiết hiện thực 5 kiến trúc mô hình (Linear, MLP, CNN, LSTM/GRU, Transformer) đang được xây dựng.
           </div>
         </div>
 
-        {/* Section 4: Benchmark Table (Placeholder for Planned Results) */}
-        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f2f3ff] pb-4">
-            <div>
-              <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-                3. Comparative Benchmark Results (Planned Protocol)
-              </h2>
-              <p className="text-[13px] text-[#515f74] mt-0.5">
-                The benchmark schema below will record final empirical results upon completion of Milestone M2.
-              </p>
-            </div>
-            <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] rounded border border-[#eaedff]">
-              Status: In Development (M1/M2)
-            </span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[13px] border-collapse">
-              <thead>
-                <tr className="bg-[#f2f3ff] border-b border-[#eaedff] text-[#515f74] font-mono text-[11px] uppercase">
-                  <th className="py-3 px-4">Architecture</th>
-                  <th className="py-3 px-4">Parameters</th>
-                  <th className="py-3 px-4">Top-1 Accuracy</th>
-                  <th className="py-3 px-4">Macro-F1</th>
-                  <th className="py-3 px-4">Train Time (s/epoch)</th>
-                  <th className="py-3 px-4">Inference (ms)</th>
-                  <th className="py-3 px-4">Checkpoint</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#eaedff] font-mono text-[12px]">
-                <tr>
-                  <td className="py-3 px-4 font-sans font-medium text-[#131b2e]">Linear / Softmax Classifier</td>
-                  <td className="py-3 px-4 text-[#515f74]">~7.8 K</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M1</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M1</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#0037b0]">linear_ckpt.pt</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-sans font-medium text-[#131b2e]">Multilayer Perceptron (MLP)</td>
-                  <td className="py-3 px-4 text-[#515f74]">~200 K</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M1</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M1</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#0037b0]">mlp_ckpt.pt</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-sans font-medium text-[#131b2e]">Convolutional Network (CNN)</td>
-                  <td className="py-3 px-4 text-[#515f74]">~1.2 M</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#0037b0]">cnn_ckpt.pt</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-sans font-medium text-[#131b2e]">Recurrent (LSTM / GRU)</td>
-                  <td className="py-3 px-4 text-[#515f74]">~450 K</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#0037b0]">rnn_ckpt.pt</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-sans font-medium text-[#131b2e]">Vision Transformer (ViT)</td>
-                  <td className="py-3 px-4 text-[#515f74]">~2.5 M</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending M2</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#515f74]">Pending</td>
-                  <td className="py-3 px-4 text-[#0037b0]">vit_ckpt.pt</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Section 5: Deliverables Checklist */}
+        {/* =========================================================================
+            7. EXPERIMENTAL SETUP (Item 7)
+           ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
-          <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-            4. Assignment 01 Deliverables &amp; Artifacts
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-2 text-[13px]">
-            <div className="p-3 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1">
-              <span className="font-semibold text-[#131b2e] block">1. Source Code</span>
-              <span className="text-[#515f74] text-[12px] block">Reproducible PyTorch modules, train/eval scripts, requirements.txt</span>
-            </div>
-            <div className="p-3 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1">
-              <span className="font-semibold text-[#131b2e] block">2. Technical Report</span>
-              <span className="text-[#515f74] text-[12px] block">Problem formulation, EDA, methodology, error analysis (PDF)</span>
-            </div>
-            <div className="p-3 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1">
-              <span className="font-semibold text-[#131b2e] block">3. YouTube Defense</span>
-              <span className="text-[#515f74] text-[12px] block">Mandatory defense presentation recording with chapter marks</span>
-            </div>
-            <div className="p-3 bg-[#faf8ff] rounded-lg border border-[#eaedff] space-y-1">
-              <span className="font-semibold text-[#131b2e] block">4. AI Disclosure</span>
-              <span className="text-[#515f74] text-[12px] block">Detailed log adhering to Section 5 with prompt samples and verifications</span>
-            </div>
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Cpu className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Experimental Setup
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Thiết lập thực nghiệm (Môi trường phần cứng, hyperparameters, seed, optimizer, scheduler, các ràng buộc so sánh công bằng Fairness constraints) đang được chuẩn bị.
           </div>
         </div>
+
+        {/* =========================================================================
+            8. RESULTS (Item 8)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <BarChart3 className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Results
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Kết quả thực nghiệm định lượng (Bảng so sánh Accuracy, Macro-F1, Parameters, Training/Inference time) và biểu đồ quá trình huấn luyện (Loss/Metric curves) sẽ được cập nhật sau khi chạy xong thực nghiệm (M1 Draft &amp; M2 Final).
+          </div>
+        </div>
+
+        {/* =========================================================================
+            9. COMPARISON AND DISCUSSION (Item 9)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Layers className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Comparison and Discussion
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Phần so sánh, biện luận và phân tích ảnh hưởng của Inductive Bias, mối quan hệ đánh đổi Accuracy – Speed – Parameter giữa 5 kiến trúc sẽ được cập nhật khi có kết quả.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            10. ERROR ANALYSIS (Item 10)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <AlertCircle className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Error Analysis
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Phân tích lỗi (Ma trận nhầm lẫn Confusion Matrix, các trường hợp dự đoán sai tiêu biểu, nguyên nhân giả định và hướng cải thiện) đang được tiến hành.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            11. LIMITATIONS AND CONCLUSION (Item 11)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <HelpCircle className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Limitations and Conclusion
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Các giới hạn về dữ liệu, mô hình, tính tổng quát hóa và kết luận tổng thể của bài tập đang được hoàn thiện.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            12. LINK TO SOURCE CODE (Item 12)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Github className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Source Code
+            </h2>
+          </div>
+          <div className="flex items-center justify-between p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px]">
+            <span className="text-[#434655]">GitHub Source Code Repository:</span>
+            <a
+              href={COURSE_INFO.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-1.5 text-[#0037b0] hover:underline font-mono text-[12px] font-semibold"
+            >
+              <span>{COURSE_INFO.repoUrl}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            13. LINK TO CHECKPOINTS OR REPRODUCTION (Item 13)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Terminal className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Checkpoint(s) / Reproduction Instructions
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Liên kết tải model checkpoints và hướng dẫn chi tiết tái lập thí nghiệm sẽ được cập nhật khi hoàn thành huấn luyện.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            14. LINK TO REPORT / SLIDES (Item 14)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <FileText className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to Report / Slides
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            File báo cáo kỹ thuật (Report PDF) và slide trình bày (Slides) sẽ được đính kèm tại đây trước hạn chót Milestone M2 Final.
+          </div>
+        </div>
+
+        {/* =========================================================================
+            15. LINK TO YOUTUBE PRESENTATION VIDEO (Item 15)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <Video className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Link to YouTube Presentation Video
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74] space-y-1">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">Status: In Progress</span>
+            <p>Video thuyết trình sẽ được tải lên YouTube và gắn link tại đây theo định dạng tiêu đề chuẩn: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 1</code>.</p>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            16. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Item 16)
+           ========================================================================= */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
+          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
+            <ShieldCheck className="w-5 h-5 text-[#0037b0]" />
+            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
+              Assignment-Specific AI Usage Disclosure
+            </h2>
+          </div>
+          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
+            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
+            Nhật ký khai báo sử dụng các công cụ AI (Tool name, used by, task, prompt, contribution, student verification, affected files, responsible member) cho Assignment 1 sẽ được ghi nhận và cập nhật đầy đủ trong quá trình làm bài.
+          </div>
+        </div>
+
       </div>
     </div>
   );
