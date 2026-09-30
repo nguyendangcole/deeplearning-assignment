@@ -14,8 +14,7 @@ import {
   HelpCircle, 
   Users, 
   Video, 
-  BookOpen,
-  Clock
+  BookOpen
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -39,13 +38,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
             <span>Back to Course Overview</span>
           </button>
 
-          <div className="flex items-center space-x-3 text-[12px] font-mono text-[#515f74]">
-            <button
-              onClick={() => onNavigate('assignment-2')}
-              className="text-[12px] text-[#0037b0] hover:underline cursor-pointer mr-2"
-            >
-              ← Prev: Asg 02
-            </button>
+          <div className="flex items-center space-x-2 text-[12px] font-mono text-[#515f74]">
             <span className="hidden sm:inline">CO3133 / Assignments</span>
             <span className="hidden sm:inline">/</span>
             <span className="font-semibold text-[#131b2e] bg-[#f2f3ff] px-2.5 py-1 rounded">Assignment 03</span>
@@ -64,10 +57,10 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
               CO3133 Course Project · Assignment 03
             </span>
             <span className="px-2.5 py-1 bg-[#e2e7ff] text-[#0037b0] font-mono text-[11px] font-medium rounded">
-              Weight: 30%
+              Multimodal Fusion
             </span>
             <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] font-medium rounded">
-              Semester 261
+              Cross-Modal Alignment
             </span>
           </div>
 
@@ -82,7 +75,8 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
 
           {/* Item 2 & 3: Group Members & Instructor */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
+          {/* Item 2 & 3: Group Members & Instructor */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
             <div className="space-y-1">
               <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
                 <Users className="w-3.5 h-3.5 text-[#0037b0]" />
@@ -108,24 +102,6 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
               </span>
               <div className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</div>
               <div className="text-[11px] text-[#515f74]">Faculty of Computer Science and Engineering, HCMUT</div>
-            </div>
-
-            <div className="space-y-1">
-              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
-                <span>Milestone 1 (Proposal)</span>
-              </span>
-              <div className="font-semibold text-[#131b2e]">18 Nov 2026</div>
-              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 15% of A3</div>
-            </div>
-
-            <div className="space-y-1">
-              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
-                <span>Milestone 3 (Final)</span>
-              </span>
-              <div className="font-semibold text-[#131b2e]">02 Dec 2026</div>
-              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 60% of A3</div>
             </div>
           </div>
 
@@ -166,7 +142,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Nội dung chi tiết về bài toán đa phương thức (Multimodal Task Selection: Image-Text classification, VQA, Captioning, Retrieval,...), bản chất tương tác giữa các phương thức (Modality interaction: support vs. conflict) đang được chuẩn bị.
+            Detailed multimodal task formulation (Multimodal Task Selection: Image-Text classification, VQA, Captioning, Retrieval), modality interaction dynamics (support vs. conflict), and real-world motivation are currently being prepared.
           </div>
         </div>
 
@@ -182,7 +158,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Mô tả tập dữ liệu đa phương thức (≥ 5,000 cặp dữ liệu liên kết thực tế, kiểm tra chất lượng cặp dữ liệu, phân tích phân bố và chiến lược phân chia chống rò rỉ) đang được chuẩn bị theo Milestone M1 Proposal.
+            Multimodal dataset description (≥ 5,000 paired multimodal instances, pair alignment verification, distribution analysis, and leakage prevention splitting strategies) is currently being finalized.
           </div>
         </div>
 
@@ -198,7 +174,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Phương pháp nghiên cứu (Bộ mã hóa Unimodal Baselines, chiến lược dung hợp Simple Fusion Baseline, mô hình nâng cao Improved Multimodal Fusion, hàm mất mát liên phương thức) đang được thiết kế.
+            Research methodology (Unimodal Baseline Encoders, Simple Fusion Baseline strategy, Improved Cross-modal Attention / Multimodal Fusion architecture, and cross-modal loss objectives) is currently under design.
           </div>
         </div>
 
@@ -214,7 +190,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Thiết lập thực nghiệm (Môi trường huấn luyện, siêu tham số, thiết kế các nhánh so sánh Unimodal vs. Multimodal và nghiên cứu cắt bỏ thành phần dung hợp) đang được chuẩn bị.
+            Experimental configuration (Runtime compute hardware, learning rate schedules, Unimodal vs. Multimodal comparative pipelines, and ablation study controls) is being organized.
           </div>
         </div>
 
@@ -230,7 +206,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Bảng kết quả định lượng (So sánh Unimodal A, Unimodal B, Simple Fusion và Improved Multimodal Model) cùng các ví dụ dự đoán trực quan sẽ được cập nhật khi có kết quả chạy thực nghiệm.
+            Quantitative evaluation metrics (Comparison across Unimodal A, Unimodal B, Simple Fusion, and Improved Multimodal models) and qualitative multimodal prediction samples will be updated following training completion.
           </div>
         </div>
 
@@ -246,7 +222,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Phân tích so sánh (Trường hợp các phương thức bổ trợ lẫn nhau Support cases vs. xung đột dữ liệu Conflict cases, kết quả nghiên cứu cắt bỏ Ablation study) sẽ được cập nhật khi hoàn thành thực nghiệm.
+            Comparative discussion (Modality support cases vs. conflict cases, ablation study insights on fusion mechanisms, and computational overhead tradeoffs) will be presented upon experimental completion.
           </div>
         </div>
 
@@ -262,7 +238,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Phân tích lỗi (Các ca dự đoán sai do lệch phương thức, nhiễu dữ liệu hoặc giới hạn cơ chế Attention) đang được tiến hành.
+            Error analysis (Failure case taxonomy, misalignments caused by unimodal dominance, noisy modalities, or cross-attention collapse) is currently in progress.
           </div>
         </div>
 
@@ -278,7 +254,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Giới hạn của bài toán đa phương thức, chi phí tính toán và kết luận tổng quan toàn bộ đề tài đang được hoàn thiện.
+            Multimodal dataset limitations, computational bottlenecks, inference latency constraints, and overall conclusions of Assignment 3 are being compiled.
           </div>
         </div>
 
@@ -318,7 +294,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Liên kết tải model checkpoints và hướng dẫn tái lập huấn luyện đa phương thức sẽ được cập nhật khi hoàn thành các mô hình.
+            Model checkpoint links and step-by-step reproduction instructions for multimodal models will be updated upon checkpoint release.
           </div>
         </div>
 
@@ -334,7 +310,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Báo cáo kỹ thuật (Report PDF) và slide trình bày (Slides) sẽ được đính kèm tại đây trước hạn chót Milestone M3 Final.
+            Technical report (PDF) and presentation slides will be attached here upon final release.
           </div>
         </div>
 
@@ -350,7 +326,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74] space-y-1">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">Status: In Progress</span>
-            <p>Video thuyết trình sẽ được tải lên YouTube và gắn link tại đây theo định dạng tiêu đề chuẩn: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 3</code>.</p>
+            <p>The presentation video will be uploaded to YouTube and linked here following the standard title format: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 3</code>.</p>
           </div>
         </div>
 
@@ -366,7 +342,7 @@ export default function Assignment3View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Nhật ký khai báo sử dụng các công cụ AI cho Assignment 3 sẽ được ghi nhận và cập nhật đầy đủ trong quá trình triển khai bài tập.
+            Assignment-specific AI tool usage declarations for Assignment 3 will be tracked and fully documented here throughout the project execution.
           </div>
         </div>
 

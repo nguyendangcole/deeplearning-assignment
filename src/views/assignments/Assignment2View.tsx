@@ -14,8 +14,7 @@ import {
   HelpCircle, 
   Users, 
   Video, 
-  BookOpen,
-  Clock
+  BookOpen
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -39,22 +38,10 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             <span>Back to Course Overview</span>
           </button>
 
-          <div className="flex items-center space-x-3 text-[12px] font-mono text-[#515f74]">
-            <button
-              onClick={() => onNavigate('assignment-1')}
-              className="text-[12px] text-[#0037b0] hover:underline cursor-pointer mr-2"
-            >
-              ← Prev: Asg 01
-            </button>
+          <div className="flex items-center space-x-2 text-[12px] font-mono text-[#515f74]">
             <span className="hidden sm:inline">CO3133 / Assignments</span>
             <span className="hidden sm:inline">/</span>
             <span className="font-semibold text-[#131b2e] bg-[#f2f3ff] px-2.5 py-1 rounded">Assignment 02</span>
-            <button
-              onClick={() => onNavigate('assignment-3')}
-              className="text-[12px] text-[#0037b0] hover:underline cursor-pointer ml-2"
-            >
-              Next: Asg 03 →
-            </button>
           </div>
         </div>
       </div>
@@ -70,10 +57,10 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               CO3133 Course Project · Assignment 02
             </span>
             <span className="px-2.5 py-1 bg-[#e2e7ff] text-[#0037b0] font-mono text-[11px] font-medium rounded">
-              Weight: 30%
+              Large-Scale Tasks
             </span>
             <span className="px-2.5 py-1 bg-[#f2f3ff] text-[#515f74] font-mono text-[11px] font-medium rounded">
-              Semester 261
+              Pretrained Backbones
             </span>
           </div>
 
@@ -88,7 +75,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
 
           {/* Item 2 & 3: Group Members & Instructor */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#f2f3ff] text-[13px]">
             <div className="space-y-1">
               <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
                 <Users className="w-3.5 h-3.5 text-[#0037b0]" />
@@ -114,24 +101,6 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               </span>
               <div className="font-semibold text-[#131b2e]">{COURSE_INFO.instructor}</div>
               <div className="text-[11px] text-[#515f74]">Faculty of Computer Science and Engineering, HCMUT</div>
-            </div>
-
-            <div className="space-y-1">
-              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
-                <span>Milestone 1 (Proposal)</span>
-              </span>
-              <div className="font-semibold text-[#131b2e]">07 Oct 2026</div>
-              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 15% of A2</div>
-            </div>
-
-            <div className="space-y-1">
-              <span className="font-mono text-[11px] text-[#515f74] uppercase font-semibold flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-[#0037b0]" />
-                <span>Milestone 3 (Final)</span>
-              </span>
-              <div className="font-semibold text-[#131b2e]">11 Nov 2026</div>
-              <div className="font-mono text-[11px] text-[#0037b0]">Weight: 60% of A2</div>
             </div>
           </div>
 
@@ -172,7 +141,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Nội dung chi tiết về bài toán chuyên biệt (Selected task track, Real-world motivation, Input/Output, Mathematical formulation và các thách thức quy mô lớn) đang được cập nhật theo Milestone M1 Proposal.
+            Detailed specialized problem formulation (Selected task track, Real-world motivation, Input/Output, Mathematical formulation, and Large-scale challenges) is currently under preparation.
           </div>
         </div>
 
@@ -188,7 +157,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Đề xuất và mô tả tập dữ liệu quy mô lớn (Dataset Proposal: nguồn dữ liệu, kích thước ≥ 5,000 mẫu, phân tích phân bố, kiểm soát chống rò rỉ dữ liệu) đang được chuẩn bị để nộp xét duyệt.
+            Large-scale dataset proposal and description (Dataset source, sample size ≥ 5,000 samples, distribution analysis, and leakage prevention strategy) is currently being finalized.
           </div>
         </div>
 
@@ -204,7 +173,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Phương pháp nghiên cứu (Mô hình Baseline đơn giản, mô hình hiện đại / Pretrained Backbone, chiến lược Fine-tuning, tối ưu hóa huấn luyện phân tán / bộ nhớ) đang được xây dựng.
+            Research methodology (Simple baseline model, modern pretrained backbone, fine-tuning strategies, and distributed/memory-efficient training optimization) is currently under design.
           </div>
         </div>
 
@@ -220,7 +189,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Thiết lập thực nghiệm (Môi trường GPU, chiến lược đóng băng Freeze vs. Full fine-tune, các yếu tố kiểm soát Ablation study và metric đặc thù) đang được chuẩn bị.
+            Experimental configuration (GPU runtime environment, layer freezing vs. full fine-tuning schedules, ablation study controls, and task-specific metrics) is being prepared.
           </div>
         </div>
 
@@ -236,7 +205,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Bảng kết quả định lượng (Độ chính xác / Metric đặc thù, thời gian huấn luyện, chi phí tính toán) và kết quả định tính sẽ được cập nhật sau khi hoàn thành chạy thực nghiệm.
+            Quantitative results table (Accuracy/Task-specific metrics, training duration, computational budget) and qualitative samples will be updated following experimental runs.
           </div>
         </div>
 
@@ -252,7 +221,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            So sánh giữa Baseline và mô hình Pretrained, phân tích kết quả nghiên cứu cắt bỏ (Ablation study) và đánh đổi hiệu năng - chi phí tính toán sẽ được cập nhật khi có kết quả.
+            Comparative evaluation between baseline and pretrained architectures, ablation study insights, and performance vs compute trade-off analyses will be detailed upon experiment completion.
           </div>
         </div>
 
@@ -268,7 +237,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Phân tích lỗi (Phân loại các trường hợp dự đoán sai, nguyên nhân từ dữ liệu hoặc kiến trúc mô hình và đề xuất khắc phục) đang được tiến hành.
+            Error analysis (Failure case taxonomy, data-driven vs architectural error attribution, and mitigation strategies) is in progress.
           </div>
         </div>
 
@@ -284,7 +253,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Giới hạn thực nghiệm về phần cứng, tính đại diện của dữ liệu chuyên biệt và tổng kết đóng góp của Assignment 2 đang được hoàn thiện.
+            Hardware constraints, domain generalizability limitations, and summary contributions of Assignment 2 are being finalized.
           </div>
         </div>
 
@@ -293,7 +262,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
            ========================================================================= */}
         <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4">
           <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
-            <Github className="w-4 h-4 text-[#0037b0]" />
+            <Github className="w-5 h-5 text-[#0037b0]" />
             <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
               Link to Source Code
             </h2>
@@ -324,7 +293,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Liên kết tải model checkpoints và lệnh CLI tái lập huấn luyện sẽ được cập nhật khi hoàn thành các thử nghiệm.
+            Model checkpoint download links and CLI reproduction commands will be provided upon training completion.
           </div>
         </div>
 
@@ -340,7 +309,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Báo cáo kỹ thuật (Report PDF) và slide trình bày (Slides) sẽ được đính kèm tại đây trước hạn chót Milestone M3 Final.
+            Technical report (PDF) and presentation slides will be attached here upon final release.
           </div>
         </div>
 
@@ -356,7 +325,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74] space-y-1">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">Status: In Progress</span>
-            <p>Video thuyết trình sẽ được tải lên YouTube và gắn link tại đây theo định dạng tiêu đề chuẩn: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 2</code>.</p>
+            <p>The presentation video will be uploaded to YouTube and linked here following the standard title format: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#131b2e]">CO3133-Semester-261 – Group 2352821 – Assignment 2</code>.</p>
           </div>
         </div>
 
@@ -372,7 +341,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
             <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: In Progress</span>
-            Nhật ký khai báo sử dụng các công cụ AI cho Assignment 2 sẽ được ghi nhận và cập nhật đầy đủ trong quá trình triển khai bài tập.
+            Assignment-specific AI tool usage declarations for Assignment 2 will be tracked and fully documented here throughout the project execution.
           </div>
         </div>
 

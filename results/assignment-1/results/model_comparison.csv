@@ -1,0 +1,6 @@
+Model,Parameters,Best Epoch,Val Loss,Val Acc (%),Test Acc (%),Macro-F1 (%),Train Time (s),Inf Time (s),Latency (ms/sample)
+Linear Classifier,7850,10,0.5196,82.82,82.45,82.26,324.99,3.3271,0.3327
+Multilayer Perceptron (MLP),235146,14,0.3213,87.95,87.57,87.51,353.55,2.0924,0.2092
+Convolutional Neural Network (CNN),421834,14,0.1917,92.78,92.03,92.03,356.18,2.1325,0.2132
+LSTM Classifier,82186,20,0.2723,90.18,88.15,88.14,325.57,3.1135,0.3114
+Vision Transformer (ViT),71946,19,0.3183,88.58,88.22,88.05,445.34,2.2613,0.2261

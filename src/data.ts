@@ -18,7 +18,7 @@ export const COURSE_INFO = {
   repoUrl: 'https://github.com/nguyendangcole/deeplearning-assignment',
   liveUrl: 'https://nguyendangcole.github.io/deeplearning-assignment/',
   abstract:
-    'Course project landing page presenting three core Deep Learning research assignments developed throughout Semester 261. The technical portfolio spans mathematical derivations of custom gradient pipelines, empirical benchmarking across modern convolutional and sequence networks, scaling methodologies on distributed data regimes, and cross-modal attention representation frameworks.',
+    'Course project landing page presenting three core Deep Learning research assignments developed throughout Semester 261. ',
 };
 
 export const ASSIGNMENTS: Assignment[] = [
@@ -33,8 +33,8 @@ export const ASSIGNMENTS: Assignment[] = [
     metrics: {
       label1: 'Primary Dataset',
       value1: 'Fashion-MNIST (Debug: MNIST)',
-      label2: 'Key Milestones',
-      value2: 'M1 Draft (Sep 23) · M2 Final (Oct 21)',
+      label2: 'Evaluated Models',
+      value2: 'Linear · MLP · CNN · LSTM · Transformer',
     },
     buttonLabel: 'View Assignment',
   },
@@ -49,8 +49,8 @@ export const ASSIGNMENTS: Assignment[] = [
     metrics: {
       label1: 'Dataset Requirement',
       value1: '≥ 5,000 Samples (Task-Specific)',
-      label2: 'Key Milestones',
-      value2: 'M1 Proposal (Oct 07) · M3 Final (Nov 11)',
+      label2: 'Core Architecture',
+      value2: 'Pretrained Backbone & Fine-tuning',
     },
     buttonLabel: 'View Assignment',
   },
@@ -65,8 +65,8 @@ export const ASSIGNMENTS: Assignment[] = [
     metrics: {
       label1: 'Modality Alignment',
       value1: '≥ 2 Genuine Modalities (≥ 5,000 Pairs)',
-      label2: 'Key Milestones',
-      value2: 'M1 Proposal (Nov 18) · M3 Final (Dec 02)',
+      label2: 'Core Architecture',
+      value2: 'Dual-Encoder & Cross-Modal Fusion',
     },
     buttonLabel: 'View Assignment',
   },

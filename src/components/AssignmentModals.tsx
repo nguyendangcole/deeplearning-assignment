@@ -245,10 +245,10 @@ export default function AssignmentModals({
               <div className="p-4 bg-[#f2f3ff] rounded-lg border border-[#eaedff] space-y-2 text-[13px]">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase">
-                    Milestone Track · In Progress
+                    Research Scope
                   </span>
                   <span className="font-mono text-[11px] bg-[#dce1ff] text-[#001551] px-2 py-0.5 rounded font-semibold">
-                    Epoch 45 / 100
+                    Task Specification
                   </span>
                 </div>
                 <p className="text-[#434655]">
@@ -331,10 +331,10 @@ export default function AssignmentModals({
               <div className="p-4 bg-[#f2f3ff] rounded-lg border border-[#eaedff] space-y-2 text-[13px]">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase">
-                    Upcoming Research Milestone
+                    Research Scope
                   </span>
                   <span className="font-mono text-[11px] bg-[#dae2fd] text-[#434655] px-2 py-0.5 rounded font-semibold">
-                    Week 15 Defense
+                    Task Specification
                   </span>
                 </div>
                 <p className="text-[#434655]">
