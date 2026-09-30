@@ -500,8 +500,101 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
 
           <div className="space-y-4 text-[14px] text-[#434655] leading-relaxed">
             <p>
-              The <strong>Fashion-MNIST</strong> dataset comprises 70,000 grayscale images across 10 clothing categories (60,000 train + 10,000 test). We enforce a deterministic <strong>90/10 Train/Val split</strong> (54,000 train / 6,000 validation / 10,000 held-out test). All images are normalized with standard Fashion-MNIST dataset statistics (<code className="bg-[#f2f3ff] px-1.5 py-0.5 rounded font-mono text-[12px]">μ = 0.2860, σ = 0.3530</code>).
+              The <strong>Fashion-MNIST</strong> dataset comprises 70,000 grayscale images across 10 clothing categories (60,000 train + 10,000 test). We enforce a deterministic <strong>90/10 Train/Val split</strong> with fixed seed (<code className="bg-[#f2f3ff] px-1.5 py-0.5 rounded font-mono text-[12px]">seed = 42</code>), yielding 54,000 training, 6,000 validation, and 10,000 held-out test samples. All image batches undergo channel-wise normalization using the computed training split parameters.
             </p>
+
+            {/* Split Verification & DataLoader Sanity Check Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-1">
+              {/* Card 1: Split Verification Summary */}
+              <div className="p-4 bg-[#f8faff] rounded-xl border border-[#dbe6fd] space-y-3">
+                <div className="flex items-center justify-between border-b border-[#e2ecff] pb-2">
+                  <div className="flex items-center space-x-1.5 text-[#0037b0]">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span className="font-mono text-[12px] font-bold uppercase tracking-wider">
+                      Split Verification Summary
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 bg-[#e6f4ea] text-[#137333] font-mono text-[10px] font-semibold rounded-full border border-[#ceead6]">
+                    ✓ No Overlap (Seed 42)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 text-center text-[12px]">
+                  <div className="p-2 bg-white rounded-lg border border-[#eaedff]">
+                    <div className="font-mono text-[10px] text-[#515f74] uppercase">Training</div>
+                    <div className="font-mono text-[13px] font-bold text-[#131b2e]">54,000</div>
+                    <div className="text-[10px] text-[#515f74]">90% of train</div>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-[#eaedff]">
+                    <div className="font-mono text-[10px] text-[#515f74] uppercase">Validation</div>
+                    <div className="font-mono text-[13px] font-bold text-[#131b2e]">6,000</div>
+                    <div className="text-[10px] text-[#515f74]">10% of train</div>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-[#eaedff]">
+                    <div className="font-mono text-[10px] text-[#515f74] uppercase">Test Set</div>
+                    <div className="font-mono text-[13px] font-bold text-[#131b2e]">10,000</div>
+                    <div className="text-[10px] text-[#515f74]">Held-out bench</div>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5 text-[11px] font-mono text-[#434655] bg-white p-2.5 rounded-lg border border-[#eaedff]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Training Mean (54k split):</span>
+                    <span className="font-semibold text-[#131b2e]">0.2856</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Training Std (54k split):</span>
+                    <span className="font-semibold text-[#131b2e]">0.3528</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-1 border-t border-[#f2f3ff]">
+                    <span className="text-[#515f74]">Index Overlap Check:</span>
+                    <span className="text-[#137333] font-semibold">PASSED (0 overlapping indices)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: DataLoader Batch Sanity Check */}
+              <div className="p-4 bg-[#f8faff] rounded-xl border border-[#dbe6fd] space-y-3">
+                <div className="flex items-center justify-between border-b border-[#e2ecff] pb-2">
+                  <div className="flex items-center space-x-1.5 text-[#0037b0]">
+                    <Terminal className="w-4 h-4" />
+                    <span className="font-mono text-[12px] font-bold uppercase tracking-wider">
+                      DataLoader Batch Sanity Check
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 bg-[#f2f3ff] text-[#0037b0] font-mono text-[10px] font-semibold rounded-full border border-[#d2dffc]">
+                    Batch Size = 64
+                  </span>
+                </div>
+
+                <div className="space-y-1.5 text-[11px] font-mono bg-white p-2.5 rounded-lg border border-[#eaedff] text-[#434655]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Batch Images Shape:</span>
+                    <span className="font-semibold text-[#131b2e]">torch.Size([64, 1, 28, 28])</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Batch Labels Shape:</span>
+                    <span className="font-semibold text-[#131b2e]">torch.Size([64])</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Data Types (Images / Labels):</span>
+                    <span className="font-semibold text-[#131b2e]">float32 / int64</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-1 border-t border-[#f2f3ff]">
+                    <span className="text-[#515f74]">Normalized Min / Max:</span>
+                    <span className="font-semibold text-[#131b2e]">-0.8096 / +2.0249</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#515f74]">Normalized Mean / Std:</span>
+                    <span className="font-semibold text-[#0037b0]">-0.0159 (≈ 0) / 0.9638 (≈ 1)</span>
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-[#515f74] leading-normal">
+                  The zero-mean unit-variance transformation is empirically validated on loaded mini-batches prior to feedforward training.
+                </p>
+              </div>
+            </div>
 
             {/* EDA Tabs */}
             <div className="space-y-3 pt-2">
