@@ -22,7 +22,8 @@ import {
   Table,
   Sparkles,
   Workflow,
-  CheckCircle2
+  CheckCircle2,
+  ArrowRight
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -688,176 +689,153 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 End-to-End Deep Learning Pipeline Flow
               </h2>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono bg-[#eef2ff] text-[#0037b0] px-2.5 py-1 rounded font-semibold border border-[#d2dffc]">
-                Unified Execution Pipeline
-              </span>
-              <span className="text-[11px] font-mono bg-[#f8faff] text-[#515f74] px-2.5 py-1 rounded border border-[#e2e8f0]">
-                Deterministic Seed 42
-              </span>
-            </div>
+            <span className="text-[11px] font-mono bg-[#eef2ff] text-[#0037b0] px-2.5 py-1 rounded font-semibold border border-[#d2dffc] w-fit">
+              Architecture Overview
+            </span>
           </div>
 
-          <p className="text-[14px] text-[#434655] leading-relaxed">
-            To guarantee strict experimental control and reproducible benchmarking, all 6 models are processed through an identical, modular PyTorch pipeline from tensor ingestion to serialized checkpoint evaluation:
-          </p>
-
-          {/* Visual Step-by-Step Pipeline Flow */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 pt-1">
+          {/* High-Level Architecture Components */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
             {/* Stage 1 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    1
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">Dataset Ingestion</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
+                  <Database className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 01</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">Dataset</h3>
+                </div>
+                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
                   Fashion-MNIST
-                </span>
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Raw $28 \times 28$ grayscale images converted to PyTorch Tensors and normalized with pre-computed statistics: <code className="bg-[#eaedff] px-1 py-0.2 rounded font-mono text-[11px]">mean=0.2860, std=0.3530</code>.
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>Split: 54k / 6k / 10k</span>
-                <span className="text-[#515f74]">Shape: [1, 28, 28]</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
+                Tensor [1, 28, 28]
               </div>
             </div>
 
             {/* Stage 2 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    2
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">DataLoader Scaffolding</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
+                  <Layers className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
-                  Batching B=64
-                </span>
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 02</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">DataLoader</h3>
+                </div>
+                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
+                  Batching (B=64)
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Minibatches of size 64 with deterministic generator seeding. Training subset shuffled per epoch; validation and test sets remain in fixed deterministic order with pinned host memory.
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>num_workers = 2</span>
-                <span className="text-[#515f74]">pin_memory = True</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
+                Normalized Tensors
               </div>
             </div>
 
             {/* Stage 3 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    3
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">Forward Representation</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
+                  <Cpu className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
-                  5 Paradigms
-                </span>
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 03</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">Model Architecture</h3>
+                </div>
+                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
+                  6 Model Families
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Input reshaped according to architectural prior: Flattened (Linear/MLP), 2D Tensor (CNN), 28-step scanline sequence (LSTM/GRU), or 49 non-overlapping patches (ViT).
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>Output: Raw Logits</span>
-                <span className="text-[#515f74]">Shape: [B, 10]</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
+                Logits [B, 10]
               </div>
             </div>
 
             {/* Stage 4 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    4
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">Loss &amp; Optimization</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
+                  <Activity className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
-                  AdamW + CosineLR
-                </span>
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 04</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">Loss &amp; Optimizer</h3>
+                </div>
+                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
+                  CrossEntropy + AdamW
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Numerically stable <code className="bg-[#eaedff] px-1 py-0.2 rounded font-mono text-[11px]">nn.CrossEntropyLoss</code>. AdamW optimizer (<code className="font-mono text-[11px]">lr=1e-3, weight_decay=1e-4</code>) coupled with Cosine Annealing learning rate schedule decaying to <code className="font-mono text-[11px]">1e-5</code>.
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>Gradient Clipping: 1.0</span>
-                <span className="text-[#515f74]">T_max = 20 epochs</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
+                Backprop &amp; Update
               </div>
             </div>
 
             {/* Stage 5 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    5
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">Validation &amp; Checkpointing</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
+                  <ShieldCheck className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 05</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">Checkpointing</h3>
+                </div>
+                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
                   Early Stopping
-                </span>
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Post-epoch validation evaluation. When validation loss improves, state dictionary is serialized to <code className="bg-[#eaedff] px-1 py-0.2 rounded font-mono text-[11px]">checkpoints/&lt;model&gt;_best.pth</code>. Training terminates early if no gain after 5 epochs.
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>Patience: 5 Epochs</span>
-                <span className="text-[#515f74]">Best State Dict</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
+                Save *.pth Weights
               </div>
             </div>
 
             {/* Stage 6 */}
-            <div className="p-4 bg-[#fcfcff] rounded-xl border border-[#eaedff] hover:border-[#b8ccfc] transition-all space-y-2.5 relative group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-6 h-6 rounded-full bg-[#0037b0] text-white font-mono text-[11px] font-bold flex items-center justify-center">
-                    6
-                  </span>
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">Independent Test Benchmark</span>
+            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
+              <div className="space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#0037b0] text-white flex items-center justify-center">
+                  <BarChart3 className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1.5 py-0.5 rounded font-medium">
-                  Held-out 10,000
-                </span>
+                <div>
+                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 06</span>
+                  <h3 className="text-[13px] font-bold text-[#131b2e]">Evaluation</h3>
+                </div>
+                <div className="text-[11px] font-mono text-white bg-[#0037b0] px-2 py-0.5 rounded w-fit font-bold">
+                  Test Benchmark
+                </div>
               </div>
-              <p className="text-[12px] text-[#515f74] leading-relaxed">
-                Loads the best serialized checkpoint onto the target device. Synchronizes GPU/MPS timers to measure exact per-sample inference latency, Test Accuracy, and class-balanced Macro-F1 score.
-              </p>
-              <div className="pt-2 border-t border-[#f2f3ff] text-[11px] font-mono text-[#0037b0] flex items-center justify-between">
-                <span>Metrics: Acc + Macro-F1</span>
-                <span className="text-[#515f74]">Latency (ms/sample)</span>
+              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono font-semibold text-[#0037b0]">
+                Acc, F1 &amp; Latency
               </div>
             </div>
           </div>
 
-          {/* Quick Flow Summary Ribbon */}
-          <div className="p-3.5 bg-[#f0f4ff] rounded-xl border border-[#d2dffc] flex flex-col md:flex-row items-center justify-between gap-3 text-[12px] text-[#334155]">
-            <div className="flex items-center space-x-2 font-mono font-semibold text-[#0037b0]">
-              <Sparkles className="w-4 h-4 shrink-0" />
-              <span>Pipeline Flow Ribbon:</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-[#515f74]">
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">Raw Dataset</span>
-              <span>→</span>
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">DataLoader (B=64)</span>
-              <span>→</span>
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">Model Forward</span>
-              <span>→</span>
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">CrossEntropy</span>
-              <span>→</span>
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">AdamW + CosineLR</span>
-              <span>→</span>
-              <span className="bg-white px-2 py-0.5 rounded border border-[#eaedff] font-medium text-[#131b2e]">Early Stop (.pth)</span>
-              <span>→</span>
-              <span className="bg-[#0037b0] text-white px-2 py-0.5 rounded font-bold">Test Evaluation</span>
-            </div>
+          {/* Connected Flow Diagram Ribbon */}
+          <div className="p-3 bg-[#f8faff] rounded-xl border border-[#eaedff] flex flex-wrap items-center justify-center lg:justify-between gap-2 text-[12px] font-mono">
+            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
+              Fashion-MNIST [1, 28, 28]
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
+            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
+              DataLoader (B=64)
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
+            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
+              Model (Forward → Logits)
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
+            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
+              Loss &amp; Optimizer (AdamW)
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
+            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
+              Checkpoint (*.pth)
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
+            <span className="bg-[#0037b0] text-white px-2.5 py-1 rounded font-bold shadow-2xs">
+              Final Benchmark
+            </span>
           </div>
         </div>
 
