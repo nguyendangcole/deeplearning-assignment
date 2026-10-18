@@ -1,4 +1,4 @@
-// Auto-generated from results/assignment-1/histories/*.json
+// Auto-generated from assignment1/histories/*.json
 export interface EpochHistory {
   train_loss: number[];
   train_accuracy: number[];

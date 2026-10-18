@@ -65,7 +65,7 @@ interface AssignmentViewProps {
   onOpenModal?: (type: ModalType) => void;
 }
 
-// Model result data from results/assignment-1/results/model_comparison.csv
+// Model result data from assignment1/results/model_comparison.csv
 const MODEL_RESULTS = [
   {
     id: 'linear',
@@ -81,9 +81,9 @@ const MODEL_RESULTS = [
     infTime: '3.3271s',
     latency: '0.3327 ms',
     checkpoint: 'linear_best.pth',
-    historyPlot: 'results/assignment-1/figures/linear_training_history.png',
-    samplePredPlot: 'results/assignment-1/figures/linear_sample_predictions.png',
-    cmPlot: 'results/assignment-1/figures/linear_confusion_matrix.png',
+    historyPlot: 'assignment1/figures/linear_training_history.png',
+    samplePredPlot: 'assignment1/figures/linear_sample_predictions.png',
+    cmPlot: 'assignment1/figures/linear_confusion_matrix.png',
     architecture: 'Input Flatten(784) → Linear(784, 10) + Softmax logits',
     inductiveBias: 'None (Linear hyperplane in 784D space)',
     badge: 'Baseline'
@@ -102,9 +102,9 @@ const MODEL_RESULTS = [
     infTime: '2.0924s',
     latency: '0.2092 ms',
     checkpoint: 'mlp_best.pth',
-    historyPlot: 'results/assignment-1/figures/mlp_training_history.png',
-    samplePredPlot: 'results/assignment-1/figures/mlp_sample_predictions.png',
-    cmPlot: 'results/assignment-1/figures/mlp_confusion_matrix.png',
+    historyPlot: 'assignment1/figures/mlp_training_history.png',
+    samplePredPlot: 'assignment1/figures/mlp_sample_predictions.png',
+    cmPlot: 'assignment1/figures/mlp_confusion_matrix.png',
     architecture: 'Linear(784, 256) → BatchNorm → ReLU → Dropout(0.3) → Linear(256, 128) → ReLU → Linear(128, 10)',
     inductiveBias: 'None (Fully connected permutation-invariant layers)',
     badge: 'Non-linear'
@@ -123,9 +123,9 @@ const MODEL_RESULTS = [
     infTime: '2.1325s',
     latency: '0.2132 ms',
     checkpoint: 'cnn_best.pth',
-    historyPlot: 'results/assignment-1/figures/cnn_training_history.png',
-    samplePredPlot: 'results/assignment-1/figures/cnn_sample_predictions.png',
-    cmPlot: 'results/assignment-1/figures/cnn_confusion_matrix.png',
+    historyPlot: 'assignment1/figures/cnn_training_history.png',
+    samplePredPlot: 'assignment1/figures/cnn_sample_predictions.png',
+    cmPlot: 'assignment1/figures/cnn_confusion_matrix.png',
     architecture: 'Conv2D(1→32, 3x3) → BN → ReLU → Conv2D(32→64) → MaxPool(2) → Dropout(0.25) → Conv2D(64→128) → MaxPool(2) → FC(128*7*7, 256) → FC(256, 10)',
     inductiveBias: 'High (2D Spatial Locality & Translation Equivariance)',
     badge: 'Best Accuracy'
@@ -144,9 +144,9 @@ const MODEL_RESULTS = [
     infTime: '3.1135s',
     latency: '0.3114 ms',
     checkpoint: 'lstm_best.pth',
-    historyPlot: 'results/assignment-1/figures/lstm_training_history.png',
-    samplePredPlot: 'results/assignment-1/figures/lstm_sample_predictions.png',
-    cmPlot: 'results/assignment-1/figures/lstm_confusion_matrix.png',
+    historyPlot: 'assignment1/figures/lstm_training_history.png',
+    samplePredPlot: 'assignment1/figures/lstm_sample_predictions.png',
+    cmPlot: 'assignment1/figures/lstm_confusion_matrix.png',
     architecture: 'Sequential scanlines (T=28 rows, d=28) → LSTM(input=28, hidden=128) → Last hidden state h_28 → FC(128, 10)',
     inductiveBias: 'Sequential Temporal Bias (Top-to-bottom row transitions)',
     badge: 'Recurrent'
@@ -165,9 +165,9 @@ const MODEL_RESULTS = [
     infTime: '2.2613s',
     latency: '0.2261 ms',
     checkpoint: 'transformer_best.pth',
-    historyPlot: 'results/assignment-1/figures/transformer_training_history.png',
-    samplePredPlot: 'results/assignment-1/figures/transformer_sample_predictions.png',
-    cmPlot: 'results/assignment-1/figures/transformer_confusion_matrix.png',
+    historyPlot: 'assignment1/figures/transformer_training_history.png',
+    samplePredPlot: 'assignment1/figures/transformer_sample_predictions.png',
+    cmPlot: 'assignment1/figures/transformer_confusion_matrix.png',
     architecture: '4x4 Patching (49 patches) → Linear Projection (d=64) + CLS Token + 1D PosEmbedding → 4 Transformer Encoder Blocks (h=4, d_mlp=128) → LayerNorm → Head(64, 10)',
     inductiveBias: 'Low (Global Multi-Head Self-Attention across all patches)',
     badge: 'Attention'
@@ -624,7 +624,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 {selectedEdaTab === 'distribution' && (
                   <>
                     <img 
-                      src={getAssetUrl('results/assignment-1/figures/eda_class_distribution.png')} 
+                      src={getAssetUrl('assignment1/figures/eda_class_distribution.png')} 
                       alt="Class Distribution"
                       className="max-h-[420px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
                     />
@@ -645,7 +645,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 {selectedEdaTab === 'pixels' && (
                   <>
                     <img 
-                      src={getAssetUrl('results/assignment-1/figures/eda_pixel_distribution.png')} 
+                      src={getAssetUrl('assignment1/figures/eda_pixel_distribution.png')} 
                       alt="Pixel Intensity Distribution"
                       className="max-h-[420px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
                     />
@@ -666,7 +666,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 {selectedEdaTab === 'samples' && (
                   <>
                     <img 
-                      src={getAssetUrl('results/assignment-1/figures/eda_representative_samples.png')} 
+                      src={getAssetUrl('assignment1/figures/eda_representative_samples.png')} 
                       alt="Representative Fashion Samples"
                       className="max-h-[420px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
                     />
@@ -687,7 +687,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 {selectedEdaTab === 'average' && (
                   <>
                     <img 
-                      src={getAssetUrl('results/assignment-1/figures/eda_average_images.png')} 
+                      src={getAssetUrl('assignment1/figures/eda_average_images.png')} 
                       alt="Average Mean Images per Class"
                       className="max-h-[420px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
                     />
@@ -860,7 +860,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
 
           <div className="space-y-4">
             <p className="text-[13px] text-[#515f74]">
-              Detailed epoch-by-epoch training metrics (Loss, Accuracy, Epoch Duration) extracted directly from saved training history logs (<code className="bg-[#f2f3ff] px-1.5 py-0.5 rounded font-mono text-[12px]">results/assignment-1/histories/</code>).
+              Detailed epoch-by-epoch training metrics (Loss, Accuracy, Epoch Duration) extracted directly from saved training history logs (<code className="bg-[#f2f3ff] px-1.5 py-0.5 rounded font-mono text-[12px]">assignment1/histories/</code>).
             </p>
 
             {/* Quick Stats Strip */}
@@ -1138,7 +1138,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
             {/* Tradeoff figure */}
             <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
               <img 
-                src={getAssetUrl('results/assignment-1/figures/model_tradeoff_comparison.png')} 
+                src={getAssetUrl('assignment1/figures/model_tradeoff_comparison.png')} 
                 alt="Model Trade-off Comparison"
                 className="max-h-[460px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
               />
@@ -1316,12 +1316,12 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
             <p className="text-[#515f74]">
               All best model weights are saved in PyTorch state dict format under{' '}
               <a
-                href={`${COURSE_INFO.repoUrl}/tree/main/results/assignment-1/checkpoints`}
+                href={`${COURSE_INFO.repoUrl}/tree/main/assignment1/checkpoints`}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] px-1.5 py-0.5 rounded font-mono text-[12px] inline-flex items-center gap-1 font-medium transition-colors"
               >
-                <span>results/assignment-1/checkpoints/</span>
+                <span>assignment1/checkpoints/</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
               {' '}in the GitHub repository.
@@ -1341,7 +1341,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 </thead>
                 <tbody className="divide-y divide-[#f2f3ff] font-mono">
                   {MODEL_RESULTS.map((m) => {
-                    const checkpointUrl = `${COURSE_INFO.repoUrl}/blob/main/results/assignment-1/checkpoints/${m.checkpoint}`;
+                    const checkpointUrl = `${COURSE_INFO.repoUrl}/blob/main/assignment1/checkpoints/${m.checkpoint}`;
                     return (
                       <tr key={m.id} className="hover:bg-[#f9faff]">
                         <td className="py-2.5 px-3 font-semibold text-[#131b2e]">{m.name}</td>
@@ -1365,7 +1365,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                             rel="noreferrer"
                             className="inline-flex items-center gap-1 text-[#0037b0] hover:underline"
                           >
-                            <span className="truncate max-w-[280px]">tree/main/results/assignment-1/checkpoints/{m.checkpoint}</span>
+                            <span className="truncate max-w-[280px]">tree/main/assignment1/checkpoints/{m.checkpoint}</span>
                             <ExternalLink className="w-3 h-3 shrink-0 opacity-70" />
                           </a>
                         </td>
@@ -1386,7 +1386,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 <div>git clone {COURSE_INFO.repoUrl}.git</div>
                 <div>cd deeplearning-assignment</div>
                 <div className="text-[#94a3b8] pt-2"># 2. Run extended training pipeline notebook</div>
-                <div>jupyter notebook results/assignment-1/Assignment1_Extended.ipynb</div>
+                <div>jupyter notebook assignment1/Assignment1_Extended.ipynb</div>
               </div>
             </div>
           </div>

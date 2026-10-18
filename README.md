@@ -55,11 +55,11 @@ The course project consists of **three core assignments** contributing to 100% o
 
 ### Summary of Assignments
 
-| Assignment | Topic & Scope | Primary Dataset | Key Models & Methods | Weight |
-| :--- | :--- | :--- | :--- | :---: |
-| **Assignment 1** | **Foundations of Deep Learning Pipelines & Architectures**<br>Comparative study from linear models to sequence models for image classification. | Fashion-MNIST<br>*(Debug: MNIST, Ext: CIFAR-10)* | • Linear / Softmax Classifier<br>• Multilayer Perceptron (MLP)<br>• Convolutional Neural Network (CNN)<br>• Recurrent Network (LSTM/GRU)<br>• Vision Transformer (ViT) | **40%** |
-| **Assignment 2** | **Deep Learning on Large-Scale Data & Specialized Tasks**<br>End-to-end specialized CV or NLP pipeline with pretrained backbones. | Domain-specific dataset (≥ 5,000 samples, approved proposal) | • Simple Baseline<br>• Modern Pretrained Backbone (Transfer Learning)<br>• Fine-tuning protocol & Controlled Ablation | **30%** |
-| **Assignment 3** | **Multimodal Deep Learning**<br>Cross-modal representation, fusion strategies, and alignment. | Paired multimodal dataset (e.g., Image-Text, VQA, RGB-Depth) | • Unimodal Baselines (Modality A & B)<br>• Simple Fusion Baseline<br>• Advanced Multimodal Fusion Architecture | **30%** |
+| Assignment | Topic & Scope | Primary Dataset | Key Models & Methods | Weight | Root Directory |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **Assignment 1** | **Foundations of Deep Learning Pipelines & Architectures**<br>Comparative study from linear models to sequence models for image classification. | Fashion-MNIST<br>*(Debug: MNIST, Ext: CIFAR-10)* | • Linear / Softmax Classifier<br>• Multilayer Perceptron (MLP)<br>• Convolutional Neural Network (CNN)<br>• Recurrent Network (LSTM/GRU)<br>• Vision Transformer (ViT) | **40%** | [**`📂 assignment1/`**](./assignment1/) |
+| **Assignment 2** | **Deep Learning on Large-Scale Data & Specialized Tasks**<br>End-to-end specialized CV or NLP pipeline with pretrained backbones. | Domain-specific dataset (≥ 5,000 samples, approved proposal) | • Simple Baseline<br>• Modern Pretrained Backbone (Transfer Learning)<br>• Fine-tuning protocol & Controlled Ablation | **30%** | [**`📂 assignment2/`**](./assignment2/) |
+| **Assignment 3** | **Multimodal Deep Learning**<br>Cross-modal representation, fusion strategies, and alignment. | Paired multimodal dataset (e.g., Image-Text, VQA, RGB-Depth) | • Unimodal Baselines (Modality A & B)<br>• Simple Fusion Baseline<br>• Advanced Multimodal Fusion Architecture | **30%** | [**`📂 assignment3/`**](./assignment3/) |
 
 ### Milestone Calendar Overview
 
@@ -143,8 +143,37 @@ To run this landing page locally on your machine:
 
 ```text
 deep-learning-&-applications---co3133/
-├── public/                 # Static assets & icons
-├── src/
+├── assignment1/            # Assignment 1: Foundations of Deep Learning Pipelines & Architectures
+│   ├── Assignment1_Extended_Executed.ipynb  # Executed notebook (full outputs, tables & curves)
+│   ├── Assignment1_Extended.ipynb           # Clean reproducible training pipeline
+│   ├── Assignment1 (1).ipynb                # Initial baseline run notebook
+│   ├── checkpoints/                         # Best model checkpoints (.pth)
+│   │   ├── cnn_best.pth                     # Best CNN checkpoint (421k params, 92.19% acc)
+│   │   ├── linear_best.pth                  # Best Linear classifier checkpoint (84.21% acc)
+│   │   ├── lstm_best.pth                    # Best LSTM baseline checkpoint (90.00% acc)
+│   │   ├── mlp_best.pth                     # Best MLP checkpoint (88.77% acc)
+│   │   └── transformer_best.pth             # Best ViT checkpoint (87.60% acc)
+│   ├── figures/                             # 22 visualization figures (confusion matrices, loss curves)
+│   ├── histories/                           # Epoch-by-epoch loss & accuracy history logs
+│   ├── results/                             # Quantitative evaluation exports (model_comparison.csv)
+│   ├── scripts/                             # Notebook generation scripts
+│   └── README.md                            # Detailed Assignment 1 report & benchmark documentation
+├── assignment2/            # Assignment 2: Large-Scale Data & Specialized Tasks (Pretrained backbones)
+│   ├── notebooks/          # Exploratory & fine-tuning notebooks
+│   ├── src/                # Modular pipeline scripts
+│   ├── checkpoints/        # Saved model weights
+│   ├── figures/            # Training curves & ablation charts
+│   ├── results/            # Quantitative benchmarks
+│   └── README.md           # Assignment 2 scope, milestones & roadmap
+├── assignment3/            # Assignment 3: Multimodal Deep Learning (Cross-modal representation & fusion)
+│   ├── notebooks/          # Multimodal training & alignment notebooks
+│   ├── src/                # Modular encoders, cross-modal attention & fusion heads
+│   ├── checkpoints/        # Multimodal weights
+│   ├── figures/            # Attention heatmaps & retrieval curves
+│   ├── results/            # Benchmark metrics & ablation tables
+│   └── README.md           # Assignment 3 scope, milestones & roadmap
+├── public/                 # Static assets, web figures & icons
+├── src/                    # Web landing page & interactive portfolio (React 19 + TypeScript)
 │   ├── components/         # Reusable React UI components
 │   │   ├── Navbar.tsx             # Header navigation & quick links
 │   │   ├── HeroSection.tsx        # Course overview, intro stats & badges
@@ -156,6 +185,10 @@ deep-learning-&-applications---co3133/
 │   │   ├── AiUsageModal.tsx       # Detailed AI disclosure log viewer
 │   │   ├── AuthorProfileModal.tsx # Student biography & contact modal
 │   │   └── Footer.tsx             # Institutional footer
+│   ├── views/assignments/  # Deep dive assignment showcase views
+│   │   ├── Assignment1View.tsx    # Comprehensive A1 results, KaTeX math & metrics
+│   │   ├── Assignment2View.tsx    # A2 specification, dataset & backbone roadmap
+│   │   └── Assignment3View.tsx    # A3 multimodal fusion & alignment specification
 │   ├── data.ts             # Course metadata, milestones & assignment specs
 │   ├── types.ts            # TypeScript type definitions
 │   ├── App.tsx             # Main application layout & modal controller
