@@ -158,7 +158,49 @@ const MODEL_RESULTS = [
     cmPlot: 'assignment1/figures/gru_128_confusion_matrix.png',
     architecture: 'Row scanlines (T=28, d=28) → GRU(28, H=128, 3 gates) → h_28 → FC(128, 10)',
     inductiveBias: 'Sequential Temporal Bias (Efficient 3-gate recurrent transitions)',
-    badge: 'Efficient RNN'
+    badge: 'Extended Study'
+  },
+  {
+    id: 'lstm_300k',
+    name: 'LSTM Matched (H=258)',
+    shortName: 'LSTM-300K',
+    params: '299,806',
+    bestEpoch: 14,
+    valLoss: 0.2591,
+    valAcc: 90.80,
+    testAcc: 89.94,
+    macroF1: 89.91,
+    trainTime: '305.49s',
+    infTime: '0.1521s',
+    latency: '0.0475 ms',
+    checkpoint: 'lstm_300k_best.pth',
+    historyPlot: 'assignment1/figures/lstm_300k_training_history.png',
+    samplePredPlot: 'assignment1/figures/lstm_300k_sample_predictions.png',
+    cmPlot: 'assignment1/figures/lstm_300k_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → LSTM(28, H=258, 4 gates) → h_28 → FC(258, 10)',
+    inductiveBias: 'Sequential Temporal Bias (~300K parameter matched budget)',
+    badge: 'Extended Study'
+  },
+  {
+    id: 'gru_300k',
+    name: 'GRU Matched (H=300)',
+    shortName: 'GRU-300K',
+    params: '300,010',
+    bestEpoch: 10,
+    valLoss: 0.2532,
+    valAcc: 91.02,
+    testAcc: 90.60,
+    macroF1: 90.49,
+    trainTime: '303.92s',
+    infTime: '0.1471s',
+    latency: '0.0460 ms',
+    checkpoint: 'gru_300k_best.pth',
+    historyPlot: 'assignment1/figures/gru_300k_training_history.png',
+    samplePredPlot: 'assignment1/figures/gru_300k_sample_predictions.png',
+    cmPlot: 'assignment1/figures/gru_300k_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → GRU(28, H=300, 3 gates) → h_28 → FC(300, 10)',
+    inductiveBias: 'Sequential Temporal Bias (~300K parameter matched budget, +16.3% wider)',
+    badge: 'Extended Study'
   },
   {
     id: 'transformer',
@@ -183,54 +225,10 @@ const MODEL_RESULTS = [
   }
 ];
 
-// Extended Study: Matched Parameter Budget (~300K) Models
+// Extended Study: Matched Parameter Budget (~300K) Models for dedicated comparison block
 const MATCHED_PARAMETER_MODELS = [
-  {
-    id: 'lstm_300k',
-    name: 'LSTM Matched Budget (H=258)',
-    shortName: 'LSTM ~300K',
-    params: '299,806',
-    hiddenSize: 258,
-    gates: '4 gates (Input, Forget, Cell, Output)',
-    bestEpoch: 14,
-    valLoss: 0.2591,
-    valAcc: 90.80,
-    testAcc: 89.94,
-    macroF1: 89.91,
-    trainTime: '305.49s',
-    infTime: '0.1521s',
-    latency: '0.0475 ms',
-    checkpoint: 'lstm_300k_best.pth',
-    historyPlot: 'assignment1/figures/lstm_300k_training_history.png',
-    samplePredPlot: 'assignment1/figures/lstm_300k_sample_predictions.png',
-    cmPlot: 'assignment1/figures/lstm_300k_confusion_matrix.png',
-    architecture: 'Row scanlines (T=28, d=28) → LSTM(28, H=258, 4 gates) → h_28 → FC(258, 10)',
-    inductiveBias: 'Sequential Temporal Bias with expanded hidden state capacity',
-    badge: 'Matched ~300K'
-  },
-  {
-    id: 'gru_300k',
-    name: 'GRU Matched Budget (H=300)',
-    shortName: 'GRU ~300K',
-    params: '300,010',
-    hiddenSize: 300,
-    gates: '3 gates (Reset, Update, Candidate)',
-    bestEpoch: 10,
-    valLoss: 0.2532,
-    valAcc: 91.02,
-    testAcc: 90.60,
-    macroF1: 90.49,
-    trainTime: '303.92s',
-    infTime: '0.1471s',
-    latency: '0.0460 ms',
-    checkpoint: 'gru_300k_best.pth',
-    historyPlot: 'assignment1/figures/gru_300k_training_history.png',
-    samplePredPlot: 'assignment1/figures/gru_300k_sample_predictions.png',
-    cmPlot: 'assignment1/figures/gru_300k_confusion_matrix.png',
-    architecture: 'Row scanlines (T=28, d=28) → GRU(28, H=300, 3 gates) → h_28 → FC(300, 10)',
-    inductiveBias: 'Sequential Temporal Bias with +16.3% wider hidden representation',
-    badge: 'Winner ~300K'
-  }
+  MODEL_RESULTS[5], // LSTM Matched (H=258)
+  MODEL_RESULTS[6]  // GRU Matched (H=300)
 ];
 
 export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
@@ -245,11 +243,11 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
   const base = ((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '') + '/';
   const getAssetUrl = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
-  const allModels = [...MODEL_RESULTS, ...MATCHED_PARAMETER_MODELS];
+  const allModels = MODEL_RESULTS;
   const currentModel = allModels.find((m) => m.id === selectedModelId) || MODEL_RESULTS[2];
   const currentCmModel = allModels.find((m) => m.id === selectedCmModelId) || MODEL_RESULTS[2];
-  const currentHistoryModel = allModels.find((m) => m.id === selectedHistoryModelId) || MODEL_RESULTS[4];
-  const currentHistory = ASSIGNMENT1_HISTORIES[selectedHistoryModelId] || ASSIGNMENT1_HISTORIES['transformer'];
+  const currentHistoryModel = allModels.find((m) => m.id === selectedHistoryModelId) || MODEL_RESULTS[0];
+  const currentHistory = ASSIGNMENT1_HISTORIES[selectedHistoryModelId] || ASSIGNMENT1_HISTORIES['linear'];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -862,7 +860,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
 
             {/* Model Selector Pills */}
             <div className="flex flex-wrap gap-1 bg-[#f2f3ff] p-1 rounded-lg">
-              {MODEL_RESULTS.map((m) => (
+              {allModels.map((m) => (
                 <button
                   key={m.id}
                   onClick={() => setSelectedHistoryModelId(m.id)}
@@ -1003,7 +1001,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f2f3ff]">
-                  {MODEL_RESULTS.map((row) => (
+                  {allModels.map((row) => (
                     <tr 
                       key={row.id}
                       className={`hover:bg-[#f9faff] transition-colors ${row.id === 'cnn' ? 'bg-[#f4f7ff] font-medium' : ''}`}
@@ -1011,7 +1009,17 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                       <td className="py-2.5 px-4 font-semibold text-[#131b2e] flex items-center gap-2">
                         <span>{row.name}</span>
                         {row.id === 'cnn' && (
-                          <span className="text-[10px] font-mono bg-[#0037b0] text-white px-1.5 py-0.2 rounded">Best</span>
+                          <span className="text-[10px] font-mono bg-[#0037b0] text-white px-1.5 py-0.2 rounded font-normal">Best Acc</span>
+                        )}
+                        {row.badge === 'Extended Study' && (
+                          <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] border border-[#d2dffc] px-1.5 py-0.2 rounded font-normal">
+                            Extended Study
+                          </span>
+                        )}
+                        {row.badge === 'Baseline' && (
+                          <span className="text-[10px] font-mono bg-[#f1f5f9] text-[#475569] border border-[#e2e8f0] px-1.5 py-0.2 rounded font-normal">
+                            Baseline
+                          </span>
                         )}
                       </td>
                       <td className="py-2.5 px-3 font-mono text-[#515f74]">{row.params}</td>
@@ -1044,7 +1052,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
 
               {/* Model Selector Pills */}
               <div className="flex flex-wrap gap-1.5">
-                {MODEL_RESULTS.map((m) => (
+                {allModels.map((m) => (
                   <button
                     key={m.id}
                     onClick={() => setSelectedModelId(m.id)}
@@ -1255,27 +1263,43 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 </table>
               </div>
 
-              {/* Matched Budget Visualizations */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
-                <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
-                  <img 
-                    src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_convergence.png')} 
-                    alt="LSTM vs GRU Convergence Curves"
-                    className="max-h-[360px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
-                  />
-                  <p className="text-[11px] font-mono text-[#515f74] text-center">
-                    Figure 7.2a: Epoch-by-epoch loss and accuracy convergence of LSTM vs. GRU under the matched 300K budget.
+              {/* Matched Budget Visualizations - Full Width Stacked for Maximum Readability */}
+              <div className="space-y-6 pt-3">
+                <div className="bg-[#fcfcff] p-5 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-3">
+                  <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono text-[#515f74] border-b border-[#f2f3ff] pb-2">
+                    <span className="font-semibold text-[#131b2e] text-[13px]">
+                      Figure 7.2a: Epoch-by-Epoch Training &amp; Validation Convergence (LSTM vs. GRU ~300K Budget)
+                    </span>
+                    <span className="text-[#0037b0] font-medium">H=258 (LSTM) vs. H=300 (GRU)</span>
+                  </div>
+                  <div className="w-full flex justify-center bg-white p-3 rounded-lg border border-[#eaedff] shadow-xs">
+                    <img 
+                      src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_convergence.png')} 
+                      alt="Figure 7.2a: Epoch-by-epoch loss and accuracy convergence of LSTM vs. GRU under the matched 300K budget."
+                      className="w-full max-h-[520px] object-contain rounded-md"
+                    />
+                  </div>
+                  <p className="text-[12px] font-mono text-[#515f74] text-center max-w-3xl leading-relaxed">
+                    Validation loss (left) and validation accuracy (right) trajectories across 20 epochs under the matched 300K parameter budget. GRU achieves faster early-stage convergence and lower terminal loss (0.2520 vs. 0.2541).
                   </p>
                 </div>
 
-                <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
-                  <img 
-                    src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_budget_barchart.png')} 
-                    alt="LSTM vs GRU Matched Budget Bar Chart"
-                    className="max-h-[360px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
-                  />
-                  <p className="text-[11px] font-mono text-[#515f74] text-center">
-                    Figure 7.2b: Side-by-side performance tradeoff bar chart (Accuracy, Macro-F1, and Inference Latency).
+                <div className="bg-[#fcfcff] p-5 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-3">
+                  <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono text-[#515f74] border-b border-[#f2f3ff] pb-2">
+                    <span className="font-semibold text-[#131b2e] text-[13px]">
+                      Figure 7.2b: Multi-Dimensional Empirical Performance Comparison Bar Chart
+                    </span>
+                    <span className="text-[#0037b0] font-medium">Test Accuracy • Total Training Time • Inference Latency</span>
+                  </div>
+                  <div className="w-full flex justify-center bg-white p-3 rounded-lg border border-[#eaedff] shadow-xs">
+                    <img 
+                      src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_budget_barchart.png')} 
+                      alt="Figure 7.2b: Side-by-side performance tradeoff bar chart (Accuracy, Macro-F1, and Inference Latency)."
+                      className="w-full max-h-[520px] object-contain rounded-md"
+                    />
+                  </div>
+                  <p className="text-[12px] font-mono text-[#515f74] text-center max-w-3xl leading-relaxed">
+                    Side-by-side empirical trade-offs: GRU Matched ($H=300$) delivers superior classification accuracy (90.60% vs. 89.94%) with lower inference latency per sample (0.0460 ms vs. 0.0475 ms) due to 3-gate parameter efficiency.
                   </p>
                 </div>
               </div>
@@ -1317,7 +1341,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                   Normalized Confusion Matrix:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
-                  {MODEL_RESULTS.map((m) => (
+                  {allModels.map((m) => (
                     <button
                       key={m.id}
                       onClick={() => setSelectedCmModelId(m.id)}
@@ -1462,46 +1486,22 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f2f3ff] font-mono">
-                  {MODEL_RESULTS.map((m) => {
+                  {allModels.map((m) => {
                     const checkpointUrl = `${COURSE_INFO.repoUrl}/blob/main/assignment1/checkpoints/${m.checkpoint}`;
                     return (
                       <tr key={m.id} className="hover:bg-[#f9faff]">
-                        <td className="py-2.5 px-3 font-semibold text-[#131b2e]">{m.name}</td>
-                        <td className="py-2.5 px-3">
-                          <a
-                            href={checkpointUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-[#0037b0] hover:underline font-bold"
-                          >
-                            <span>{m.checkpoint}</span>
-                            <ExternalLink className="w-3 h-3 opacity-75" />
-                          </a>
-                        </td>
-                        <td className="py-2.5 px-3 text-[#515f74]">Epoch {m.bestEpoch}</td>
-                        <td className="py-2.5 px-3 text-[#0037b0] font-bold">{m.testAcc}%</td>
-                        <td className="py-2.5 px-3 text-[#515f74]">
-                          <a
-                            href={checkpointUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-[#0037b0] hover:underline"
-                          >
-                            <span className="truncate max-w-[280px]">tree/main/assignment1/checkpoints/{m.checkpoint}</span>
-                            <ExternalLink className="w-3 h-3 shrink-0 opacity-70" />
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                  {/* Matched budget checkpoints */}
-                  {MATCHED_PARAMETER_MODELS.map((m) => {
-                    const checkpointUrl = `${COURSE_INFO.repoUrl}/blob/main/assignment1/checkpoints/${m.checkpoint}`;
-                    return (
-                      <tr key={m.id} className="hover:bg-[#f9faff] bg-[#fdfdff]">
-                        <td className="py-2.5 px-3 font-semibold text-[#131b2e] flex items-center gap-1.5">
+                        <td className="py-2.5 px-3 font-semibold text-[#131b2e] flex items-center gap-2">
                           <span>{m.name}</span>
-                          <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1 py-0.2 rounded font-normal">Extended 300K</span>
+                          {m.badge === 'Extended Study' && (
+                            <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] border border-[#d2dffc] px-1 py-0.2 rounded font-normal">
+                              Extended Study
+                            </span>
+                          )}
+                          {m.id === 'cnn' && (
+                            <span className="text-[10px] font-mono bg-[#0037b0] text-white px-1.5 py-0.2 rounded font-normal">
+                              Best Acc
+                            </span>
+                          )}
                         </td>
                         <td className="py-2.5 px-3">
                           <a
