@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   ArrowLeft, 
   ExternalLink, 
@@ -20,33 +20,13 @@ import {
   Activity,
   TrendingUp,
   Table,
-  Sparkles,
-  List,
-  ArrowUp,
-  X,
-  ChevronRight
+  Sparkles
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
 import { ASSIGNMENT1_HISTORIES } from '../../assignment1Histories';
 
-const TOC_ITEMS = [
-  { id: 'sec-overview', num: '01', title: 'Overview & Info', icon: BookOpen },
-  { id: 'sec-problem-statement', num: '02', title: 'Problem Statement', icon: BookOpen },
-  { id: 'sec-eda', num: '03', title: 'Dataset & EDA', icon: Database },
-  { id: 'sec-methodology', num: '04', title: 'Methodology & Models', icon: GitBranch },
-  { id: 'sec-setup', num: '05', title: 'Experimental Setup', icon: Cpu },
-  { id: 'sec-training-dynamics', num: '06', title: 'Training Dynamics', icon: Activity },
-  { id: 'sec-results', num: '07', title: 'Experimental Results', icon: BarChart3 },
-  { id: 'sec-discussion', num: '08', title: 'Comparison & Discussion', icon: Layers },
-  { id: 'sec-error-analysis', num: '09', title: 'Error Analysis', icon: AlertCircle },
-  { id: 'sec-limitations', num: '10', title: 'Limitations & Conclusion', icon: HelpCircle },
-  { id: 'sec-source-code', num: '11', title: 'Source Code Repo', icon: Github },
-  { id: 'sec-checkpoints', num: '12', title: 'Checkpoints & Reproduction', icon: Terminal },
-  { id: 'sec-report', num: '13', title: 'Report & Slides', icon: FileText },
-  { id: 'sec-video', num: '14', title: 'YouTube Video', icon: Video },
-  { id: 'sec-ai-disclosure', num: '15', title: 'AI Usage Disclosure', icon: ShieldCheck },
-];
+
 
 interface AssignmentViewProps {
   onNavigate: (view: ViewType) => void;
@@ -235,10 +215,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
   const [selectedModelId, setSelectedModelId] = useState<string>('cnn');
   const [selectedEdaTab, setSelectedEdaTab] = useState<'distribution' | 'pixels' | 'samples' | 'average'>('distribution');
   const [selectedCmModelId, setSelectedCmModelId] = useState<string>('cnn');
-  const [selectedHistoryModelId, setSelectedHistoryModelId] = useState<string>('transformer');
-  const [activeSection, setActiveSection] = useState<string>('sec-overview');
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const [isMobileTocOpen, setIsMobileTocOpen] = useState<boolean>(false);
+  const [selectedHistoryModelId, setSelectedHistoryModelId] = useState<string>('linear');
 
   const base = ((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '') + '/';
   const getAssetUrl = (path: string) => `${base}${path.replace(/^\//, '')}`;
@@ -249,47 +226,11 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
   const currentHistoryModel = allModels.find((m) => m.id === selectedHistoryModelId) || MODEL_RESULTS[0];
   const currentHistory = ASSIGNMENT1_HISTORIES[selectedHistoryModelId] || ASSIGNMENT1_HISTORIES['linear'];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const currentProgress = Math.min(100, Math.max(0, Math.round((window.scrollY / totalScroll) * 100)));
-        setScrollProgress(currentProgress);
-      }
-
-      // Determine active section based on scroll offset
-      const scrollPosition = window.scrollY + 140;
-      for (let i = TOC_ITEMS.length - 1; i >= 0; i--) {
-        const item = TOC_ITEMS[i];
-        const el = document.getElementById(item.id);
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(item.id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const yOffset = -90; // offset for sticky navigation header
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setActiveSection(id);
-      setIsMobileTocOpen(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#faf8ff] text-[#131b2e] pb-24">
       {/* Top Breadcrumbs & Navigation Bar */}
       <div className="bg-white border-b border-[#eaedff] sticky top-16 z-30 shadow-xs">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <div className="max-w-[1140px] mx-auto px-4 lg:px-8 h-14 flex items-center justify-between">
           <button
             onClick={() => onNavigate('home')}
             className="inline-flex items-center space-x-2 text-[13px] font-medium text-[#0037b0] hover:text-[#00257a] transition-colors cursor-pointer group"
@@ -306,82 +247,8 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
         </div>
       </div>
 
-      {/* Main Centered Layout with Compact Left Gutter TOC */}
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="flex justify-center gap-6 xl:gap-8 items-start relative">
-          
-          {/* =========================================================================
-              COMPACT STICKY LEFT SIDEBAR: TABLE OF CONTENTS (Only on wide screens)
-             ========================================================================= */}
-          <aside className="hidden xl:block w-48 2xl:w-52 shrink-0 sticky top-32 self-start">
-            <div className="bg-white/95 backdrop-blur-xs rounded-xl border border-[#eaedff] p-3 shadow-xs space-y-2.5">
-              <div className="flex items-center justify-between pb-2 border-b border-[#f2f3ff]">
-                <div className="flex items-center space-x-1.5 text-[#131b2e]">
-                  <List className="w-3.5 h-3.5 text-[#0037b0]" />
-                  <span className="font-serif text-[12px] font-semibold">Contents</span>
-                </div>
-                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-[#f2f3ff] text-[#0037b0]">
-                  15 Sec
-                </span>
-              </div>
-
-              {/* Reading Progress Indicator */}
-              <div className="space-y-1 pb-2 border-b border-[#f2f3ff]">
-                <div className="flex items-center justify-between text-[10px] font-mono text-[#515f74]">
-                  <span>Progress</span>
-                  <span className="font-semibold text-[#0037b0]">{scrollProgress}%</span>
-                </div>
-                <div className="w-full bg-[#f2f3ff] h-1 rounded-full overflow-hidden">
-                  <div 
-                    className="bg-[#0037b0] h-full rounded-full transition-all duration-150"
-                    style={{ width: `${scrollProgress}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Navigation List */}
-              <nav className="space-y-0.5 max-h-[calc(100vh-270px)] overflow-y-auto pr-0.5 text-[11px]">
-                {TOC_ITEMS.map((item) => {
-                  const isActive = activeSection === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-2 py-1 rounded-md text-[11px] flex items-center space-x-1.5 transition-all cursor-pointer ${
-                        isActive 
-                          ? 'bg-[#0037b0] text-white font-medium shadow-xs' 
-                          : 'text-[#515f74] hover:bg-[#f2f3ff] hover:text-[#131b2e]'
-                      }`}
-                      title={item.title}
-                    >
-                      <span className={`font-mono text-[9px] px-1 py-0.2 rounded shrink-0 ${
-                        isActive ? 'bg-white/20 text-white' : 'bg-[#f2f3ff] text-[#0037b0]'
-                      }`}>
-                        {item.num}
-                      </span>
-                      <span className="truncate flex-1">{item.title}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Footer Quick Actions */}
-              <div className="pt-2 border-t border-[#f2f3ff] flex items-center justify-center text-[10px]">
-                <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="inline-flex items-center space-x-1 text-[#515f74] hover:text-[#0037b0] cursor-pointer font-medium"
-                >
-                  <ArrowUp className="w-3 h-3" />
-                  <span>Scroll to Top</span>
-                </button>
-              </div>
-            </div>
-          </aside>
-
-          {/* =========================================================================
-              MAIN CENTERED CONTENT CONTAINER
-             ========================================================================= */}
-          <main className="w-full max-w-[1040px] min-w-0 space-y-8">
+      {/* Main Centered Content Stream */}
+      <div className="max-w-[1140px] mx-auto px-4 lg:px-8 pt-8 space-y-8">
             
             {/* =========================================================================
                 1. ASSIGNMENT TITLE & BASIC INFORMATION
@@ -1598,61 +1465,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
           </div>
         </div>
 
-          </main>
-        </div>
       </div>
-
-      {/* Mobile Floating TOC Toggle Button */}
-      <div className="lg:hidden fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
-          className="flex items-center space-x-2 px-4 py-2.5 bg-[#0037b0] text-white text-[13px] font-medium rounded-full shadow-lg hover:bg-[#00257a] transition-all cursor-pointer"
-        >
-          <List className="w-4 h-4" />
-          <span>Contents ({scrollProgress}%)</span>
-        </button>
-      </div>
-
-      {/* Mobile TOC Drawer Modal */}
-      {isMobileTocOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-end sm:items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl border border-[#eaedff] overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-4 border-b border-[#f2f3ff] flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <List className="w-4 h-4 text-[#0037b0]" />
-                <h3 className="font-serif font-semibold text-[15px] text-[#131b2e]">Table of Contents</h3>
-              </div>
-              <button 
-                onClick={() => setIsMobileTocOpen(false)}
-                className="p-1 text-[#515f74] hover:text-[#131b2e] rounded-lg cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-4 overflow-y-auto space-y-1.5 flex-1">
-              {TOC_ITEMS.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-[13px] flex items-center space-x-2.5 transition-all cursor-pointer ${
-                    activeSection === item.id 
-                      ? 'bg-[#0037b0] text-white font-medium' 
-                      : 'text-[#515f74] hover:bg-[#f2f3ff] hover:text-[#131b2e]'
-                  }`}
-                >
-                  <span className={`font-mono text-[11px] px-1.5 py-0.5 rounded ${
-                    activeSection === item.id ? 'bg-white/20 text-white' : 'bg-[#f2f3ff] text-[#0037b0]'
-                  }`}>
-                    {item.num}
-                  </span>
-                  <span className="truncate">{item.title}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
