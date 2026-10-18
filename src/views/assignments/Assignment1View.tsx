@@ -53,27 +53,27 @@ interface AssignmentViewProps {
   onOpenModal?: (type: ModalType) => void;
 }
 
-// Model result data from assignment1/results/model_comparison.csv
+// Model result data from assignment1/results/master_model_comparison.csv
 const MODEL_RESULTS = [
   {
     id: 'linear',
     name: 'Linear Classifier',
     shortName: 'Linear',
     params: '7,850',
-    bestEpoch: 10,
-    valLoss: 0.5196,
-    valAcc: 82.82,
-    testAcc: 82.45,
-    macroF1: 82.26,
-    trainTime: '324.99s',
-    infTime: '3.3271s',
-    latency: '0.3327 ms',
+    bestEpoch: 12,
+    valLoss: 0.4352,
+    valAcc: 85.13,
+    testAcc: 84.21,
+    macroF1: 84.19,
+    trainTime: '276.37s',
+    infTime: '0.0088s',
+    latency: '0.0027 ms',
     checkpoint: 'linear_best.pth',
     historyPlot: 'assignment1/figures/linear_training_history.png',
     samplePredPlot: 'assignment1/figures/linear_sample_predictions.png',
     cmPlot: 'assignment1/figures/linear_confusion_matrix.png',
-    architecture: 'Input Flatten(784) → Linear(784, 10) + Softmax logits',
-    inductiveBias: 'None (Linear hyperplane in 784D space)',
+    architecture: 'Input Flatten(784) → Linear(784, 10) + Cross-Entropy Loss',
+    inductiveBias: 'None (Linear hyperplane in 784D vector space)',
     badge: 'Baseline'
   },
   {
@@ -81,14 +81,14 @@ const MODEL_RESULTS = [
     name: 'Multilayer Perceptron (MLP)',
     shortName: 'MLP',
     params: '235,146',
-    bestEpoch: 14,
-    valLoss: 0.3213,
-    valAcc: 87.95,
-    testAcc: 87.57,
-    macroF1: 87.51,
-    trainTime: '353.55s',
-    infTime: '2.0924s',
-    latency: '0.2092 ms',
+    bestEpoch: 17,
+    valLoss: 0.3026,
+    valAcc: 88.98,
+    testAcc: 88.77,
+    macroF1: 88.71,
+    trainTime: '285.81s',
+    infTime: '0.0386s',
+    latency: '0.0121 ms',
     checkpoint: 'mlp_best.pth',
     historyPlot: 'assignment1/figures/mlp_training_history.png',
     samplePredPlot: 'assignment1/figures/mlp_sample_predictions.png',
@@ -102,63 +102,134 @@ const MODEL_RESULTS = [
     name: 'Convolutional Neural Network (CNN)',
     shortName: 'CNN',
     params: '421,834',
-    bestEpoch: 14,
-    valLoss: 0.1917,
-    valAcc: 92.78,
-    testAcc: 92.03,
-    macroF1: 92.03,
-    trainTime: '356.18s',
-    infTime: '2.1325s',
-    latency: '0.2132 ms',
+    bestEpoch: 9,
+    valLoss: 0.1994,
+    valAcc: 92.63,
+    testAcc: 92.19,
+    macroF1: 92.17,
+    trainTime: '306.71s',
+    infTime: '0.0656s',
+    latency: '0.0205 ms',
     checkpoint: 'cnn_best.pth',
     historyPlot: 'assignment1/figures/cnn_training_history.png',
     samplePredPlot: 'assignment1/figures/cnn_sample_predictions.png',
     cmPlot: 'assignment1/figures/cnn_confusion_matrix.png',
-    architecture: 'Conv2D(1→32, 3x3) → BN → ReLU → Conv2D(32→64) → MaxPool(2) → Dropout(0.25) → Conv2D(64→128) → MaxPool(2) → FC(128*7*7, 256) → FC(256, 10)',
+    architecture: 'Conv2D(1→32, 3x3) → BN → ReLU → Conv2D(32→64) → MaxPool(2) → Conv2D(64→128) → MaxPool(2) → FC(128*7*7, 256) → FC(256, 10)',
     inductiveBias: 'High (2D Spatial Locality & Translation Equivariance)',
     badge: 'Best Accuracy'
   },
   {
     id: 'lstm',
-    name: 'LSTM Image Classifier',
-    shortName: 'LSTM',
+    name: 'LSTM Baseline (H=128)',
+    shortName: 'LSTM-128',
     params: '82,186',
-    bestEpoch: 20,
-    valLoss: 0.2723,
-    valAcc: 90.18,
-    testAcc: 88.15,
-    macroF1: 88.14,
-    trainTime: '325.57s',
-    infTime: '3.1135s',
-    latency: '0.3114 ms',
-    checkpoint: 'lstm_best.pth',
-    historyPlot: 'assignment1/figures/lstm_training_history.png',
-    samplePredPlot: 'assignment1/figures/lstm_sample_predictions.png',
-    cmPlot: 'assignment1/figures/lstm_confusion_matrix.png',
-    architecture: 'Sequential scanlines (T=28 rows, d=28) → LSTM(input=28, hidden=128) → Last hidden state h_28 → FC(128, 10)',
-    inductiveBias: 'Sequential Temporal Bias (Top-to-bottom row transitions)',
+    bestEpoch: 17,
+    valLoss: 0.2676,
+    valAcc: 90.33,
+    testAcc: 90.00,
+    macroF1: 89.95,
+    trainTime: '289.11s',
+    infTime: '0.0775s',
+    latency: '0.0242 ms',
+    checkpoint: 'lstm_128_best.pth',
+    historyPlot: 'assignment1/figures/lstm_128_training_history.png',
+    samplePredPlot: 'assignment1/figures/lstm_128_sample_predictions.png',
+    cmPlot: 'assignment1/figures/lstm_128_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → LSTM(28, H=128, 4 gates) → h_28 → FC(128, 10)',
+    inductiveBias: 'Sequential Temporal Bias (Top-to-bottom row scanline transitions)',
     badge: 'Recurrent'
   },
   {
+    id: 'gru',
+    name: 'GRU Baseline (H=128)',
+    shortName: 'GRU-128',
+    params: '61,962',
+    bestEpoch: 17,
+    valLoss: 0.2582,
+    valAcc: 90.80,
+    testAcc: 90.51,
+    macroF1: 90.46,
+    trainTime: '292.60s',
+    infTime: '0.0647s',
+    latency: '0.0202 ms',
+    checkpoint: 'gru_128_best.pth',
+    historyPlot: 'assignment1/figures/gru_128_training_history.png',
+    samplePredPlot: 'assignment1/figures/gru_128_sample_predictions.png',
+    cmPlot: 'assignment1/figures/gru_128_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → GRU(28, H=128, 3 gates) → h_28 → FC(128, 10)',
+    inductiveBias: 'Sequential Temporal Bias (Efficient 3-gate recurrent transitions)',
+    badge: 'Efficient RNN'
+  },
+  {
     id: 'transformer',
-    name: 'Transformer Image Classifier',
-    shortName: 'Transformer',
-    params: '71,946',
-    bestEpoch: 19,
-    valLoss: 0.3183,
-    valAcc: 88.58,
-    testAcc: 88.22,
-    macroF1: 88.05,
-    trainTime: '445.34s',
-    infTime: '2.2613s',
-    latency: '0.2261 ms',
+    name: 'Vision Transformer (ViT)',
+    shortName: 'ViT',
+    params: '72,074',
+    bestEpoch: 20,
+    valLoss: 0.3170,
+    valAcc: 88.07,
+    testAcc: 87.60,
+    macroF1: 87.52,
+    trainTime: '373.48s',
+    infTime: '0.2567s',
+    latency: '0.0802 ms',
     checkpoint: 'transformer_best.pth',
     historyPlot: 'assignment1/figures/transformer_training_history.png',
     samplePredPlot: 'assignment1/figures/transformer_sample_predictions.png',
     cmPlot: 'assignment1/figures/transformer_confusion_matrix.png',
-    architecture: '4x4 Patching (49 patches) → Linear Projection (d=64) + CLS Token + 1D PosEmbedding → 4 Transformer Encoder Blocks (h=4, d_mlp=128) → LayerNorm → Head(64, 10)',
+    architecture: '4x4 Patching (49 patches) → Linear Projection (d=64) + CLS Token + 1D PosEmbedding → 2 Transformer Blocks (h=4, d_mlp=128) → Head(64, 10)',
     inductiveBias: 'Low (Global Multi-Head Self-Attention across all patches)',
     badge: 'Attention'
+  }
+];
+
+// Extended Study: Matched Parameter Budget (~300K) Models
+const MATCHED_PARAMETER_MODELS = [
+  {
+    id: 'lstm_300k',
+    name: 'LSTM Matched Budget (H=258)',
+    shortName: 'LSTM ~300K',
+    params: '299,806',
+    hiddenSize: 258,
+    gates: '4 gates (Input, Forget, Cell, Output)',
+    bestEpoch: 14,
+    valLoss: 0.2591,
+    valAcc: 90.80,
+    testAcc: 89.94,
+    macroF1: 89.91,
+    trainTime: '305.49s',
+    infTime: '0.1521s',
+    latency: '0.0475 ms',
+    checkpoint: 'lstm_300k_best.pth',
+    historyPlot: 'assignment1/figures/lstm_300k_training_history.png',
+    samplePredPlot: 'assignment1/figures/lstm_300k_sample_predictions.png',
+    cmPlot: 'assignment1/figures/lstm_300k_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → LSTM(28, H=258, 4 gates) → h_28 → FC(258, 10)',
+    inductiveBias: 'Sequential Temporal Bias with expanded hidden state capacity',
+    badge: 'Matched ~300K'
+  },
+  {
+    id: 'gru_300k',
+    name: 'GRU Matched Budget (H=300)',
+    shortName: 'GRU ~300K',
+    params: '300,010',
+    hiddenSize: 300,
+    gates: '3 gates (Reset, Update, Candidate)',
+    bestEpoch: 10,
+    valLoss: 0.2532,
+    valAcc: 91.02,
+    testAcc: 90.60,
+    macroF1: 90.49,
+    trainTime: '303.92s',
+    infTime: '0.1471s',
+    latency: '0.0460 ms',
+    checkpoint: 'gru_300k_best.pth',
+    historyPlot: 'assignment1/figures/gru_300k_training_history.png',
+    samplePredPlot: 'assignment1/figures/gru_300k_sample_predictions.png',
+    cmPlot: 'assignment1/figures/gru_300k_confusion_matrix.png',
+    architecture: 'Row scanlines (T=28, d=28) → GRU(28, H=300, 3 gates) → h_28 → FC(300, 10)',
+    inductiveBias: 'Sequential Temporal Bias with +16.3% wider hidden representation',
+    badge: 'Winner ~300K'
   }
 ];
 
@@ -174,9 +245,10 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
   const base = ((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '') + '/';
   const getAssetUrl = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
-  const currentModel = MODEL_RESULTS.find((m) => m.id === selectedModelId) || MODEL_RESULTS[2];
-  const currentCmModel = MODEL_RESULTS.find((m) => m.id === selectedCmModelId) || MODEL_RESULTS[2];
-  const currentHistoryModel = MODEL_RESULTS.find((m) => m.id === selectedHistoryModelId) || MODEL_RESULTS[4];
+  const allModels = [...MODEL_RESULTS, ...MATCHED_PARAMETER_MODELS];
+  const currentModel = allModels.find((m) => m.id === selectedModelId) || MODEL_RESULTS[2];
+  const currentCmModel = allModels.find((m) => m.id === selectedCmModelId) || MODEL_RESULTS[2];
+  const currentHistoryModel = allModels.find((m) => m.id === selectedHistoryModelId) || MODEL_RESULTS[4];
   const currentHistory = ASSIGNMENT1_HISTORIES[selectedHistoryModelId] || ASSIGNMENT1_HISTORIES['transformer'];
 
   useEffect(() => {
@@ -1086,16 +1158,16 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
             {/* Tradeoff figure */}
             <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
               <img 
-                src={getAssetUrl('assignment1/figures/model_tradeoff_comparison.png')} 
+                src={getAssetUrl('assignment1/figures/master_tradeoff_comparison.png')} 
                 alt="Model Trade-off Comparison"
                 className="max-h-[460px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
               />
               <p className="text-[12px] font-mono text-[#515f74] text-center">
-                Figure 7.1: Master Trade-off Analysis: Accuracy vs Parameters, Accuracy vs Latency, and Macro-F1 across all 5 architectures.
+                Figure 7.1: Master Trade-off Analysis: Accuracy vs Parameters, Accuracy vs Latency, and Macro-F1 across all architectures.
               </p>
             </div>
 
-            {/* Discussion Points */}
+            {/* Core Discussion Points */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               <div className="p-4 bg-[#f9faff] rounded-lg border border-[#eaedff] space-y-1.5">
                 <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase flex items-center gap-1.5">
@@ -1103,17 +1175,119 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                   Spatial Inductive Bias Dominance (CNN)
                 </span>
                 <p className="text-[13px] text-[#515f74]">
-                  CNN achieved the top performance (<strong>92.03% Test Acc</strong>, <strong>92.03% Macro-F1</strong>). Its 2D local receptive fields and weight sharing naturally match visual image translation properties, outperforming flat MLPs by +4.46% with fast latency (0.21ms).
+                  CNN achieved the top performance (<strong>92.19% Test Acc</strong>, <strong>92.17% Macro-F1</strong>). Its 2D local receptive fields and weight sharing naturally match visual image translation properties, outperforming flat MLPs by +3.42% with fast latency (0.0205ms).
                 </p>
               </div>
 
               <div className="p-4 bg-[#f9faff] rounded-lg border border-[#eaedff] space-y-1.5">
                 <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase flex items-center gap-1.5">
                   <Activity className="w-3.5 h-3.5" />
-                  Sequence &amp; Attention Modalities (LSTM vs Transformer)
+                  Sequence &amp; Attention Modalities (GRU / LSTM vs ViT)
                 </span>
                 <p className="text-[13px] text-[#515f74]">
-                  Transformer Image Classifier reached <strong>88.22% Test Acc</strong> with only 71.9K parameters, proving global self-attention can model image patches from scratch. LSTM achieved <strong>88.15% Test Acc</strong> by treating row scanlines as sequential dependencies.
+                  GRU baseline reached <strong>90.51% Test Acc</strong> (faster and higher than LSTM at <strong>90.00%</strong>). Vision Transformer reached <strong>87.60% Test Acc</strong> from scratch with 72K parameters, demonstrating patch self-attention capabilities.
+                </p>
+              </div>
+            </div>
+
+            {/* EXTENDED RESEARCH: LSTM vs GRU Matched Parameter Budget (~300K) placed below core models */}
+            <div className="mt-6 pt-6 border-t border-[#f2f3ff] space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 bg-[#eef2ff] text-[#0037b0] font-mono text-[11px] font-bold uppercase rounded">
+                      Extended Research Study
+                    </span>
+                    <span className="text-[11px] font-mono text-[#515f74] bg-[#f8faff] px-2 py-0.5 rounded border border-[#e2e8f0]">
+                      Budget: ≈ 300K Parameters
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-[17px] font-medium text-[#131b2e] pt-1">
+                    LSTM vs. GRU under a Matched Parameter Budget (H=258 vs H=300)
+                  </h3>
+                </div>
+              </div>
+
+              <p className="text-[13px] text-[#515f74] leading-relaxed">
+                In standard baseline configurations (<span className="font-mono">H=128</span>), LSTM has 4 gate transformations (82.2K params) while GRU has only 3 gates (62.0K params). To establish an unbiased, scientifically rigorous comparison, we calibrated the hidden dimension so both architectures operate under an identical parameter budget of <strong className="text-[#131b2e]">≈ 300K parameters</strong>:
+              </p>
+
+              {/* Matched Budget Comparison Table */}
+              <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+                <table className="w-full text-left text-[12px] border-collapse">
+                  <thead className="bg-[#f8faff] text-[#131b2e] font-mono text-[11px] uppercase border-b border-[#eaedff]">
+                    <tr>
+                      <th className="py-2.5 px-3">Architecture</th>
+                      <th className="py-2.5 px-3">Hidden Size (H)</th>
+                      <th className="py-2.5 px-3">Total Params</th>
+                      <th className="py-2.5 px-3">Val Acc (%)</th>
+                      <th className="py-2.5 px-3">Test Acc (%)</th>
+                      <th className="py-2.5 px-3">Macro-F1 (%)</th>
+                      <th className="py-2.5 px-3">Latency (ms)</th>
+                      <th className="py-2.5 px-3">Checkpoint</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#f2f3ff] font-mono">
+                    <tr className="hover:bg-[#f9faff]">
+                      <td className="py-2.5 px-3 font-semibold text-[#131b2e]">LSTM Matched</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">H = 258 (4 gates)</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">299,806</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">90.80%</td>
+                      <td className="py-2.5 px-3 font-bold text-[#131b2e]">89.94%</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">89.91%</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">0.0475 ms</td>
+                      <td className="py-2.5 px-3 text-[#0037b0]">lstm_300k_best.pth</td>
+                    </tr>
+                    <tr className="hover:bg-[#f9faff] bg-[#f4f7ff]">
+                      <td className="py-2.5 px-3 font-semibold text-[#0037b0] flex items-center gap-1.5">
+                        <span>GRU Matched</span>
+                        <span className="text-[10px] font-mono bg-[#0037b0] text-white px-1.5 py-0.2 rounded">Winner</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-[#0037b0] font-semibold">H = 300 (+16.3% wider)</td>
+                      <td className="py-2.5 px-3 text-[#515f74]">300,010</td>
+                      <td className="py-2.5 px-3 font-semibold text-[#0037b0]">91.02%</td>
+                      <td className="py-2.5 px-3 font-bold text-[#0037b0]">90.60%</td>
+                      <td className="py-2.5 px-3 font-semibold text-[#0037b0]">90.49%</td>
+                      <td className="py-2.5 px-3 font-semibold text-[#137333]">0.0460 ms (faster)</td>
+                      <td className="py-2.5 px-3 text-[#0037b0]">gru_300k_best.pth</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Matched Budget Visualizations */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
+                <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
+                  <img 
+                    src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_convergence.png')} 
+                    alt="LSTM vs GRU Convergence Curves"
+                    className="max-h-[360px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
+                  />
+                  <p className="text-[11px] font-mono text-[#515f74] text-center">
+                    Figure 7.2a: Epoch-by-epoch loss and accuracy convergence of LSTM vs. GRU under the matched 300K budget.
+                  </p>
+                </div>
+
+                <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#eaedff] flex flex-col items-center space-y-2">
+                  <img 
+                    src={getAssetUrl('assignment1/figures/lstm_vs_gru_matched_budget_barchart.png')} 
+                    alt="LSTM vs GRU Matched Budget Bar Chart"
+                    className="max-h-[360px] w-auto object-contain rounded-lg border border-[#eaedff] bg-white p-2"
+                  />
+                  <p className="text-[11px] font-mono text-[#515f74] text-center">
+                    Figure 7.2b: Side-by-side performance tradeoff bar chart (Accuracy, Macro-F1, and Inference Latency).
+                  </p>
+                </div>
+              </div>
+
+              {/* Key Takeaways Box */}
+              <div className="p-4 bg-[#f0f4ff] rounded-lg border border-[#d2dffc] text-[13px] text-[#334155] space-y-2">
+                <div className="font-semibold text-[#0037b0] font-mono text-[11px] uppercase flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Key Empirical Takeaway: Gating Efficiency &amp; Hidden Capacity</span>
+                </div>
+                <p className="leading-relaxed text-[12.5px]">
+                  Because GRU omits the separate memory cell and couples the update and reset gates into 3 affine transformations (versus 4 in LSTM), it achieves a <strong>25% parameter savings per recurrent unit</strong>. Holding total parameter budget fixed at ~300K allows GRU to expand its hidden state width by <strong>+16.3% (H=300 vs H=258)</strong>. This larger representational capacity yields <strong>+0.66% higher Test Accuracy (90.60% vs 89.94%)</strong> while requiring fewer floating-point operations per step, resulting in lower inference latency.
                 </p>
               </div>
             </div>
@@ -1216,7 +1390,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                 Conclusion
               </span>
               <p className="text-[#515f74] leading-relaxed">
-                Assignment 1 successfully demonstrated the full pipeline of deep image classification across 5 paradigms. The <strong>CNN architecture</strong> demonstrated the strongest performance (<strong>92.03% Test Acc</strong>), while <strong>Transformer</strong> and <strong>LSTM</strong> proved that sequence and self-attention mechanisms can effectively capture image representations.
+                Assignment 1 successfully demonstrated the full pipeline of deep image classification across 5 paradigms. The <strong>CNN architecture</strong> demonstrated the strongest performance (<strong>92.19% Test Acc</strong>), while <strong>Transformer</strong>, <strong>GRU</strong>, and <strong>LSTM</strong> proved that sequence and self-attention mechanisms can effectively capture image representations.
               </p>
             </div>
           </div>
@@ -1293,6 +1467,42 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
                     return (
                       <tr key={m.id} className="hover:bg-[#f9faff]">
                         <td className="py-2.5 px-3 font-semibold text-[#131b2e]">{m.name}</td>
+                        <td className="py-2.5 px-3">
+                          <a
+                            href={checkpointUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-[#0037b0] hover:underline font-bold"
+                          >
+                            <span>{m.checkpoint}</span>
+                            <ExternalLink className="w-3 h-3 opacity-75" />
+                          </a>
+                        </td>
+                        <td className="py-2.5 px-3 text-[#515f74]">Epoch {m.bestEpoch}</td>
+                        <td className="py-2.5 px-3 text-[#0037b0] font-bold">{m.testAcc}%</td>
+                        <td className="py-2.5 px-3 text-[#515f74]">
+                          <a
+                            href={checkpointUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-[#0037b0] hover:underline"
+                          >
+                            <span className="truncate max-w-[280px]">tree/main/assignment1/checkpoints/{m.checkpoint}</span>
+                            <ExternalLink className="w-3 h-3 shrink-0 opacity-70" />
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {/* Matched budget checkpoints */}
+                  {MATCHED_PARAMETER_MODELS.map((m) => {
+                    const checkpointUrl = `${COURSE_INFO.repoUrl}/blob/main/assignment1/checkpoints/${m.checkpoint}`;
+                    return (
+                      <tr key={m.id} className="hover:bg-[#f9faff] bg-[#fdfdff]">
+                        <td className="py-2.5 px-3 font-semibold text-[#131b2e] flex items-center gap-1.5">
+                          <span>{m.name}</span>
+                          <span className="text-[10px] font-mono bg-[#eef2ff] text-[#0037b0] px-1 py-0.2 rounded font-normal">Extended 300K</span>
+                        </td>
                         <td className="py-2.5 px-3">
                           <a
                             href={checkpointUrl}
