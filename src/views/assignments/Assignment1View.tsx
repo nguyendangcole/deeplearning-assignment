@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import katex from 'katex';
 import { 
   ArrowLeft, 
   ExternalLink, 
@@ -20,7 +19,6 @@ import {
   Award,
   Activity,
   TrendingUp,
-  Sliders,
   Table,
   Sparkles,
   List,
@@ -31,16 +29,6 @@ import {
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
 import { ASSIGNMENT1_HISTORIES } from '../../assignment1Histories';
-
-function MathInline({ math }: { math: string }) {
-  const html = katex.renderToString(math, { throwOnError: false, displayMode: false });
-  return <span className="inline-block align-middle mx-0.5 font-normal" dangerouslySetInnerHTML={{ __html: html }} />;
-}
-
-function MathBlock({ math, className = '' }: { math: string; className?: string }) {
-  const html = katex.renderToString(math, { throwOnError: false, displayMode: true });
-  return <div className={`my-2 overflow-x-auto text-[#131b2e] ${className}`} dangerouslySetInnerHTML={{ __html: html }} />;
-}
 
 const TOC_ITEMS = [
   { id: 'sec-overview', num: '01', title: 'Overview & Info', icon: BookOpen },
@@ -421,46 +409,6 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
               Image classification on complex clothing products introduces nuanced visual ambiguities due to subtle textural contours, sleeve variations, and high intra-class variance compared to handwritten digits. The core objective of <strong>Assignment 1</strong> is to formulate, implement from scratch, and systematically benchmark <strong>5 foundational deep learning architectures</strong> on the <strong>Fashion-MNIST</strong> dataset under controlled empirical conditions.
             </p>
 
-            {/* Formal Mathematical Formulation Card */}
-            <div className="p-5 bg-[#fcfdff] rounded-xl border border-[#eaedff] space-y-4">
-              <div className="flex items-center justify-between border-b border-[#f2f3ff] pb-2">
-                <span className="font-mono text-[12px] font-bold text-[#0037b0] uppercase flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5" />
-                  Formal Mathematical Formulation
-                </span>
-                <span className="text-[11px] font-mono text-[#515f74] bg-[#f2f3ff] px-2 py-0.5 rounded">
-                  Supervised 10-Class Classification
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13px]">
-                {/* 1. Input Space & Posterior Probability Mapping */}
-                <div className="p-4 bg-white rounded-lg border border-[#eaedff] space-y-2">
-                  <span className="font-mono text-[11px] font-semibold text-[#131b2e] uppercase block">
-                    1. Input Space &amp; Probability Mapping
-                  </span>
-                  <p className="text-[#515f74] leading-normal">
-                    Let an input image be <MathInline math="\mathbf{x} \in \mathbb{R}^{28 \times 28}" /> with target one-hot vector <MathInline math="\mathbf{y} \in \{0, 1\}^{C}" /> (<MathInline math="C = 10" />). A neural network parameterized by <MathInline math="\boldsymbol{\theta}" /> computes logits <MathInline math="\mathbf{z} = f_{\boldsymbol{\theta}}(\mathbf{x})" />:
-                  </p>
-                  <MathBlock math="f_{\boldsymbol{\theta}}: \mathbb{R}^{28 \times 28} \longrightarrow \Delta^{C-1}, \quad \hat{y}_c = \operatorname{Softmax}(z_c) = \frac{\exp(z_c)}{\sum_{k=1}^C \exp(z_k)}" />
-                </div>
-
-                {/* 2. Empirical Risk Minimization & Decision Rule */}
-                <div className="p-4 bg-white rounded-lg border border-[#eaedff] space-y-2">
-                  <span className="font-mono text-[11px] font-semibold text-[#131b2e] uppercase block">
-                    2. Empirical Risk Minimization (ERM)
-                  </span>
-                  <p className="text-[#515f74] leading-normal">
-                    Given training set <MathInline math="\mathcal{D} = \{(\mathbf{x}_i, \mathbf{y}_i)\}_{i=1}^N" />, we minimize the regularized Cross-Entropy loss (<MathInline math="\lambda = 10^{-4}" />):
-                  </p>
-                  <MathBlock math="\mathcal{L}(\boldsymbol{\theta}) = -\frac{1}{N} \sum_{i=1}^N \sum_{c=1}^C y_{i,c} \log \hat{y}_{i,c} + \frac{\lambda}{2} \|\boldsymbol{\theta}\|_2^2" />
-                  <div className="pt-2 text-[12px] text-[#515f74] border-t border-[#f2f3ff] flex items-center justify-between">
-                    <span className="font-mono text-[11px]">MAP Decision Rule:</span>
-                    <MathInline math="\hat{c} = \underset{c \in \{0, \dots, C-1\}}{\operatorname{argmax}} \, \hat{y}_c" />
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Motivation & Representation Challenges */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
