@@ -23,7 +23,8 @@ import {
   Sparkles,
   Workflow,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  ArrowDown
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -680,6 +681,7 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
 
         {/* =========================================================================
             DEDICATED SECTION: END-TO-END TRAINING & EVALUATION PIPELINE FLOW
+            (Exact Visual Adaptation of Report Figure 2.1)
            ========================================================================= */}
         <div id="sec-pipeline-flow" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f2f3ff] pb-3">
@@ -690,152 +692,159 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
               </h2>
             </div>
             <span className="text-[11px] font-mono bg-[#eef2ff] text-[#0037b0] px-2.5 py-1 rounded font-semibold border border-[#d2dffc] w-fit">
-              Architecture Overview
+              Figure 2.1 · Architecture Overview
             </span>
           </div>
 
-          {/* High-Level Architecture Components */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
-            {/* Stage 1 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
-                  <Database className="w-4 h-4" />
+          <p className="text-[13px] text-[#515f74] leading-relaxed">
+            In strict compliance with Course Specification (Section 3.2), our unified training and evaluation workflow operates as a closed-loop supervised pipeline across all five candidate model families:
+          </p>
+
+          {/* Publication-Grade Figure 2.1 Flow Diagram */}
+          <div className="bg-[#fbfcff] p-5 sm:p-7 rounded-2xl border border-[#eaedff] space-y-4 shadow-2xs">
+            {/* Desktop 2-Row Flow Diagram (MD+) */}
+            <div className="hidden md:block space-y-3">
+              {/* Row 1: Forward Processing (Data -> Preprocessing -> DataLoader -> Model) */}
+              <div className="grid grid-cols-4 gap-3 items-center">
+                {/* 1. Raw Data */}
+                <div className="relative group">
+                  <div className="bg-blue-50/70 border-2 border-blue-500/80 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-blue-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-full">Input Tensor</span>
+                    <h4 className="text-[15px] font-bold text-blue-950 mt-1">Raw Data</h4>
+                    <p className="text-[12px] font-mono text-blue-800 mt-0.5">28 × 28 Grayscale</p>
+                  </div>
+                  {/* Connector Arrow Right */}
+                  <div className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 text-gray-400">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 01</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">Dataset</h3>
+
+                {/* 2. Preprocessing */}
+                <div className="relative group">
+                  <div className="bg-blue-50/70 border-2 border-blue-500/80 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-blue-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-full">Transform</span>
+                    <h4 className="text-[15px] font-bold text-blue-950 mt-1">Preprocessing</h4>
+                    <p className="text-[12px] font-mono text-blue-800 mt-0.5">Flip + Normalize</p>
+                  </div>
+                  <div className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 text-gray-400">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                  </div>
                 </div>
-                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
-                  Fashion-MNIST
+
+                {/* 3. DataLoader */}
+                <div className="relative group">
+                  <div className="bg-blue-50/70 border-2 border-blue-500/80 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-blue-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-full">Batch Generator</span>
+                    <h4 className="text-[15px] font-bold text-blue-950 mt-1">DataLoader</h4>
+                    <p className="text-[12px] font-mono text-blue-800 mt-0.5">Batch B = 64, Shuffle</p>
+                  </div>
+                  <div className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 translate-x-1/2 text-gray-400">
+                    <ArrowRight className="w-4 h-4 text-blue-400" />
+                  </div>
+                </div>
+
+                {/* 4. Model f_theta */}
+                <div className="relative group">
+                  <div className="bg-blue-50/90 border-2 border-blue-600 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-blue-100/50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-800 bg-blue-200/80 px-2 py-0.5 rounded-full">Forward Pass</span>
+                    <h4 className="text-[15px] font-bold text-blue-950 mt-1">Model f<sub>θ</sub></h4>
+                    <p className="text-[12px] font-mono text-blue-800 mt-0.5">Logits z ∈ ℝ<sup>10</sup></p>
+                  </div>
                 </div>
               </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
-                Tensor [1, 28, 28]
+
+              {/* Turnaround Connector between Row 1 and Row 2 */}
+              <div className="flex justify-end pr-16 py-1">
+                <div className="flex items-center space-x-1.5 text-rose-500 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 text-[11px] font-mono font-semibold">
+                  <span>Logits z</span>
+                  <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+                </div>
+              </div>
+
+              {/* Row 2: Optimization & Evaluation (Right to Left flow) */}
+              <div className="grid grid-cols-4 gap-3 items-center">
+                {/* 8. Evaluation (Final node on left) */}
+                <div className="relative group">
+                  <div className="bg-emerald-50/90 border-2 border-emerald-600 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-emerald-100/50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-200/80 px-2 py-0.5 rounded-full">Benchmark</span>
+                    <h4 className="text-[15px] font-bold text-emerald-950 mt-1">Evaluation</h4>
+                    <p className="text-[12px] font-mono text-emerald-800 mt-0.5">Acc, F1, Latency</p>
+                  </div>
+                </div>
+
+                {/* 7. Prediction */}
+                <div className="relative group">
+                  <div className="bg-emerald-50/70 border-2 border-emerald-500/80 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-emerald-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">Decision Rule</span>
+                    <h4 className="text-[15px] font-bold text-emerald-950 mt-1">Prediction</h4>
+                    <p className="text-[12px] font-mono text-emerald-800 mt-0.5">ŷ = arg max(z)</p>
+                  </div>
+                  {/* Connector Arrow Left */}
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 text-gray-400">
+                    <ArrowLeft className="w-4 h-4 text-emerald-500" />
+                  </div>
+                </div>
+
+                {/* 6. Optimization */}
+                <div className="relative group">
+                  <div className="bg-rose-50/70 border-2 border-rose-400 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-rose-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-rose-700 bg-rose-100/80 px-2 py-0.5 rounded-full">Gradient Step</span>
+                    <h4 className="text-[15px] font-bold text-rose-950 mt-1">Optimization</h4>
+                    <p className="text-[12px] font-mono text-rose-800 mt-0.5">Adam (η = 10<sup>-3</sup>)</p>
+                  </div>
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 text-gray-400">
+                    <ArrowLeft className="w-4 h-4 text-rose-400" />
+                  </div>
+                </div>
+
+                {/* 5. CrossEntropyLoss (First node on right of row 2) */}
+                <div className="relative group">
+                  <div className="bg-rose-50/70 border-2 border-rose-400 rounded-xl p-3.5 text-center shadow-xs transition-all hover:shadow-md hover:bg-rose-50">
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-rose-700 bg-rose-100/80 px-2 py-0.5 rounded-full">Objective</span>
+                    <h4 className="text-[15px] font-bold text-rose-950 mt-1">CrossEntropyLoss</h4>
+                    <p className="text-[12px] font-mono text-rose-800 mt-0.5">ℒ<sub>CE</sub>(z, y)</p>
+                  </div>
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 -translate-x-1/2 text-gray-400">
+                    <ArrowLeft className="w-4 h-4 text-rose-400" />
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Stage 2 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
-                  <Layers className="w-4 h-4" />
+            {/* Mobile Stacked Flow Diagram (< MD) */}
+            <div className="md:hidden space-y-2.5">
+              {[
+                { step: "01", name: "Raw Data", sub: "28 × 28 Grayscale", badge: "Input", color: "border-blue-400 bg-blue-50/70 text-blue-950" },
+                { step: "02", name: "Preprocessing", sub: "Flip + Normalize", badge: "Transform", color: "border-blue-400 bg-blue-50/70 text-blue-950" },
+                { step: "03", name: "DataLoader", sub: "Batch B = 64, Shuffle", badge: "Loader", color: "border-blue-400 bg-blue-50/70 text-blue-950" },
+                { step: "04", name: "Model f_θ", sub: "Logits z ∈ ℝ¹⁰", badge: "Forward", color: "border-blue-500 bg-blue-50/90 text-blue-950" },
+                { step: "05", name: "CrossEntropyLoss", sub: "ℒ_CE(z, y)", badge: "Loss", color: "border-rose-400 bg-rose-50/80 text-rose-950" },
+                { step: "06", name: "Optimization", sub: "Adam (η = 10⁻³)", badge: "Backprop", color: "border-rose-400 bg-rose-50/80 text-rose-950" },
+                { step: "07", name: "Prediction", sub: "ŷ = arg max(z)", badge: "ArgMax", color: "border-emerald-400 bg-emerald-50/70 text-emerald-950" },
+                { step: "08", name: "Evaluation", sub: "Acc, F1, Latency", badge: "Metrics", color: "border-emerald-500 bg-emerald-50/90 text-emerald-950" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <div className={"w-full border-2 rounded-xl p-3 text-center " + item.color + " shadow-xs"}>
+                    <div className="flex items-center justify-between text-[10px] font-mono font-semibold mb-1">
+                      <span>Step {item.step}</span>
+                      <span className="bg-white/80 px-2 py-0.5 rounded-full">{item.badge}</span>
+                    </div>
+                    <div className="text-[14px] font-bold">{item.name}</div>
+                    <div className="text-[12px] font-mono opacity-80">{item.sub}</div>
+                  </div>
+                  {idx < 7 && (
+                    <ArrowDown className="w-4 h-4 text-gray-400 my-1" />
+                  )}
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 02</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">DataLoader</h3>
-                </div>
-                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
-                  Batching (B=64)
-                </div>
-              </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
-                Normalized Tensors
-              </div>
+              ))}
             </div>
 
-            {/* Stage 3 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
-                  <Cpu className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 03</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">Model Architecture</h3>
-                </div>
-                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
-                  6 Model Families
-                </div>
-              </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
-                Logits [B, 10]
-              </div>
+            {/* Publication Caption matching Figure 2.1 */}
+            <div className="pt-3 border-t border-[#f0f2ff] text-center">
+              <p className="text-[12px] text-[#515f74] font-serif italic">
+                <strong>Figure:</strong> Comprehensive end-to-end deep learning pipeline architecture. Arrows depict synchronous mini-batch forward signal propagation, empirical loss calculation, backward gradient updates, and post-inference multi-metric evaluation.
+              </p>
             </div>
-
-            {/* Stage 4 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
-                  <Activity className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 04</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">Loss &amp; Optimizer</h3>
-                </div>
-                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
-                  CrossEntropy + AdamW
-                </div>
-              </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
-                Backprop &amp; Update
-              </div>
-            </div>
-
-            {/* Stage 5 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-[#0037b0] flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 05</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">Checkpointing</h3>
-                </div>
-                <div className="text-[11px] font-mono text-[#0037b0] bg-[#eef2ff] px-2 py-0.5 rounded w-fit">
-                  Early Stopping
-                </div>
-              </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono text-[#515f74]">
-                Save *.pth Weights
-              </div>
-            </div>
-
-            {/* Stage 6 */}
-            <div className="bg-[#fcfcff] border border-[#eaedff] rounded-xl p-4 flex flex-col justify-between hover:border-[#b8ccfc] transition-all">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#0037b0] text-white flex items-center justify-center">
-                  <BarChart3 className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-[#717686] uppercase tracking-wider">Step 06</span>
-                  <h3 className="text-[13px] font-bold text-[#131b2e]">Evaluation</h3>
-                </div>
-                <div className="text-[11px] font-mono text-white bg-[#0037b0] px-2 py-0.5 rounded w-fit font-bold">
-                  Test Benchmark
-                </div>
-              </div>
-              <div className="mt-4 pt-2.5 border-t border-[#f2f3ff] text-[11px] font-mono font-semibold text-[#0037b0]">
-                Acc, F1 &amp; Latency
-              </div>
-            </div>
-          </div>
-
-          {/* Connected Flow Diagram Ribbon */}
-          <div className="p-3 bg-[#f8faff] rounded-xl border border-[#eaedff] flex flex-wrap items-center justify-center lg:justify-between gap-2 text-[12px] font-mono">
-            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
-              Fashion-MNIST [1, 28, 28]
-            </span>
-            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
-            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
-              DataLoader (B=64)
-            </span>
-            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
-            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
-              Model (Forward → Logits)
-            </span>
-            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
-            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
-              Loss &amp; Optimizer (AdamW)
-            </span>
-            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
-            <span className="bg-white px-2.5 py-1 rounded border border-[#eaedff] font-medium text-[#131b2e] shadow-2xs">
-              Checkpoint (*.pth)
-            </span>
-            <ArrowRight className="w-4 h-4 text-[#0037b0] shrink-0" />
-            <span className="bg-[#0037b0] text-white px-2.5 py-1 rounded font-bold shadow-2xs">
-              Final Benchmark
-            </span>
           </div>
         </div>
 
