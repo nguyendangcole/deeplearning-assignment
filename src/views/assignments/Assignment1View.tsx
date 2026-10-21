@@ -24,7 +24,8 @@ import {
   Workflow,
   CheckCircle2,
   ArrowRight,
-  ArrowDown
+  ArrowDown,
+  Download
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -243,10 +244,22 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
             <span>Back to Course Overview</span>
           </button>
 
-          <div className="flex items-center space-x-2 text-[12px] font-mono text-[#515f74]">
-            <span className="hidden sm:inline">CO3133 / Assignments</span>
-            <span className="hidden sm:inline">/</span>
-            <span className="font-semibold text-[#131b2e] bg-[#f2f3ff] px-2.5 py-1 rounded">Assignment 01</span>
+          <div className="flex items-center space-x-3">
+            <a
+              href={`${base}Murph_A1_Report.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-md text-[12px] font-medium transition-colors shadow-xs cursor-pointer"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Report PDF</span>
+              <ExternalLink className="w-3 h-3 opacity-80" />
+            </a>
+            <div className="flex items-center space-x-2 text-[12px] font-mono text-[#515f74]">
+              <span className="hidden sm:inline">CO3133 / Assignments</span>
+              <span className="hidden sm:inline">/</span>
+              <span className="font-semibold text-[#131b2e] bg-[#f2f3ff] px-2.5 py-1 rounded">Assignment 01</span>
+            </div>
           </div>
         </div>
       </div>
@@ -312,12 +325,23 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
           {/* Quick Deliverable Action Links */}
           <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
+              href={`${base}Murph_A1_Report.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-all shadow-xs hover:shadow-md cursor-pointer"
+            >
+              <FileText className="w-4 h-4" />
+              <span>View Assignment 1 Report (PDF)</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+            </a>
+
+            <a
               href={COURSE_INFO.repoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
+              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff]"
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-4 h-4 text-[#0037b0]" />
               <span>Source Code Repo</span>
               <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
             </a>
@@ -1591,18 +1615,78 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
         </div>
 
         {/* =========================================================================
-            13. LINK TO REPORT / SLIDES (Placeholder as requested)
+            12. TECHNICAL REPORT & DELIVERABLES (<Murph>_A1_Report.pdf)
            ========================================================================= */}
-        <div id="sec-report" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4 scroll-mt-28">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
-            <FileText className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              12. Link to Report / Slides
-            </h2>
+        <div id="sec-report" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-5 scroll-mt-28">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f2f3ff] pb-4">
+            <div className="flex items-center space-x-3">
+              <FileText className="w-5 h-5 text-[#0037b0]" />
+              <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
+                12. Technical Report &amp; Deliverables
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#eef4ff] text-[#0037b0] border border-[#d0deff]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Official Report · 29 Pages
+            </span>
           </div>
-          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
-            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: Pending Final Submission</span>
-            Technical report (PDF) and presentation slides will be attached here upon final release.
+
+          {/* Overview Metadata Card */}
+          <div className="p-5 sm:p-6 bg-[#fbfcfe] rounded-xl border border-[#eaedff] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 bg-[#d5e3fc] text-[#001d31] font-mono text-[10px] font-semibold uppercase rounded">
+                    Milestone 2 Deliverable
+                  </span>
+                  <span className="text-[12px] font-mono text-[#515f74]">
+                    4.9 MB · 29 Pages
+                  </span>
+                </div>
+                <h3 className="text-[16px] font-semibold text-[#131b2e] leading-snug">
+                  Foundations of Deep Learning Pipelines and Architectures: From Linear Models to Modern Sequence Models
+                </h3>
+                <p className="text-[12px] text-[#515f74]">
+                  Document: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#0037b0] font-semibold">&lt;Murph&gt;_A1_Report.pdf</code> · Author: {COURSE_INFO.author} ({COURSE_INFO.studentId}) · Advisor: {COURSE_INFO.instructor}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href={`${base}Murph_A1_Report.pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs cursor-pointer"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>View Full Report (PDF)</span>
+                  <ExternalLink className="w-3 h-3 opacity-80" />
+                </a>
+                <a
+                  href={`${base}Murph_A1_Report.pdf`}
+                  download="<Murph>_A1_Report.pdf"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#0037b0]" />
+                  <span>Download PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#f2f3ff] text-[12px]">
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Scope &amp; Content</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">5 Core Architectures Benchmark &amp; Analysis</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Dataset</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">Fashion-MNIST (10 Classes, 70k Images)</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Key Findings</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">CNN 92.19% · GRU Matched 90.60% · ViT 87.60%</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1623,18 +1707,69 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
         </div>
 
         {/* =========================================================================
-            15. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Placeholder as requested)
+            14. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Handbook Section 5.2)
            ========================================================================= */}
-        <div id="sec-ai-disclosure" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4 scroll-mt-28">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
-            <ShieldCheck className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              14. Assignment-Specific AI Usage Disclosure
-            </h2>
+        <div id="sec-ai-disclosure" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-5 scroll-mt-28">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f2f3ff] pb-4">
+            <div className="flex items-center space-x-3">
+              <ShieldCheck className="w-5 h-5 text-[#0037b0]" />
+              <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
+                14. Assignment-Specific AI Usage Disclosure
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#eef4ff] text-[#0037b0] border border-[#d0deff]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Handbook Sec. 5.2 Compliant
+            </span>
           </div>
-          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
-            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block mb-1">Status: Pending Disclosure Declaration</span>
-            Assignment-specific AI tool usage declarations (Tool name, user, task, prompt, contribution, student verification, affected files, responsible member) will be maintained and documented here.
+
+          <p className="text-[13px] text-[#515f74] leading-relaxed">
+            In strict adherence to Section 5 of the Course Project Handbook, all generative AI tool usage during the preparation, experimentation, and report writing for Assignment 1 is transparently documented below.
+          </p>
+
+          <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+            <table className="w-full text-left text-[13px] border-collapse">
+              <thead className="bg-[#faf8ff] text-[#131b2e] border-b border-[#eaedff]">
+                <tr>
+                  <th className="py-2.5 px-4 font-semibold w-1/4">Field</th>
+                  <th className="py-2.5 px-4 font-semibold">Disclosure Record (Assignment 1)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#eaedff] text-[#334155]">
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Tool Name &amp; Model</td>
+                  <td className="py-2.5 px-4">ChatGPT, Google Antigravity</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Member Who Used It</td>
+                  <td className="py-2.5 px-4">Đặng Duy Nguyên</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Development Stage</td>
+                  <td className="py-2.5 px-4">Model design, pipeline coding, controlled experimentation, and report writing</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Purpose</td>
+                  <td className="py-2.5 px-4">Brainstorming model architectures, suggesting preprocessing techniques and hyperparameters, explaining PyTorch APIs, assisting with code generation and debugging, reviewing LSTM–GRU parameter calculations, and improving report formatting.</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Affected Sections</td>
+                  <td className="py-2.5 px-4">Sections 1.1–1.5 (Problem &amp; Data), Sections 2.1–2.4 (Methodology), and Sections 3.1–3.6 (Implementation Results &amp; Error Analysis)</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Student Verification</td>
+                  <td className="py-2.5 px-4">AI suggestions were reviewed and adapted to assignment requirements. Final implementations, parameter counts, and benchmark results were verified through real PyTorch execution runs and training logs.</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Responsible Member</td>
+                  <td className="py-2.5 px-4 font-medium text-[#0037b0]">Đặng Duy Nguyên (Student ID: 2352821)</td>
+                </tr>
+                <tr className="hover:bg-[#fbfcfe]">
+                  <td className="py-2.5 px-4 font-medium text-[#131b2e] bg-[#faf8ff]/50">Verification Sources</td>
+                  <td className="py-2.5 px-4">Official PyTorch documentation (v2.11), Fashion-MNIST research paper (Xiao et al., 2017), and generated execution logs.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
