@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AssignmentsSection from './components/AssignmentsSection';
+import SlidesSection from './components/SlidesSection';
 import VideosSection from './components/VideosSection';
 import AiUsageSection from './components/AiUsageSection';
 import Footer from './components/Footer';
@@ -82,6 +83,7 @@ export default function App() {
           <>
             <HeroSection onOpenModal={setActiveModal} />
             <AssignmentsSection onNavigateView={navigateToView} />
+            <SlidesSection onNavigateView={navigateToView} />
             <VideosSection onOpenModal={setActiveModal} />
             <AiUsageSection onOpenModal={setActiveModal} />
           </>

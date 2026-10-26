@@ -25,7 +25,8 @@ import {
   CheckCircle2,
   ArrowRight,
   ArrowDown,
-  Download
+  Download,
+  Presentation
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data';
 import { ViewType, ModalType } from '../../types';
@@ -255,6 +256,16 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
               <span>Report PDF</span>
               <ExternalLink className="w-3 h-3 opacity-80" />
             </a>
+            <a
+              href={`${base}assignment1_slides.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] border border-[#d5e3fc] rounded-md text-[12px] font-medium transition-colors shadow-xs cursor-pointer"
+            >
+              <Presentation className="w-3.5 h-3.5" />
+              <span>Slides (13p)</span>
+              <ExternalLink className="w-3 h-3 opacity-80" />
+            </a>
             <div className="flex items-center space-x-2 text-[12px] font-mono text-[#515f74]">
               <span className="hidden sm:inline">CO3133 / Assignments</span>
               <span className="hidden sm:inline">/</span>
@@ -333,6 +344,26 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
               <FileText className="w-4 h-4" />
               <span>View Assignment 1 Report (PDF)</span>
               <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+            </a>
+
+            <a
+              href={`${base}assignment1_slides.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-[#131b2e] hover:bg-[#25324d] text-white rounded-lg text-[13px] font-medium transition-all shadow-xs hover:shadow-md cursor-pointer"
+            >
+              <Presentation className="w-4 h-4 text-[#82b1ff]" />
+              <span>View Presentation Slides (PDF)</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+            </a>
+
+            <a
+              href={`${base}assignment1_slides.pdf`}
+              download="CO3133-Semester-261 – Group [2352821] – Assignment [1].pdf"
+              className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-[#0037b0]" />
+              <span>Download Slides (13p)</span>
             </a>
 
             <a
@@ -1691,13 +1722,89 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
         </div>
 
         {/* =========================================================================
+            13. PRESENTATION SLIDES (CO3133-Semester-261 – Group [2352821] – Assignment [1].pdf)
+           ========================================================================= */}
+        <div id="sec-slides" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-5 scroll-mt-28">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f2f3ff] pb-4">
+            <div className="flex items-center space-x-3">
+              <Presentation className="w-5 h-5 text-[#0037b0]" />
+              <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
+                13. Presentation Slides &amp; Defense Materials
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#eef4ff] text-[#0037b0] border border-[#d0deff]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Official Slides · 13 Pages
+            </span>
+          </div>
+
+          {/* Overview Metadata Card */}
+          <div className="p-5 sm:p-6 bg-[#fbfcfe] rounded-xl border border-[#eaedff] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 bg-[#d5e3fc] text-[#001d31] font-mono text-[10px] font-semibold uppercase rounded">
+                    Milestone Deliverable
+                  </span>
+                  <span className="text-[12px] font-mono text-[#515f74]">
+                    3.2 MB · 13 Slides
+                  </span>
+                </div>
+                <h3 className="text-[16px] font-semibold text-[#131b2e] leading-snug">
+                  Foundations of Deep Learning Pipelines and Architectures: From Linear Models to Modern Sequence Models
+                </h3>
+                <p className="text-[12px] text-[#515f74]">
+                  Document: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#0037b0] font-semibold">CO3133-Semester-261 – Group [2352821] – Assignment [1].pdf</code> · Author: {COURSE_INFO.author} ({COURSE_INFO.studentId}) · Advisor: {COURSE_INFO.instructor}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href={`${base}assignment1_slides.pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs cursor-pointer"
+                >
+                  <Presentation className="w-4 h-4" />
+                  <span>View Slides (PDF)</span>
+                  <ExternalLink className="w-3 h-3 opacity-80" />
+                </a>
+                <a
+                  href={`${base}assignment1_slides.pdf`}
+                  download="CO3133-Semester-261 – Group [2352821] – Assignment [1].pdf"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#0037b0]" />
+                  <span>Download PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#f2f3ff] text-[12px]">
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Slide Deck Content</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">13 Slides covering Intro, EDA, 5 Models &amp; Conclusion</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Scope &amp; Results</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">Fashion-MNIST 70K Benchmark across 5 Paradigms</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Course Format</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">Compliant with CO3133 Defense Specifications</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
             14. LINK TO YOUTUBE PRESENTATION VIDEO (Placeholder as requested)
            ========================================================================= */}
         <div id="sec-video" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-4 scroll-mt-28">
           <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
             <Video className="w-5 h-5 text-[#0037b0]" />
             <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-              13. Link to YouTube Presentation Video
+              14. Link to YouTube Presentation Video
             </h2>
           </div>
           <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74] space-y-1">
@@ -1707,14 +1814,14 @@ export default function Assignment1View({ onNavigate }: AssignmentViewProps) {
         </div>
 
         {/* =========================================================================
-            14. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Handbook Section 5.2)
+            15. ASSIGNMENT-SPECIFIC AI USAGE DISCLOSURE (Handbook Section 5.2)
            ========================================================================= */}
         <div id="sec-ai-disclosure" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-5 scroll-mt-28">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f2f3ff] pb-4">
             <div className="flex items-center space-x-3">
               <ShieldCheck className="w-5 h-5 text-[#0037b0]" />
               <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
-                14. Assignment-Specific AI Usage Disclosure
+                15. Assignment-Specific AI Usage Disclosure
               </h2>
             </div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#eef4ff] text-[#0037b0] border border-[#d0deff]">

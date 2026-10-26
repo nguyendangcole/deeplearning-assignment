@@ -19,6 +19,7 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const assignmentsEl = document.getElementById('assignments');
+      const slidesEl = document.getElementById('slides');
       const videosEl = document.getElementById('videos');
       const aiUsageEl = document.getElementById('ai-usage');
 
@@ -26,6 +27,8 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
         setActiveSection('ai-usage');
       } else if (videosEl && scrollY >= videosEl.offsetTop - 180) {
         setActiveSection('videos');
+      } else if (slidesEl && scrollY >= slidesEl.offsetTop - 180) {
+        setActiveSection('slides');
       } else if (assignmentsEl && scrollY >= assignmentsEl.offsetTop - 180) {
         setActiveSection('assignments');
       } else {
@@ -100,6 +103,16 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
             {currentView !== 'home' ? 'Assignments (Viewing Page)' : 'Assignments'}
           </button>
           <button
+            onClick={() => handleNavClick('slides')}
+            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
+              currentView === 'home' && activeSection === 'slides'
+                ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
+                : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
+            }`}
+          >
+            Slides
+          </button>
+          <button
             onClick={() => handleNavClick('videos')}
             className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
               currentView === 'home' && activeSection === 'videos'
@@ -167,6 +180,12 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             Assignments
+          </button>
+          <button
+            onClick={() => handleNavClick('slides')}
+            className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
+          >
+            Slides
           </button>
           <button
             onClick={() => handleNavClick('videos')}

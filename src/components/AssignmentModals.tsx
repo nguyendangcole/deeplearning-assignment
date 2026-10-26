@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Code, Play, FileText, Check, Copy, ExternalLink } from 'lucide-react';
+import { X, Code, Play, FileText, Check, Copy, ExternalLink, Presentation } from 'lucide-react';
 import { COURSE_INFO } from '../data';
 import { ModalType } from '../types';
 
@@ -95,6 +95,16 @@ export default function AssignmentModals({
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>View PDF Report</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                  <a
+                    href={`${((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '')}/assignment1_slides.pdf`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline flex items-center gap-1 font-medium text-[#0037b0]"
+                  >
+                    <Presentation className="w-3.5 h-3.5" />
+                    <span>View Slides (PDF)</span>
                     <ExternalLink className="w-2.5 h-2.5 opacity-80" />
                   </a>
                   <a
