@@ -108,6 +108,16 @@ export default function AssignmentModals({
                     <ExternalLink className="w-2.5 h-2.5 opacity-80" />
                   </a>
                   <a
+                    href="https://youtu.be/aOAxYFO0zQs"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline flex items-center gap-1 font-medium text-[#c00]"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-[#c00]" />
+                    <span>Watch YouTube Video</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                  <a
                     href={COURSE_INFO.repoUrl}
                     target="_blank"
                     rel="noreferrer"

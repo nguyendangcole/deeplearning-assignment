@@ -21,11 +21,8 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
       const assignmentsEl = document.getElementById('assignments');
       const slidesEl = document.getElementById('slides');
       const videosEl = document.getElementById('videos');
-      const aiUsageEl = document.getElementById('ai-usage');
 
-      if (aiUsageEl && scrollY >= aiUsageEl.offsetTop - 180) {
-        setActiveSection('ai-usage');
-      } else if (videosEl && scrollY >= videosEl.offsetTop - 180) {
+      if (videosEl && scrollY >= videosEl.offsetTop - 180) {
         setActiveSection('videos');
       } else if (slidesEl && scrollY >= slidesEl.offsetTop - 180) {
         setActiveSection('slides');
@@ -122,16 +119,6 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
           >
             Videos
           </button>
-          <button
-            onClick={() => handleNavClick('ai-usage')}
-            className={`px-3 py-1 text-[13px] rounded transition-colors cursor-pointer ${
-              currentView === 'home' && activeSection === 'ai-usage'
-                ? 'bg-[#d5e3fc] text-[#0d1c2e] font-semibold'
-                : 'text-[#434655] hover:text-[#131b2e] hover:bg-[#f2f3ff]'
-            }`}
-          >
-            AI Usage
-          </button>
         </nav>
 
         {/* Right Actions */}
@@ -192,12 +179,6 @@ export default function Navbar({ onOpenModal, currentView = 'home', onNavigateVi
             className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
           >
             Videos
-          </button>
-          <button
-            onClick={() => handleNavClick('ai-usage')}
-            className="block w-full text-left px-3 py-2 text-[14px] rounded text-[#131b2e] hover:bg-[#f2f3ff]"
-          >
-            AI Usage
           </button>
         </div>
       )}

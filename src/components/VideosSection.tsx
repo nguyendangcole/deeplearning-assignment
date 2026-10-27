@@ -1,4 +1,4 @@
-import { Play, Clock, Lock, ArrowRight } from 'lucide-react';
+import { Play, Clock, Lock, ArrowRight, ExternalLink } from 'lucide-react';
 import { VIDEO_PRESENTATIONS } from '../data';
 import { ModalType } from '../types';
 
@@ -84,13 +84,13 @@ export default function VideosSection({ onOpenModal }: VideosSectionProps) {
               </div>
 
               {/* Action Link */}
-              <div className="p-4 pt-0">
+              <div className="p-4 pt-0 flex items-center justify-between gap-2">
                 {vid.modalKey ? (
                   <button
                     onClick={() => onOpenModal(vid.modalKey)}
                     className="inline-flex items-center space-x-1.5 text-[14px] font-semibold text-[#0037b0] hover:text-[#1d4ed8] group-hover:underline cursor-pointer"
                   >
-                    <span>Watch Presentation</span>
+                    <span>Watch Video</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 ) : (
@@ -98,6 +98,19 @@ export default function VideosSection({ onOpenModal }: VideosSectionProps) {
                     <Lock className="w-4 h-4 text-[#515f74]" />
                     <span>Upcoming Presentation</span>
                   </span>
+                )}
+
+                {vid.youtubeUrl && (
+                  <a
+                    href={vid.youtubeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center space-x-1 text-[12px] font-semibold text-[#ff0000] hover:underline"
+                    title="Open on YouTube"
+                  >
+                    <span>YouTube</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 )}
               </div>
             </div>

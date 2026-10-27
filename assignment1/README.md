@@ -10,7 +10,7 @@
 **Comparative Benchmark from Linear Classifiers to Vision Transformers on Fashion-MNIST**  
 *Faculty of Computer Science and Engineering — Ho Chi Minh City University of Technology (HCMUT)*
 
-[Live Web Showcase](https://nguyendangcole.github.io/deeplearning-assignment/#/assignment-1) • [Main Repository](https://github.com/nguyendangcole/deeplearning-assignment) • [Course Handbook](../handbook-ene.pdf)
+[Live Web Showcase](https://nguyendangcole.github.io/deeplearning-assignment/#/assignment-1) • [YouTube Defense Video](https://youtu.be/aOAxYFO0zQs) • [Main Repository](https://github.com/nguyendangcole/deeplearning-assignment) • [Course Handbook](../handbook-ene.pdf)
 
 </div>
 

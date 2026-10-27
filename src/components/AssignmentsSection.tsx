@@ -47,6 +47,26 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
                 <p className="text-[13px] text-[#515f74] leading-relaxed">
                   {asg.subtitle}
                 </p>
+
+                {asg.id === 'asg-01' && (
+                  <div className="pt-3 border-t border-[#f2f3ff] flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+                    <span className="px-2 py-0.5 bg-[#eef4ff] text-[#0037b0] rounded font-semibold">
+                      Report (29p)
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#eef4ff] text-[#0037b0] rounded font-semibold">
+                      Slides (13p)
+                    </span>
+                    <a
+                      href="https://youtu.be/aOAxYFO0zQs"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-2 py-0.5 bg-[#ff0000]/10 text-[#c00] hover:bg-[#ff0000]/20 rounded font-semibold transition-colors inline-flex items-center gap-0.5"
+                    >
+                      <span>YouTube Video</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* Action Button: View Assignment */}

@@ -192,14 +192,6 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
                 <span>Explore Assignments</span>
                 <ArrowDown className="w-4 h-4" />
               </button>
-
-              <button
-                onClick={() => onOpenModal('ai-usage')}
-                className="font-mono text-[12px] text-[#515f74] hover:text-[#0037b0] transition-colors inline-flex items-center gap-1.5 sm:ml-auto py-2"
-              >
-                <ShieldCheck className="w-4 h-4 text-[#0037b0]" />
-                <span>AI Disclosure Statement</span>
-              </button>
             </div>
           </div>
         </div>

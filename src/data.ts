@@ -75,12 +75,26 @@ export const ASSIGNMENTS: Assignment[] = [
 export const VIDEO_PRESENTATIONS: VideoPresentation[] = [
   {
     id: 'vid-01',
+    modalKey: 'video-1',
     assignmentTag: 'ASSIGNMENT 01 DEFENSE',
-    title: 'Foundations & Benchmark Walkthrough',
+    title: 'CO3133-Semester-261 – Group [2352821] – Assignment [1]',
     description:
-      'Mathematical review of custom backward pass with comparative empirical CIFAR-10 classification tables.',
-    duration: 'TBD',
-    isUpcoming: true,
+      'Official oral defense walkthrough and comparative benchmark of 5 foundational deep learning paradigms (Linear, MLP, CNN, LSTM/GRU, ViT) on Fashion-MNIST.',
+    duration: 'YouTube HD',
+    thumbnailUrl: 'https://i.ytimg.com/vi/aOAxYFO0zQs/hqdefault.jpg',
+    videoUrl: 'https://www.youtube.com/embed/aOAxYFO0zQs',
+    youtubeUrl: 'https://youtu.be/aOAxYFO0zQs',
+    slidesUrl: 'assignment1_slides.pdf',
+    slidesFilename: 'CO3133-Semester-261 – Group [2352821] – Assignment [1].pdf',
+    slidesCount: 13,
+    isUpcoming: false,
+    chapters: [
+      { time: '00:00', title: 'Problem Statement & Dataset Description' },
+      { time: '02:00', title: 'EDA & Preprocessing Setup' },
+      { time: '04:00', title: 'Architectures & Formulations' },
+      { time: '07:00', title: 'Benchmark Results & Trade-off Analysis' },
+      { time: '10:00', title: 'Conclusion & Key Takeaways' },
+    ],
   },
   {
     id: 'vid-02',

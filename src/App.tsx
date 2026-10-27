@@ -4,7 +4,6 @@ import HeroSection from './components/HeroSection';
 import AssignmentsSection from './components/AssignmentsSection';
 import SlidesSection from './components/SlidesSection';
 import VideosSection from './components/VideosSection';
-import AiUsageSection from './components/AiUsageSection';
 import Footer from './components/Footer';
 import AssignmentModals from './components/AssignmentModals';
 import AiUsageModal from './components/AiUsageModal';
@@ -85,7 +84,6 @@ export default function App() {
             <AssignmentsSection onNavigateView={navigateToView} />
             <SlidesSection onNavigateView={navigateToView} />
             <VideosSection onOpenModal={setActiveModal} />
-            <AiUsageSection onOpenModal={setActiveModal} />
           </>
         )}
 

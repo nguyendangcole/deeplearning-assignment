@@ -38,6 +38,10 @@ export interface VideoPresentation {
   thumbnailUrl?: string;
   isUpcoming?: boolean;
   videoUrl?: string;
+  youtubeUrl?: string;
+  slidesUrl?: string;
+  slidesFilename?: string;
+  slidesCount?: number;
   chapters?: { time: string; title: string }[];
 }
 
