@@ -172,7 +172,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           {/* Quick Deliverable Action Links */}
           <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
-              href="https://github.com/colece/sunrgbd-depth-estimation"
+              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
@@ -321,37 +321,42 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     <tr>
                       <td className="px-4 py-2 font-medium">Total Benchmark Pairs</td>
                       <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">10,335 pairs</td>
-                      <td className="px-4 py-2 text-[#166534] font-medium">Exceeds ≥ 5,000 requirement</td>
+                      <td className="px-4 py-2 text-[#166534] font-medium">Official SUN RGB-D benchmark size</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 font-medium">Analyzed Dataset Corpus</td>
+                      <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">7,001 pairs</td>
+                      <td className="px-4 py-2 text-[#166534] font-medium">67.7% of full benchmark (Exceeds ≥ 5,000 requirement)</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Mean Valid Depth</td>
-                      <td className="px-4 py-2 font-mono">1.83 meters</td>
-                      <td className="px-4 py-2 text-[#515f74]">Primary human working envelope in rooms</td>
+                      <td className="px-4 py-2 font-mono">2.32 meters</td>
+                      <td className="px-4 py-2 text-[#515f74]">Primary human working envelope in indoor rooms</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Median Valid Depth</td>
-                      <td className="px-4 py-2 font-mono">1.80 meters</td>
-                      <td className="px-4 py-2 text-[#515f74]">Well-balanced distribution, robust to outliers</td>
+                      <td className="px-4 py-2 font-mono">2.07 meters</td>
+                      <td className="px-4 py-2 text-[#515f74]">Well-balanced distribution, robust central tendency</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Standard Deviation</td>
-                      <td className="px-4 py-2 font-mono">0.66 meters</td>
-                      <td className="px-4 py-2 text-[#515f74]">Consistent indoor spatial variance</td>
+                      <td className="px-4 py-2 font-mono">1.04 meters</td>
+                      <td className="px-4 py-2 text-[#515f74]">Consistent indoor spatial variance across scenes</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Effective Range [Min, Max]</td>
-                      <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">[0.53m, 3.82m]</td>
-                      <td className="px-4 py-2 text-[#166534] font-medium">Within standard [0.5m, 8.0m] indoor bounds</td>
+                      <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">[0.50m, 8.00m]</td>
+                      <td className="px-4 py-2 text-[#166534] font-medium">Covers standard [0.5m, 8.0m] Section 19.6 indoor bounds</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-2 font-medium">Storage Format</td>
-                      <td className="px-4 py-2 font-mono text-[#7e22ce]">16-bit PNG (uint16)</td>
-                      <td className="px-4 py-2 text-[#515f74]">Lossless millimeter scale representation</td>
+                      <td className="px-4 py-2 font-medium">Storage &amp; Bit-Shift Decode</td>
+                      <td className="px-4 py-2 font-mono text-[#7e22ce]">16-bit PNG (Lossless uint16)</td>
+                      <td className="px-4 py-2 text-[#515f74]">Restored via Z = ((raw &gt;&gt; 3) | (raw &lt;&lt; 13)) / 1000.0</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Sensor Invalid Pixel Ratio</td>
-                      <td className="px-4 py-2 font-mono">~8.4% mean (raw)</td>
-                      <td className="px-4 py-2 text-[#515f74]">Masked out during training &amp; metric calculation</td>
+                      <td className="px-4 py-2 font-mono">10.34% mean (Max 64.53%)</td>
+                      <td className="px-4 py-2 text-[#515f74]">Dynamically masked out via valid_mask during training</td>
                     </tr>
                   </tbody>
                 </table>
@@ -366,7 +371,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     className="w-full rounded border border-[#eaedff]"
                   />
                   <p className="text-[12px] font-mono text-[#515f74] text-center">
-                    Figure 1: Empirical Ground Truth Metric Depth Distribution (peak around 1.80m) and Missing Pixel Ratio.
+                    Figure 1: Empirical Ground Truth Metric Depth Distribution (peak around 2.07m - 2.32m) and Missing Pixel Ratio (10.34% mean across 7,001 pairs).
                   </p>
                 </div>
 
@@ -466,31 +471,62 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               </div>
             </div>
 
-            {/* 8. Baseline plan */}
-            <div className="border-l-2 border-[#0037b0] pl-4 space-y-1">
+            {/* 8. Baseline & Model Progression Plan (3 Core Experiments) */}
+            <div className="border-l-2 border-[#0037b0] pl-4 space-y-3">
               <h3 className="font-semibold text-[15px] text-[#131b2e]">
-                8. Baseline Plan
+                8. Baseline &amp; Controlled Experiments Plan (E1, E2, E3)
               </h3>
               <p>
-                <strong>Tier 1 (Heuristic Baseline):</strong> Global Spatial Mean Depth Prior — predicts the empirical mean depth of the training corpus across all pixels to establish the absolute performance floor.
+                To rigorously investigate the representation capacity of classical convolutional networks against foundation Vision Transformers on real-world indoor scenes, the experimental pipeline is structured into three controlled ablation studies:
               </p>
-              <p>
-                <strong>Tier 2 (Neural Baseline):</strong> A lightweight UNet/FCN architecture trained completely from scratch (random weight initialization) using standard L1/L2 loss. This measures the empirical gain provided by deep representations without pretraining.
-              </p>
+
+              {/* Experiment Table */}
+              <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+                <table className="w-full text-[13px] text-left">
+                  <thead className="bg-[#f8faff] text-[#475569] font-mono text-[11px] uppercase border-b border-[#eaedff]">
+                    <tr>
+                      <th className="px-4 py-2.5">Experiment</th>
+                      <th className="px-4 py-2.5">Model Architecture</th>
+                      <th className="px-4 py-2.5">Training Strategy</th>
+                      <th className="px-4 py-2.5">Scientific Purpose &amp; Rationale</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#f2f3ff] bg-white">
+                    <tr>
+                      <td className="px-4 py-2.5 font-mono font-bold text-[#0037b0]">E1</td>
+                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Simple CNN Encoder–Decoder (UNet Baseline)</td>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#7e22ce]">From scratch (Random Init)</td>
+                      <td className="px-4 py-2.5 text-[#515f74]">Establishes the empirical baseline floor without external pretraining. Measures pure convolutional feature learning from raw SUN RGB-D pixels.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2.5 font-mono font-bold text-[#0284c7]">E2</td>
+                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Depth Anything V2 (Small - ViT)</td>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#0284c7]">Freeze encoder, train depth head only</td>
+                      <td className="px-4 py-2.5 text-[#515f74]">Linear probing / Feature extraction. Evaluates how well general-purpose pre-trained Vision Transformer representations transfer to metric indoor depth regression.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2.5 font-mono font-bold text-[#166534]">E3</td>
+                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Depth Anything V2 (Small - ViT)</td>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#166534]">Fine-tune encoder + depth head</td>
+                      <td className="px-4 py-2.5 text-[#515f74]">Full end-to-end domain adaptation with Cosine Annealing scheduler. Maximizes metric boundary accuracy and minimizes RMSE across complex indoor layouts.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            {/* 9. Planned pretrained models */}
-            <div className="border-l-2 border-[#0037b0] pl-4 space-y-1">
+            {/* 9. Loss Function & Optimization */}
+            <div className="border-l-2 border-[#0037b0] pl-4 space-y-2">
               <h3 className="font-semibold text-[15px] text-[#131b2e]">
-                9. Planned Pretrained Model(s) &amp; Transfer Learning
+                9. Loss Function &amp; Optimization Strategy
               </h3>
               <p>
-                <strong>Pretrained Backbone:</strong> MiDaS v3.1 / DPT (Dense Prediction Transformer) or FastDepth / MobileNetV3-Depth with ImageNet pretrained encoders.
+                All models are optimized on the dynamic validity domain <InlineMath math="\Omega = \{(u,v) \mid 0.5 < y_{(u,v)} \le 8.0\}" /> using a combined Scale-Invariant Logarithmic (SILog) Loss and Edge Gradient Loss to enforce crisp object boundaries:
               </p>
-              <p>
-                <strong>Fine-Tuning Strategy:</strong> Freeze early low-level convolutional/patch layers, fine-tuning the multiscale neck and decoder heads with Scale-Invariant Logarithmic Loss (<InlineMath math="\mathcal{L}_{\text{SiLog}}" />) and Edge Gradient Loss (<InlineMath math="\mathcal{L}_{\text{grad}}" />):
+              <MathBlock math="\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{SILog}} + 0.5 \cdot \mathcal{L}_{\text{grad}}" />
+              <p className="text-[12.5px] text-[#64748b]">
+                Optimizer: AdamW (<InlineMath math="\beta_1 = 0.9, \beta_2 = 0.999" />, weight decay <InlineMath math="10^{-4}" />) paired with Cosine Annealing learning rate schedule and FP16 Mixed Precision (<code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">torch.cuda.amp.autocast</code>).
               </p>
-              <MathBlock math="\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{SiLog}} + 0.5 \cdot \mathcal{L}_{\text{grad}} + 0.1 \cdot \mathcal{L}_{\text{SSIM}}" />
             </div>
 
             {/* 10. Compute estimate */}
@@ -499,16 +535,16 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 10. Compute &amp; Hardware Estimation
               </h3>
               <p>
-                <strong>Hardware Environment:</strong> Standard Google Colab (Free Tier) — 1x NVIDIA Tesla T4 GPU (15 GB VRAM), 12.7 GB Host RAM.
+                <strong>Hardware Environment:</strong> Google Colab Pro — 1x NVIDIA L4 GPU (24 GB VRAM - Ada Lovelace) or NVIDIA Tesla T4 GPU (15 GB VRAM).
               </p>
               <p>
-                <strong>Memory Budget:</strong> ~5.2 GB – 6.0 GB VRAM allocation at batch size 16 (input resolution 256×320).
+                <strong>Memory Budget:</strong> ~5.8 GB – 6.4 GB VRAM allocation at batch size 16 (input resolution 256×320).
               </p>
               <p>
-                <strong>Training Throughput:</strong> ~12 ms per step → ~10–11 minutes per epoch on 5,285 training pairs.
+                <strong>Training Throughput:</strong> ~35–45 seconds per epoch on NVIDIA L4 (~1.2 min per epoch on T4).
               </p>
               <p>
-                <strong>Total Expected Runtime:</strong> ~2.5 to 3.5 hours for 15–20 epochs (safely completes within Colab's standard 12-hour session limit).
+                <strong>Persistent Storage:</strong> Full 6.5 GB dataset archive stored permanently on Google Drive at <code className="font-mono text-[12px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">MyDrive/BTL-deep_learning/assignment2/datasets/SUNRGBD.zip</code>, unzipped locally to Colab SSD for maximum I/O throughput.
               </p>
             </div>
 
@@ -518,9 +554,9 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 11. Subset Selection Rules &amp; Quality Filtering
               </h3>
               <ul className="list-disc list-inside space-y-1 pl-1 text-[13px] text-[#475569]">
-                <li><strong>Sensor Range Cutoff:</strong> Enforce strict indoor depth bounds: <InlineMath math="0.5\,\text{m} \le Z \le 8.0\,\text{m}" />. Out-of-range pixels and sensor occlusions (<InlineMath math="Z = 0" />) are flagged via boolean validity masks.</li>
-                <li><strong>Camera Intrinsics Validity:</strong> Only frames with verified calibration intrinsic matrices (<InlineMath math="K" /> matrix) are retained to guarantee correct metric geometry.</li>
-                <li><strong>Aspect Ratio Standard:</strong> Input frames from diverse sensors are bilinearly interpolated to a standard <InlineMath math="256 \times 320" /> resolution.</li>
+                <li><strong>Zero-Drop Strategy with Dynamic Masking:</strong> Retains 100% of the 7,001 analyzed pairs. Missing/invalid depth values (sensor parallax, reflective mirrors, transparent glass) are masked dynamically via boolean validity tensor: <InlineMath math="\text{valid\_mask} = (Z > 0.5) \land (Z \le 8.0) \land \text{isfinite}(Z)" /> during backpropagation.</li>
+                <li><strong>Physical Scale &amp; Bit-Shift Decode:</strong> Raw 16-bit PNG depth maps from Princeton are decoded via cyclic 3-bit restoration: <InlineMath math="Z = ((D \gg 3) \mid (D \ll 13)) / 1000.0" /> before normalization.</li>
+                <li><strong>Resolution Standardization:</strong> All camera streams (Intel RealSense, Asus Xtion, Kinect v1/v2) are interpolated to a standard <InlineMath math="256 \times 320" /> training resolution.</li>
               </ul>
             </div>
 
@@ -534,11 +570,11 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
             <GitBranch className="w-5 h-5 text-[#0037b0]" />
             <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
-              6. Methodology Roadmap
+              6. Methodology Roadmap (E1 → E2 → E3)
             </h2>
           </div>
           <p className="text-[13.5px] text-[#475569] leading-relaxed">
-            The planned pipeline adopts a two-stage transfer learning methodology: Stage 1 fine-tunes the decoder while keeping early backbone weights frozen; Stage 2 unfreezes top encoder blocks with a reduced learning rate and Cosine Annealing schedule.
+            The project follows a 3-tier evolutionary research progression: (E1) Training a classical CNN Encoder–Decoder from scratch to establish baseline performance; (E2) Feature extraction transfer learning with a frozen Depth Anything V2 encoder to isolate foundation representation utility; (E3) Full end-to-end fine-tuning of Depth Anything V2 to reach optimal indoor geometric fidelity.
           </p>
         </div>
 
@@ -553,7 +589,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             </h2>
           </div>
           <p className="text-[13.5px] text-[#475569] leading-relaxed">
-            Controlled experiments will evaluate: (1) Standard MSE Loss vs. Scale-Invariant Logarithmic (SiLog) Loss; (2) Performance comparison between Scratch UNet Baseline and Pretrained Vision Transformer; (3) Inference latency on mobile CPU vs. T4 GPU.
+            Controlled experiments will quantify: (1) Performance gap between Scratch CNN (E1) vs. Frozen ViT (E2) vs. Fine-tuned SOTA (E3); (2) Sensitivity of RMSE and AbsRel to invalid sensor pixel ratios; (3) Computational efficiency comparing training throughput and VRAM footprint on Google Colab L4 vs. T4 GPUs.
           </p>
         </div>
 
@@ -615,12 +651,12 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px] gap-2">
             <span className="text-[#434655]">Assignment 2 GitHub Repository:</span>
             <a
-              href="https://github.com/colece/sunrgbd-depth-estimation"
+              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-1.5 text-[#0037b0] hover:underline font-mono text-[12px] font-semibold"
             >
-              <span>https://github.com/colece/sunrgbd-depth-estimation</span>
+              <span>https://github.com/nguyendangcole/nguyen-assignment2-deeplearning</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -641,7 +677,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               Repository Setup &amp; Reproduction:
             </span>
             <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto">
-              <code>git clone https://github.com/colece/sunrgbd-depth-estimation.git &amp;&amp; cd sunrgbd-depth-estimation</code>
+              <code>git clone https://github.com/nguyendangcole/nguyen-assignment2-deeplearning.git &amp;&amp; cd sunrgbd-depth-estimation</code>
             </div>
             <p className="text-[12px] text-[#64748b]">
               Model weight checkpoints (.pth) will be linked here upon final milestone release.
