@@ -1,7 +1,8 @@
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { 
-  ArrowLeft, 
+  ArrowLeft,
+  Download, 
   ExternalLink, 
   FileText, 
   Github, 
@@ -191,6 +192,24 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               <FileText className="w-4 h-4 text-[#0037b0]" />
               <span>Course Handbook (PDF)</span>
             </a>
+
+            <a
+              href={getAssetUrl('assignment2/preliminary_metrics_summary.csv')}
+              download="preliminary_metrics_summary.csv"
+              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff]"
+            >
+              <Download className="w-4 h-4 text-[#0037b0]" />
+              <span>EDA Metrics Summary (CSV)</span>
+            </a>
+
+            <a
+              href={getAssetUrl('assignment2/sunrgbd_manifest_10335.csv')}
+              download="sunrgbd_manifest_10335.csv"
+              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#434655] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff]"
+            >
+              <Download className="w-4 h-4 text-[#0037b0]" />
+              <span>Full Manifest (10,335 Pairs CSV)</span>
+            </a>
           </div>
         </div>
 
@@ -219,7 +238,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 Mathematical Mapping &amp; Evaluation Domain:
               </span>
               <MathBlock math="f_\theta : \mathbb{R}^{H \times W \times 3} \longrightarrow \mathbb{R}^{H \times W \times 1}" />
-              <MathBlock math="Z_{(u,v)} = \frac{\text{raw\_uint16}_{(u,v)}}{1000.0} \quad (\text{meters})" />
+              <MathBlock math="Z_{(u,v)} = \frac{(D_{(u,v)} \gg 3) \mid (D_{(u,v)} \ll 13)}{1000.0} \quad (\text{meters})" />
               <MathBlock math="\Omega = \left\{ (u, v) \;\middle|\; 0.5\,\text{m} < Z_{(u,v)} \le 8.0\,\text{m} \quad \text{and} \quad Z_{(u,v)} \text{ is finite} \right\}" />
             </div>
           </div>
@@ -294,17 +313,37 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 <strong>Sensor Diversity:</strong> Intel RealSense 3D (3,784 pairs), Asus Xtion (3,784 pairs), Microsoft Kinect v1 (1,449 pairs), Microsoft Kinect v2 (1,318 pairs).
               </p>
               <p>
-                <strong>Annotation Format:</strong> 16-bit Lossless PNG (<code className="font-mono text-[12px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">uint16</code>). Metric depth is obtained via <InlineMath math="Z = \text{raw\_uint16} / 1000.0" /> (millimeter precision).
+                <strong>Annotation Format &amp; Decoding:</strong> 16-bit Lossless PNG (<code className="font-mono text-[12px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">uint16</code>). Metric ground truth is restored from the color-guided bilateral inpainted stream (<code className="font-mono text-[12px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">depth_bfx/</code>) using bit-shift cyclic restoration: <InlineMath math="Z = \frac{(D \gg 3) \mid (D \ll 13)}{1000.0} \quad (\text{meters})" /> to eliminate specular reflection blind spots.
               </p>
             </div>
 
             {/* 4. Preliminary distribution analysis */}
             <div className="border-l-2 border-[#0037b0] pl-4 space-y-3">
-              <h3 className="font-semibold text-[15px] text-[#131b2e]">
-                4. Preliminary Distribution Analysis &amp; Empirical Evidence
-              </h3>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h3 className="font-semibold text-[15px] text-[#131b2e]">
+                  4. Preliminary Distribution Analysis &amp; Empirical Evidence
+                </h3>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={getAssetUrl('assignment2/preliminary_metrics_summary.csv')}
+                    download="preliminary_metrics_summary.csv"
+                    className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] rounded text-[11px] font-mono font-medium border border-[#eaedff] transition-colors"
+                  >
+                    <Download className="w-3 h-3" />
+                    <span>metrics_summary.csv</span>
+                  </a>
+                  <a
+                    href={getAssetUrl('assignment2/sunrgbd_manifest_10335.csv')}
+                    download="sunrgbd_manifest_10335.csv"
+                    className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] rounded text-[11px] font-mono font-medium border border-[#eaedff] transition-colors"
+                  >
+                    <Download className="w-3 h-3" />
+                    <span>manifest_10335.csv</span>
+                  </a>
+                </div>
+              </div>
               <p>
-                Preliminary distribution analysis was conducted on representative samples to verify scale conversion, statistical stability, and sensor validity masks.
+                Preliminary distribution analysis was conducted across all 10,335 pairs in the benchmark to verify physical scale conversion, central tendency, scene composition, and sensor missing rate characteristics.
               </p>
 
               {/* Empirical metrics table */}
@@ -318,12 +357,6 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f2f3ff] bg-white">
-                    <tr>
-                      <td className="px-4 py-2.5 font-mono font-bold text-[#b45309]">E0</td>
-                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Depth Anything V2 (Small - ViT)</td>
-                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#b45309]">Pretrained Inference (Zero-shot)</td>
-                      <td className="px-4 py-2.5 text-[#515f74]">Measures out-of-distribution zero-shot generalization without any training on SUN RGB-D. Serves as reference floor to quantify fine-tuning gains.</td>
-                    </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Total Benchmark Pairs</td>
                       <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">10,335 pairs</td>
@@ -368,6 +401,74 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 </table>
               </div>
 
+              {/* Raw Sensor vs Inpainted Target Comparison Table */}
+              <div className="bg-[#fcfcff] p-4 rounded-xl border border-[#dce3f9] space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                  <div className="flex items-center space-x-2">
+                    <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#0037b0] bg-[#eef4ff] px-2 py-0.5 rounded">
+                      Empirical Investigation
+                    </span>
+                    <span className="text-[13.5px] font-semibold text-[#131b2e]">
+                      Raw Sensor Depth (<code className="font-mono text-[11.5px] text-[#515f74]">depth/</code>) vs. Refined Inpainted Target (<code className="font-mono text-[11.5px] text-[#0037b0]">depth_bfx/</code>)
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono text-[#166534] bg-[#dcfce7] px-2 py-0.5 rounded font-semibold w-fit">
+                    10,335 Pairs Analyzed
+                  </span>
+                </div>
+
+                <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+                  <table className="w-full text-[12.5px] text-left">
+                    <thead className="bg-[#f8faff] text-[#475569] font-mono text-[11px] uppercase border-b border-[#eaedff]">
+                      <tr>
+                        <th className="px-3.5 py-2">Chỉ số phân tích (Metric)</th>
+                        <th className="px-3.5 py-2 text-[#b45309]">Raw Depth (depth/)</th>
+                        <th className="px-3.5 py-2 text-[#166534]">Refined Depth (depth_bfx/)</th>
+                        <th className="px-3.5 py-2">Hiện tượng vật lý &amp; Ý nghĩa huấn luyện</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#f2f3ff] bg-white">
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Tỷ lệ Invalid Pixels trung bình</td>
+                        <td className="px-3.5 py-2 font-mono text-[#b45309]">15.77%</td>
+                        <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">0.43% (↓ 36.7× reduction)</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Khắc phục triệt để điểm mù do phản xạ gương trên kính đen, gương soi, bề mặt phản chiếu</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Tỷ lệ Invalid Pixels cực đại</td>
+                        <td className="px-3.5 py-2 font-mono text-[#b45309]">71.30%</td>
+                        <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">52.36%</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Các góc phòng cửa sổ kính lớn đối diện nguồn sáng mạnh được vá mịn mượt mà</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Độ sâu trung bình (Mean Depth)</td>
+                        <td className="px-3.5 py-2 font-mono">2.29 m</td>
+                        <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">2.38 m</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Dải đo bao trọn không gian sinh hoạt nội thất chuẩn Section 19.6 [0.5m – 8.0m]</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Độ sâu trung vị (Median Depth)</td>
+                        <td className="px-3.5 py-2 font-mono">2.04 m</td>
+                        <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">2.08 m</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Độ hội tụ trung tâm ổn định quanh khoảng cách thao tác của người và đồ đạc</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Độ lệch chuẩn (Std Dev)</td>
+                        <td className="px-3.5 py-2 font-mono">1.08 m</td>
+                        <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">1.20 m</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Độ phân tán không gian đồng nhất giữa các thể loại phòng khác nhau</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3.5 py-2 font-medium">Tín hiệu giám sát huấn luyện</td>
+                        <td className="px-3.5 py-2 font-mono text-[#b45309]">Thủng lỗ (Sparse - 84.23%)</td>
+                        <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">Dày đặc (Dense - 99.57%)</td>
+                        <td className="px-3.5 py-2 text-[#166534] font-medium">Cung cấp gradient mật độ cao tại các đường biên mép vật thể cho cả CNN và ViT</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
               {/* Inline Figures with captions */}
               <div className="space-y-4 pt-2">
                 <div className="bg-[#fcfcff] p-3 rounded-lg border border-[#eaedff] space-y-2">
@@ -406,18 +507,54 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             </div>
 
             {/* 5. Data-splitting plan */}
-            <div className="border-l-2 border-[#0037b0] pl-4 space-y-1">
+            <div className="border-l-2 border-[#0037b0] pl-4 space-y-2">
               <h3 className="font-semibold text-[15px] text-[#131b2e]">
                 5. Data-Splitting Plan
               </h3>
               <p>
-                The benchmark is partitioned into three disjoint splits following the standard SUN RGB-D benchmark protocol:
+                The benchmark is partitioned into three disjoint splits strictly based on unique Room/Scene IDs to satisfy the course guideline (<InlineMath math="\ge 5{,}000" /> training pairs) while completely preventing data leakage:
               </p>
-              <ul className="list-disc list-inside space-y-1 pl-1 text-[13px] text-[#475569]">
-                <li><strong>Training Set:</strong> <strong>5,285 pairs</strong> (~51.1% of total, ~82.9% of train/val development pool). Satisfies the <InlineMath math="\ge 5{,}000" /> threshold on the training split alone.</li>
-                <li><strong>Validation Set:</strong> <strong>1,090 pairs</strong> (~10.5% of total, ~17.1% of train/val development pool) for hyperparameter tuning and model checkpointing.</li>
-                <li><strong>Test Set:</strong> <strong>3,960 pairs</strong> (~38.4% of total) for final unbiased evaluation.</li>
-              </ul>
+              <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+                <table className="w-full text-[12.5px] text-left">
+                  <thead className="bg-[#f8faff] text-[#475569] font-mono text-[11px] uppercase border-b border-[#eaedff]">
+                    <tr>
+                      <th className="px-3.5 py-2">Tập dữ liệu (Split)</th>
+                      <th className="px-3.5 py-2">Số lượng cặp ảnh (Pairs)</th>
+                      <th className="px-3.5 py-2">Tỷ lệ (%)</th>
+                      <th className="px-3.5 py-2">Mục đích sử dụng</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#f2f3ff] bg-white">
+                    <tr>
+                      <td className="px-3.5 py-2 font-semibold text-[#0037b0]">Train Set</td>
+                      <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">7,751 pairs</td>
+                      <td className="px-3.5 py-2 font-mono">~75.0%</td>
+                      <td className="px-3.5 py-2 text-[#166534] font-medium">Tối ưu gradient, cập nhật trọng số mô hình (Vượt chuẩn ≥ 5,000 mẫu)</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3.5 py-2 font-semibold text-[#0284c7]">Validation Set</td>
+                      <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">1,550 pairs</td>
+                      <td className="px-3.5 py-2 font-mono">~15.0%</td>
+                      <td className="px-3.5 py-2 text-[#515f74]">Điều chỉnh hyperparameter, theo dõi SILog validation loss, Early Stopping</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3.5 py-2 font-semibold text-[#7e22ce]">Test Set</td>
+                      <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">1,034 pairs</td>
+                      <td className="px-3.5 py-2 font-mono">~10.0%</td>
+                      <td className="px-3.5 py-2 text-[#515f74]">Đánh giá tổng kết độc lập cuối cùng trên các căn phòng chưa từng thấy</td>
+                    </tr>
+                    <tr className="bg-[#f8faff] font-semibold">
+                      <td className="px-3.5 py-2 text-[#131b2e]">Tổng cộng</td>
+                      <td className="px-3.5 py-2 font-mono text-[#0037b0]">10,335 pairs</td>
+                      <td className="px-3.5 py-2 font-mono">100.0%</td>
+                      <td className="px-3.5 py-2 text-[#166534]">Toàn bộ 100% benchmark SUN RGB-D</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[12px] text-[#64748b]">
+                <em>Ghi chú:</em> Phân vùng kinh điển của Princeton (5,285 train / 1,090 val / 3,960 test) cũng được đánh số và lưu trữ song song trong manifest để đối chiếu chéo với các công bố quốc tế.
+              </p>
             </div>
 
             {/* 6. Split unit to prevent leakage */}
@@ -480,10 +617,10 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             {/* 8. Baseline & Model Progression Plan (3 Core Experiments) */}
             <div className="border-l-2 border-[#0037b0] pl-4 space-y-3">
               <h3 className="font-semibold text-[15px] text-[#131b2e]">
-                8. Baseline &amp; Controlled Experiments Plan (E1, E2, E3)
+                8. Baseline &amp; Controlled Experiments Plan (E0, E1, E2, E3)
               </h3>
               <p>
-                To rigorously investigate the representation capacity of classical convolutional networks against foundation Vision Transformers on real-world indoor scenes, the experimental pipeline is structured into three controlled ablation studies:
+                To rigorously investigate the representation capacity of classical convolutional networks against foundation Vision Transformers on real-world indoor scenes, the experimental pipeline is structured into four controlled ablation studies (E0, E1, E2, E3):
               </p>
 
               {/* Experiment Table */}
@@ -615,7 +752,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               <span>8. Results &amp; Quantitative Benchmark</span>
             </div>
             <p className="text-[12.5px] text-[#64748b]">
-              Quantitative test evaluation across 3,960 test pairs (RMSE, AbsRel, δ_1) will be documented upon experimental completion.
+              Quantitative test evaluation across the test split (RMSE, AbsRel, δ_1, δ_2, δ_3) will be documented upon experimental completion.
             </p>
           </div>
 

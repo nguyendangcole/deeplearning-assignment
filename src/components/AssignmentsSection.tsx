@@ -67,6 +67,26 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
                     </a>
                   </div>
                 )}
+
+                {asg.id === 'asg-02' && (
+                  <div className="pt-3 border-t border-[#f2f3ff] flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+                    <span className="px-2 py-0.5 bg-[#dcfce7] text-[#166534] rounded font-semibold">
+                      Proposal (10,335 Pairs)
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#eef4ff] text-[#0037b0] rounded font-semibold">
+                      Depth Anything V2
+                    </span>
+                    <a
+                      href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-2 py-0.5 bg-[#1e293b]/10 text-[#1e293b] hover:bg-[#1e293b]/20 rounded font-semibold transition-colors inline-flex items-center gap-0.5"
+                    >
+                      <span>GitHub Repo</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* Action Button: View Assignment */}
