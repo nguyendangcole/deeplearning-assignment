@@ -421,48 +421,48 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                   <table className="w-full text-[12.5px] text-left">
                     <thead className="bg-[#f8faff] text-[#475569] font-mono text-[11px] uppercase border-b border-[#eaedff]">
                       <tr>
-                        <th className="px-3.5 py-2">Chỉ số phân tích (Metric)</th>
+                        <th className="px-3.5 py-2">Empirical Metric</th>
                         <th className="px-3.5 py-2 text-[#b45309]">Raw Depth (depth/)</th>
-                        <th className="px-3.5 py-2 text-[#166534]">Refined Depth (depth_bfx/)</th>
-                        <th className="px-3.5 py-2">Hiện tượng vật lý &amp; Ý nghĩa huấn luyện</th>
+                        <th className="px-3.5 py-2 text-[#166534]">Refined Inpainted Depth (depth_bfx/)</th>
+                        <th className="px-3.5 py-2">Physical Phenomenon &amp; Training Impact</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#f2f3ff] bg-white">
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Tỷ lệ Invalid Pixels trung bình</td>
+                        <td className="px-3.5 py-2 font-medium">Mean Invalid Pixel Ratio</td>
                         <td className="px-3.5 py-2 font-mono text-[#b45309]">15.77%</td>
                         <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">0.43% (↓ 36.7× reduction)</td>
-                        <td className="px-3.5 py-2 text-[#515f74]">Khắc phục triệt để điểm mù do phản xạ gương trên kính đen, gương soi, bề mặt phản chiếu</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Effectively eliminates sensor blind spots caused by specular reflections on tinted glass, mirrors, and reflective surfaces</td>
                       </tr>
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Tỷ lệ Invalid Pixels cực đại</td>
+                        <td className="px-3.5 py-2 font-medium">Max Observed Invalid Ratio</td>
                         <td className="px-3.5 py-2 font-mono text-[#b45309]">71.30%</td>
                         <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">52.36%</td>
-                        <td className="px-3.5 py-2 text-[#515f74]">Các góc phòng cửa sổ kính lớn đối diện nguồn sáng mạnh được vá mịn mượt mà</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Smoothly infills large window apertures and strong ambient infrared interference zones</td>
                       </tr>
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Độ sâu trung bình (Mean Depth)</td>
+                        <td className="px-3.5 py-2 font-medium">Mean Valid Depth</td>
                         <td className="px-3.5 py-2 font-mono">2.29 m</td>
                         <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">2.38 m</td>
-                        <td className="px-3.5 py-2 text-[#515f74]">Dải đo bao trọn không gian sinh hoạt nội thất chuẩn Section 19.6 [0.5m – 8.0m]</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Spans standard Section 19.6 indoor evaluation range [0.5m – 8.0m]</td>
                       </tr>
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Độ sâu trung vị (Median Depth)</td>
+                        <td className="px-3.5 py-2 font-medium">Median Valid Depth</td>
                         <td className="px-3.5 py-2 font-mono">2.04 m</td>
                         <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">2.08 m</td>
-                        <td className="px-3.5 py-2 text-[#515f74]">Độ hội tụ trung tâm ổn định quanh khoảng cách thao tác của người và đồ đạc</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Robust central tendency centered around human working envelope and interior furniture</td>
                       </tr>
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Độ lệch chuẩn (Std Dev)</td>
+                        <td className="px-3.5 py-2 font-medium">Standard Deviation (Std Dev)</td>
                         <td className="px-3.5 py-2 font-mono">1.08 m</td>
                         <td className="px-3.5 py-2 font-mono font-medium text-[#131b2e]">1.20 m</td>
-                        <td className="px-3.5 py-2 text-[#515f74]">Độ phân tán không gian đồng nhất giữa các thể loại phòng khác nhau</td>
+                        <td className="px-3.5 py-2 text-[#515f74]">Consistent spatial dispersion across diverse room categories</td>
                       </tr>
                       <tr>
-                        <td className="px-3.5 py-2 font-medium">Tín hiệu giám sát huấn luyện</td>
-                        <td className="px-3.5 py-2 font-mono text-[#b45309]">Thủng lỗ (Sparse - 84.23%)</td>
-                        <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">Dày đặc (Dense - 99.57%)</td>
-                        <td className="px-3.5 py-2 text-[#166534] font-medium">Cung cấp gradient mật độ cao tại các đường biên mép vật thể cho cả CNN và ViT</td>
+                        <td className="px-3.5 py-2 font-medium">Training Supervision Density</td>
+                        <td className="px-3.5 py-2 font-mono text-[#b45309]">Sparse / Hole-ridden (84.23%)</td>
+                        <td className="px-3.5 py-2 font-mono text-[#166534] font-bold">Dense Continuous (99.57%)</td>
+                        <td className="px-3.5 py-2 text-[#166534] font-medium">Provides dense gradient supervision along crisp object boundaries for both CNN and ViT</td>
                       </tr>
                     </tbody>
                   </table>
@@ -518,10 +518,10 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 <table className="w-full text-[12.5px] text-left">
                   <thead className="bg-[#f8faff] text-[#475569] font-mono text-[11px] uppercase border-b border-[#eaedff]">
                     <tr>
-                      <th className="px-3.5 py-2">Tập dữ liệu (Split)</th>
-                      <th className="px-3.5 py-2">Số lượng cặp ảnh (Pairs)</th>
-                      <th className="px-3.5 py-2">Tỷ lệ (%)</th>
-                      <th className="px-3.5 py-2">Mục đích sử dụng</th>
+                      <th className="px-3.5 py-2">Dataset Split</th>
+                      <th className="px-3.5 py-2">Number of Pairs</th>
+                      <th className="px-3.5 py-2">Ratio (%)</th>
+                      <th className="px-3.5 py-2">Operational Purpose</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f2f3ff] bg-white">
@@ -529,31 +529,31 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                       <td className="px-3.5 py-2 font-semibold text-[#0037b0]">Train Set</td>
                       <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">7,751 pairs</td>
                       <td className="px-3.5 py-2 font-mono">~75.0%</td>
-                      <td className="px-3.5 py-2 text-[#166534] font-medium">Tối ưu gradient, cập nhật trọng số mô hình (Vượt chuẩn ≥ 5,000 mẫu)</td>
+                      <td className="px-3.5 py-2 text-[#166534] font-medium">Gradient descent optimization (exceeds the ≥ 5,000 sample requirement)</td>
                     </tr>
                     <tr>
                       <td className="px-3.5 py-2 font-semibold text-[#0284c7]">Validation Set</td>
                       <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">1,550 pairs</td>
                       <td className="px-3.5 py-2 font-mono">~15.0%</td>
-                      <td className="px-3.5 py-2 text-[#515f74]">Điều chỉnh hyperparameter, theo dõi SILog validation loss, Early Stopping</td>
+                      <td className="px-3.5 py-2 text-[#515f74]">Hyperparameter tuning, SILog validation monitoring, and Early Stopping</td>
                     </tr>
                     <tr>
                       <td className="px-3.5 py-2 font-semibold text-[#7e22ce]">Test Set</td>
                       <td className="px-3.5 py-2 font-mono font-bold text-[#131b2e]">1,034 pairs</td>
                       <td className="px-3.5 py-2 font-mono">~10.0%</td>
-                      <td className="px-3.5 py-2 text-[#515f74]">Đánh giá tổng kết độc lập cuối cùng trên các căn phòng chưa từng thấy</td>
+                      <td className="px-3.5 py-2 text-[#515f74]">Final unbiased generalization evaluation across unseen rooms</td>
                     </tr>
                     <tr className="bg-[#f8faff] font-semibold">
-                      <td className="px-3.5 py-2 text-[#131b2e]">Tổng cộng</td>
+                      <td className="px-3.5 py-2 text-[#131b2e]">Total Benchmark Corpus</td>
                       <td className="px-3.5 py-2 font-mono text-[#0037b0]">10,335 pairs</td>
                       <td className="px-3.5 py-2 font-mono">100.0%</td>
-                      <td className="px-3.5 py-2 text-[#166534]">Toàn bộ 100% benchmark SUN RGB-D</td>
+                      <td className="px-3.5 py-2 text-[#166534]">100% full SUN RGB-D benchmark</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <p className="text-[12px] text-[#64748b]">
-                <em>Ghi chú:</em> Phân vùng kinh điển của Princeton (5,285 train / 1,090 val / 3,960 test) cũng được đánh số và lưu trữ song song trong manifest để đối chiếu chéo với các công bố quốc tế.
+                <em>Note:</em> The legacy Princeton official benchmark split (5,285 train / 1,090 val / 3,960 test) is also fully indexed in our manifest for secondary cross-paper comparability.
               </p>
             </div>
 
