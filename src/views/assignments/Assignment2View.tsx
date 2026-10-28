@@ -319,28 +319,34 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                   </thead>
                   <tbody className="divide-y divide-[#f2f3ff] bg-white">
                     <tr>
+                      <td className="px-4 py-2.5 font-mono font-bold text-[#b45309]">E0</td>
+                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Depth Anything V2 (Small - ViT)</td>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#b45309]">Pretrained Inference (Zero-shot)</td>
+                      <td className="px-4 py-2.5 text-[#515f74]">Measures out-of-distribution zero-shot generalization without any training on SUN RGB-D. Serves as reference floor to quantify fine-tuning gains.</td>
+                    </tr>
+                    <tr>
                       <td className="px-4 py-2 font-medium">Total Benchmark Pairs</td>
                       <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">10,335 pairs</td>
                       <td className="px-4 py-2 text-[#166534] font-medium">Official SUN RGB-D benchmark size</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Analyzed Dataset Corpus</td>
-                      <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">7,001 pairs</td>
-                      <td className="px-4 py-2 text-[#166534] font-medium">67.7% of full benchmark (Exceeds ≥ 5,000 requirement)</td>
+                      <td className="px-4 py-2 font-mono text-[#0037b0] font-semibold">10,335 pairs</td>
+                      <td className="px-4 py-2 text-[#166534] font-medium">100% full benchmark (Exceeds ≥ 5,000 requirement)</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Mean Valid Depth</td>
-                      <td className="px-4 py-2 font-mono">2.32 meters</td>
+                      <td className="px-4 py-2 font-mono">2.38 meters</td>
                       <td className="px-4 py-2 text-[#515f74]">Primary human working envelope in indoor rooms</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Median Valid Depth</td>
-                      <td className="px-4 py-2 font-mono">2.07 meters</td>
+                      <td className="px-4 py-2 font-mono">2.08 meters</td>
                       <td className="px-4 py-2 text-[#515f74]">Well-balanced distribution, robust central tendency</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Standard Deviation</td>
-                      <td className="px-4 py-2 font-mono">1.04 meters</td>
+                      <td className="px-4 py-2 font-mono">1.20 meters</td>
                       <td className="px-4 py-2 text-[#515f74]">Consistent indoor spatial variance across scenes</td>
                     </tr>
                     <tr>
@@ -355,7 +361,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     </tr>
                     <tr>
                       <td className="px-4 py-2 font-medium">Sensor Invalid Pixel Ratio</td>
-                      <td className="px-4 py-2 font-mono">10.34% mean (Max 64.53%)</td>
+                      <td className="px-4 py-2 font-mono text-[#166534] font-semibold">0.43% mean (Refined depth_bfx, down from 15.77% raw) (Max 52.36%)</td>
                       <td className="px-4 py-2 text-[#515f74]">Dynamically masked out via valid_mask during training</td>
                     </tr>
                   </tbody>
@@ -371,7 +377,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     className="w-full rounded border border-[#eaedff]"
                   />
                   <p className="text-[12px] font-mono text-[#515f74] text-center">
-                    Figure 1: Empirical Ground Truth Metric Depth Distribution (peak around 2.07m - 2.32m) and Missing Pixel Ratio (10.34% mean across 7,001 pairs).
+                    Figure 1: Empirical Ground Truth Metric Depth Distribution (peak around 2.08m - 2.38m) and Missing Pixel Ratio (0.43% mean across full 10,335 benchmark pairs with depth_bfx).
                   </p>
                 </div>
 
@@ -493,6 +499,12 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                   </thead>
                   <tbody className="divide-y divide-[#f2f3ff] bg-white">
                     <tr>
+                      <td className="px-4 py-2.5 font-mono font-bold text-[#b45309]">E0</td>
+                      <td className="px-4 py-2.5 font-medium text-[#131b2e]">Depth Anything V2 (Small - ViT)</td>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#b45309]">Pretrained Inference (Zero-shot)</td>
+                      <td className="px-4 py-2.5 text-[#515f74]">Measures out-of-distribution zero-shot generalization without any training on SUN RGB-D. Serves as reference floor to quantify fine-tuning gains.</td>
+                    </tr>
+                    <tr>
                       <td className="px-4 py-2.5 font-mono font-bold text-[#0037b0]">E1</td>
                       <td className="px-4 py-2.5 font-medium text-[#131b2e]">Simple CNN Encoder–Decoder (UNet Baseline)</td>
                       <td className="px-4 py-2.5 font-mono text-[12px] text-[#7e22ce]">From scratch (Random Init)</td>
@@ -554,7 +566,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 11. Subset Selection Rules &amp; Quality Filtering
               </h3>
               <ul className="list-disc list-inside space-y-1 pl-1 text-[13px] text-[#475569]">
-                <li><strong>Zero-Drop Strategy with Dynamic Masking:</strong> Retains 100% of the 7,001 analyzed pairs. Missing/invalid depth values (sensor parallax, reflective mirrors, transparent glass) are masked dynamically via boolean validity tensor: <InlineMath math="\text{valid\_mask} = (Z > 0.5) \land (Z \le 8.0) \land \text{isfinite}(Z)" /> during backpropagation.</li>
+                <li><strong>Zero-Drop Strategy with Dynamic Masking:</strong> Retains 100% of the 10,335 analyzed pairs. Missing/invalid depth values (sensor parallax, reflective mirrors, transparent glass) are masked dynamically via boolean validity tensor: <InlineMath math="\text{valid\_mask} = (Z > 0.5) \land (Z \le 8.0) \land \text{isfinite}(Z)" /> during backpropagation.</li>
                 <li><strong>Physical Scale &amp; Bit-Shift Decode:</strong> Raw 16-bit PNG depth maps from Princeton are decoded via cyclic 3-bit restoration: <InlineMath math="Z = ((D \gg 3) \mid (D \ll 13)) / 1000.0" /> before normalization.</li>
                 <li><strong>Resolution Standardization:</strong> All camera streams (Intel RealSense, Asus Xtion, Kinect v1/v2) are interpolated to a standard <InlineMath math="256 \times 320" /> training resolution.</li>
               </ul>
