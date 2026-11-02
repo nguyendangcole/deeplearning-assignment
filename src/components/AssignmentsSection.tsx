@@ -70,8 +70,8 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
 
                 {asg.id === 'asg-02' && (
                   <div className="pt-3 border-t border-[#f2f3ff] flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
-                    <span className="px-2 py-0.5 bg-[#dcfce7] text-[#166534] rounded font-semibold">
-                      Proposal (10,335 Pairs)
+                    <span className="px-2 py-0.5 bg-[#eef4ff] text-[#0037b0] rounded font-semibold">
+                      SUN RGB-D (10,335 Pairs)
                     </span>
                     <span className="px-2 py-0.5 bg-[#eef4ff] text-[#0037b0] rounded font-semibold">
                       Depth Anything V2
