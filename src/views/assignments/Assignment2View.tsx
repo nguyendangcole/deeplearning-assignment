@@ -1556,20 +1556,175 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             </h2>
           </div>
 
-          <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px] text-[#475569] space-y-3">
-            <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">
-              1-Click Setup &amp; Benchmark Reproduction Guide:
-            </span>
-            <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto space-y-1">
-              <div className="text-[#94a3b8]"># 1. Clone repository &amp; enter assignment 2 directory</div>
-              <div>git clone https://github.com/nguyendangcole/deeplearning-assignment.git</div>
-              <div>cd deeplearning-assignment/assignment2</div>
-              <div className="text-[#94a3b8] pt-1"># 2. Launch interactive Jupyter Notebook</div>
-              <div>jupyter notebook notebooks/02_Training_and_Evaluation.ipynb</div>
-            </div>
-            <p className="text-[12px] text-[#64748b]">
-              Pre-trained PyTorch model weights checkpoints (<code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E1.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E2.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E3.pth</code>) are saved under <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">assignment2/checkpoints/</code> and hosted on GitHub Releases and Google Drive for final milestone grading.
+          <div className="space-y-4 text-[13px]">
+            <p className="text-[#515f74]">
+              All pre-trained and fine-tuned PyTorch model weights (<code className="font-mono text-[12px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">.pth</code>) are versioned and stored under{' '}
+              <a
+                href={`${COURSE_INFO.repoUrl}/tree/main/assignment2/checkpoints`}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] px-1.5 py-0.5 rounded font-mono text-[12px] inline-flex items-center gap-1 font-semibold transition-colors"
+              >
+                <span>assignment2/checkpoints/</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              {' '}in the GitHub repository and mirrored for direct download:
             </p>
+
+            {/* Checkpoints Table */}
+            <div className="overflow-x-auto rounded-lg border border-[#eaedff]">
+              <table className="w-full text-left text-[12px] border-collapse">
+                <thead className="bg-[#f2f3ff] text-[#131b2e] font-mono text-[11px] uppercase border-b border-[#eaedff]">
+                  <tr>
+                    <th className="py-2.5 px-3">Experiment &amp; Architecture</th>
+                    <th className="py-2.5 px-3">Checkpoint File</th>
+                    <th className="py-2.5 px-3">File Size</th>
+                    <th className="py-2.5 px-3">Test Metrics (AbsRel / &delta;&lt;1.25)</th>
+                    <th className="py-2.5 px-3 text-right">Checkpoint Link</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#f2f3ff] font-mono">
+                  <tr className="hover:bg-[#f9faff]">
+                    <td className="py-2.5 px-3 font-semibold text-[#131b2e] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#515f74]" />
+                      <span>E1 · Custom Simple CNN U-Net</span>
+                      <span className="text-[10px] font-mono bg-[#f1f5f9] text-[#475569] border border-[#cbd5e1] px-1 py-0.2 rounded font-normal">
+                        Scratch Baseline
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 font-bold text-[#0037b0]">best_model_E1.pth</td>
+                    <td className="py-2.5 px-3 text-[#515f74]">31.5 MB</td>
+                    <td className="py-2.5 px-3">
+                      <span className="text-[#475569]">0.2407</span> / <span className="text-[#0037b0] font-bold">61.27%</span>
+                    </td>
+                    <td className="py-2.5 px-3 text-right">
+                      <a
+                        href={`${COURSE_INFO.repoUrl}/blob/main/assignment2/checkpoints/best_model_E1.pth`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#f2f3ff] hover:bg-[#e2e7ff] text-[#0037b0] rounded text-[11px] font-semibold transition-colors"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>best_model_E1.pth</span>
+                        <ExternalLink className="w-2.5 h-2.5 opacity-70" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-[#f9faff]">
+                    <td className="py-2.5 px-3 font-semibold text-[#0284c7] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#0284c7]" />
+                      <span>E2 · Depth Anything V2 (Head Only)</span>
+                      <span className="text-[10px] font-mono bg-[#e0f2fe] text-[#0369a1] border border-[#bae6fd] px-1 py-0.2 rounded font-normal">
+                        Linear Probing
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 font-bold text-[#0284c7]">best_model_E2.pth</td>
+                    <td className="py-2.5 px-3 text-[#515f74]">99.2 MB</td>
+                    <td className="py-2.5 px-3">
+                      <span className="text-[#475569]">0.1802</span> / <span className="text-[#0284c7] font-bold">74.87%</span>
+                    </td>
+                    <td className="py-2.5 px-3 text-right">
+                      <a
+                        href={`${COURSE_INFO.repoUrl}/blob/main/assignment2/checkpoints/best_model_E2.pth`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#e0f2fe] hover:bg-[#bae6fd] text-[#0369a1] rounded text-[11px] font-semibold transition-colors"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>best_model_E2.pth</span>
+                        <ExternalLink className="w-2.5 h-2.5 opacity-70" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr className="bg-[#f0fdf4]/40 hover:bg-[#f0fdf4]/70">
+                    <td className="py-2.5 px-3 font-bold text-[#166534] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#166534]" />
+                      <span>E3 · Depth Anything V2 (Full FT)</span>
+                      <span className="text-[10px] font-mono bg-[#dcfce7] text-[#166534] border border-[#86efac] px-1 py-0.2 rounded font-bold">
+                        Best Model SOTA
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 font-bold text-[#166534]">best_model_E3.pth</td>
+                    <td className="py-2.5 px-3 text-[#515f74]">99.2 MB</td>
+                    <td className="py-2.5 px-3">
+                      <span className="text-[#166534] font-bold">0.1444</span> / <span className="text-[#166534] font-bold">83.69%</span>
+                    </td>
+                    <td className="py-2.5 px-3 text-right">
+                      <a
+                        href={`${COURSE_INFO.repoUrl}/blob/main/assignment2/checkpoints/best_model_E3.pth`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#dcfce7] hover:bg-[#bbf7d0] text-[#166534] rounded text-[11px] font-bold transition-colors shadow-2xs"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>best_model_E3.pth</span>
+                        <ExternalLink className="w-2.5 h-2.5 opacity-70" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-[#f9faff]">
+                    <td className="py-2.5 px-3 font-medium text-[#475569] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#64748b]" />
+                      <span>E0 · Depth Anything V2 (Metric Foundation)</span>
+                      <span className="text-[10px] font-mono bg-[#f8fafc] text-[#475569] border border-[#e2e8f0] px-1 py-0.2 rounded font-normal">
+                        Zero-Shot Pretrained
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 font-mono text-[11px] text-[#515f74]">depth_anything_v2_metric_hypersim_vits.pth</td>
+                    <td className="py-2.5 px-3 text-[#515f74]">98.0 MB</td>
+                    <td className="py-2.5 px-3">
+                      <span className="text-[#475569]">0.2188</span> / <span className="text-[#475569]">67.43%</span>
+                    </td>
+                    <td className="py-2.5 px-3 text-right">
+                      <a
+                        href="https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-Hypersim-Small/resolve/main/depth_anything_v2_metric_hypersim_vits.pth"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#f8fafc] hover:bg-[#f1f5f9] text-[#475569] rounded text-[11px] font-semibold border border-[#e2e8f0] transition-colors"
+                      >
+                        <Download className="w-3 h-3" />
+                        <span>Hugging Face Hub</span>
+                        <ExternalLink className="w-2.5 h-2.5 opacity-70" />
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Quick Loading Snippet in PyTorch */}
+            <div className="space-y-1.5 pt-1">
+              <span className="font-mono text-[11px] font-semibold text-[#0037b0] uppercase block">
+                Quick Inference Checkpoint Loading Snippet (PyTorch):
+              </span>
+              <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto space-y-1">
+                <div className="text-[#94a3b8]"># Load fine-tuned Depth Anything V2 weights (E3)</div>
+                <div>import torch</div>
+                <div>checkpoint = torch.load('checkpoints/best_model_E3.pth', map_location='cpu')</div>
+                <div>model.load_state_dict(checkpoint)</div>
+                <div>model.eval()</div>
+              </div>
+            </div>
+
+            {/* 1-Click Reproduction Guide */}
+            <div className="p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px] text-[#475569] space-y-3 pt-3">
+              <span className="font-mono text-[11px] text-[#0037b0] font-semibold uppercase block">
+                1-Click Setup &amp; Benchmark Reproduction Guide:
+              </span>
+              <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto space-y-1">
+                <div className="text-[#94a3b8]"># 1. Clone repository &amp; enter assignment 2 directory</div>
+                <div>git clone https://github.com/nguyendangcole/deeplearning-assignment.git</div>
+                <div>cd deeplearning-assignment/assignment2</div>
+                <div className="text-[#94a3b8] pt-1"># 2. Launch interactive Jupyter Notebook</div>
+                <div>jupyter notebook notebooks/02_Training_and_Evaluation.ipynb</div>
+              </div>
+              <p className="text-[12px] text-[#64748b]">
+                Checkpoints are automatically verified upon notebook initialization. If training is skipped, the evaluation engine auto-loads the best checkpoint to compute full test set metrics and generate high-resolution residual heatmaps.
+              </p>
+            </div>
           </div>
         </div>
 
