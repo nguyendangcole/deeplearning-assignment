@@ -94,6 +94,16 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             >
               Next: Asg 03 →
             </button>
+            <a
+              href={`${base}Murph_A2_Report.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-md text-[12px] font-medium transition-colors shadow-xs cursor-pointer ml-2"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Report PDF</span>
+              <ExternalLink className="w-3 h-3 opacity-80" />
+            </a>
           </div>
         </div>
       </div>
@@ -168,14 +178,25 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
             </a>
 
-            <div
-              className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f8faff] text-[#515f74] rounded-lg text-[13px] font-medium border border-[#eaedff]"
-              title="Technical report PDF will be uploaded for Milestone 3"
+            <a
+              href={`${base}Murph_A2_Report.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-all shadow-xs hover:shadow-md cursor-pointer"
             >
-              <FileText className="w-4 h-4 text-[#0037b0]" />
-              <span>Report (PDF)</span>
-              <span className="text-[10px] font-mono bg-[#e2e7ff] text-[#0037b0] px-1.5 py-0.2 rounded font-semibold">Upcoming</span>
-            </div>
+              <FileText className="w-4 h-4" />
+              <span>View Assignment 2 Report (PDF)</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+            </a>
+
+            <a
+              href={`${base}Murph_A2_Report.pdf`}
+              download="<Murph>_A2_Report.pdf"
+              className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-[#0037b0]" />
+              <span>Download Report (23p, 20.3MB)</span>
+            </a>
 
             <div
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#f8faff] text-[#515f74] rounded-lg text-[13px] font-medium border border-[#eaedff]"
@@ -717,75 +738,80 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               To tackle the ill-posed monocular depth estimation problem on real-world indoor scenes, our methodology directly addresses the course requirements by developing: (1) a dedicated from-scratch convolutional baseline; (2) a state-of-the-art pretrained Vision Transformer foundation model; and (3) a principled fine-tuning procedure tailored to metric depth recovery.
             </p>
 
-            {/* Sub-section 6.1: Simple Baseline */}
-            <div className="border-l-2 border-[#0037b0] pl-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-[16px] text-[#131b2e] flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-[#f1f5f9] text-[#475569] font-mono text-[12px] font-bold flex items-center justify-center">
-                    1
+            {/* End-to-End Pipeline & Model Architectures (Criteria 1 & 2) */}
+            <div className="bg-[#fcfcff] p-5 rounded-xl border border-[#eaedff] space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f2f3ff] pb-3">
+                <div className="flex items-center space-x-2">
+                  <Layers className="w-4 h-4 text-[#0037b0]" />
+                  <span className="font-mono text-[13px] font-bold text-[#131b2e] uppercase">
+                    Figure 2.1: Comprehensive End-to-End Deep Learning Pipeline Architecture
                   </span>
-                  <span>Simple Baseline Model: Custom CNN U-Net (E1)</span>
-                </h3>
-                <span className="px-2 py-0.5 bg-[#f1f5f9] text-[#475569] border border-[#e2e8f0] font-mono text-[11px] rounded font-semibold">
-                  Trained From Scratch (7.8M params)
-                </span>
+                </div>
+                <a
+                  href={getAssetUrl('assignment2/figures/pipeline_architecture.png')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-1 text-[12px] text-[#0037b0] hover:underline font-mono"
+                >
+                  <span>View High-Res</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
-              <p>
-                As required by <strong>Criterion 1 (Simple Baseline)</strong>, we designed a classical 4-stage convolutional Encoder–Decoder architecture with symmetric skip connections, initialized completely from scratch with no pre-trained weights.
+
+              <div className="overflow-hidden rounded-lg border border-[#eaedff] bg-white p-4 flex justify-center items-center">
+                <img
+                  src={getAssetUrl('assignment2/figures/pipeline_architecture.png')}
+                  alt="Comprehensive End-to-End Deep Learning Pipeline Architecture across experimental paradigms"
+                  className="max-w-full h-auto mx-auto object-contain"
+                />
+              </div>
+
+              <p className="text-[12px] font-mono text-[#515f74] text-center leading-relaxed">
+                Figure 2.1: Architectural dataflow diagram connecting: (Top) 16-bit raw sensor decoding and anti-leakage room-disjoint splitting; (Middle) the four experimental regimes spanning scratch CNN (E1), zero-shot foundation model (E0), linear probe (E2), and end-to-end fine-tuning (E3); (Bottom) FP16 AdamW optimization via composite <InlineMath math="\mathcal{L}_{\text{SILog}} + 0.5 \cdot \mathcal{L}_{\text{grad}}" /> and held-out metric evaluation.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13px] bg-[#f8faff] p-4 rounded-lg border border-[#eaedff]">
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-[#131b2e] block">Architectural Specifications:</span>
-                  <ul className="list-disc list-inside space-y-1 text-[#475569]">
-                    <li><strong>Encoder:</strong> 4 stages with DoubleConv blocks <code className="font-mono text-[11.5px] bg-[#eef2ff] px-1 py-0.5 rounded text-[#0037b0]">[Conv2d 3x3 → BatchNorm → ReLU]</code> doubling channel width: 3 → 32 → 64 → 128 → 256.</li>
-                    <li><strong>Downsampling:</strong> 2×2 Max Pooling with stride 2 between stages.</li>
-                    <li><strong>Bottleneck:</strong> Central feature representation with 512 feature channels.</li>
-                    <li><strong>Decoder:</strong> 4 upsampling stages using Bilinear interpolation / Transposed convolutions, concatenating low-level spatial skip features from corresponding encoder stages.</li>
-                    <li><strong>Output Head:</strong> Final 1×1 convolution with Sigmoid scaling mapped to continuous metric depth bounds <InlineMath math="[0.5\,\text{m}, \, 8.0\,\text{m}]" />.</li>
+
+              {/* Architectural Comparative Summary Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                {/* Baseline Spec Card */}
+                <div className="p-4 bg-[#f8faff] rounded-lg border border-[#e2e8f0] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-[13.5px] text-[#131b2e] flex items-center gap-1.5">
+                      <span className="w-5 h-5 rounded-full bg-[#e2e8f0] text-[#334155] font-mono text-[11px] font-bold flex items-center justify-center">
+                        1
+                      </span>
+                      <span>Criterion 1: Custom CNN U-Net (E1)</span>
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#f1f5f9] text-[#475569] border border-[#cbd5e1] font-mono text-[10.5px] rounded font-semibold">
+                      Scratch Baseline
+                    </span>
+                  </div>
+                  <ul className="text-[12.5px] text-[#475569] space-y-1 list-disc list-inside">
+                    <li><strong>Topology:</strong> 4-stage convolutional Encoder–Decoder with symmetric skip connections.</li>
+                    <li><strong>Capacity:</strong> 7,832,129 trainable parameters | 18.2 GFLOPs at 256×320 resolution.</li>
+                    <li><strong>Channels:</strong> 3 → 32 → 64 → 128 → 256 → 512 (Bottleneck) → 256 → 128 → 64 → 32 → 1.</li>
+                    <li><strong>Purpose:</strong> Establishes the empirical lower bound of monocular depth estimation when 3D spatial priors must be learned entirely from scratch on SUN RGB-D.</li>
                   </ul>
                 </div>
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-[#131b2e] block">Baseline Operational Purpose:</span>
-                  <p className="text-[#475569]">
-                    Establishes the true empirical lower bound of monocular depth estimation when an architecture must learn 3D projective geometry purely from scratch on SUN RGB-D. It provides the reference against which the feature transfer and representation gains of foundation models are benchmarked.
-                  </p>
-                  <div className="pt-2">
-                    <span className="text-[11px] font-mono text-[#515f74] block">Complexity: 7,832,129 trainable parameters | 18.2 GFLOPs at 256×320</span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Sub-section 6.2: Pretrained / Modern Model */}
-            <div className="border-l-2 border-[#0037b0] pl-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-[16px] text-[#131b2e] flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-[#e0f2fe] text-[#0369a1] font-mono text-[12px] font-bold flex items-center justify-center">
-                    2
-                  </span>
-                  <span>Modern Foundation Model: Depth Anything V2 (Small - ViT-S)</span>
-                </h3>
-                <span className="px-2 py-0.5 bg-[#dcfce7] text-[#166534] border border-[#bbf7d0] font-mono text-[11px] rounded font-semibold">
-                  Pretrained Foundation Model (24.8M params)
-                </span>
-              </div>
-              <p>
-                In accordance with <strong>Criterion 2 (Pretrained or Modern Model)</strong>, we employ <strong>Depth Anything V2</strong> (Small variant), a state-of-the-art foundation model designed for robust monocular depth estimation across diverse visual distributions.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13px] bg-[#f8faff] p-4 rounded-lg border border-[#eaedff]">
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-[#131b2e] block">Vision Transformer (ViT-S) Backbone:</span>
-                  <p className="text-[#475569]">
-                    Comprises 12 transformer encoder blocks with 384 hidden dimension and 6 multi-head self-attention heads (24.8M parameters). Images are split into <InlineMath math="14 \times 14" /> non-overlapping patches. Global self-attention enables the model to resolve large-scale room structures (ceiling-floor planes, long corridors) that fall outside the local receptive field of classical CNNs.
-                  </p>
-                  <span className="text-[11.5px] font-mono text-[#0037b0] block">Pretraining: Trained on 62M synthetic images + Hypersim indoor metric depth.</span>
-                </div>
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-[#131b2e] block">Dense Prediction Transformer (DPT) Head:</span>
-                  <p className="text-[#475569]">
-                    Hooks intermediate feature representations at transformer layers 3, 6, 9, and 12. Multi-scale token features are reassembled via convolutional projection into pyramid feature maps at scales <InlineMath math="1/4, 1/8, 1/16, 1/32" /> and progressively fused via Residual Convolutional Units (RCU) into crisp, high-resolution metric depth maps.
-                  </p>
-                  <span className="text-[11.5px] font-mono text-[#166534] block">Head Capacity: ~3.2M parameters optimized for dense metric regression.</span>
+                {/* Modern Foundation Model Spec Card */}
+                <div className="p-4 bg-[#f0fdf4] rounded-lg border border-[#bbf7d0] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-[13.5px] text-[#131b2e] flex items-center gap-1.5">
+                      <span className="w-5 h-5 rounded-full bg-[#dcfce7] text-[#166534] font-mono text-[11px] font-bold flex items-center justify-center">
+                        2
+                      </span>
+                      <span>Criterion 2: Depth Anything V2 (ViT-S)</span>
+                    </span>
+                    <span className="px-2 py-0.5 bg-[#dcfce7] text-[#166534] border border-[#86efac] font-mono text-[10.5px] rounded font-semibold">
+                      Foundation Model
+                    </span>
+                  </div>
+                  <ul className="text-[12.5px] text-[#166534] space-y-1 list-disc list-inside">
+                    <li><strong>Backbone:</strong> Vision Transformer (ViT-S/14) with 12 transformer blocks, <InlineMath math="D=384" />, 6 attention heads (21.6M params).</li>
+                    <li><strong>Head:</strong> Dense Prediction Transformer (DPT) with multiscale fusion at scales 1/4, 1/8, 1/16, 1/32 (3.2M params).</li>
+                    <li><strong>Pretraining:</strong> 62M synthetic images + Hypersim indoor metric depth prior.</li>
+                    <li><strong>Purpose:</strong> Captures global scene context and planar room constraints far exceeding the local receptive field of classical CNNs.</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -1729,17 +1755,78 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
         </div>
 
         {/* =========================================================================
-            14. LINK TO REPORT / SLIDES (Item 14)
+            14. TECHNICAL REPORT & DELIVERABLES (<Murph>_A2_Report.pdf)
            ========================================================================= */}
-        <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-3">
-          <div className="flex items-center space-x-3 border-b border-[#f2f3ff] pb-3">
-            <FileText className="w-5 h-5 text-[#0037b0]" />
-            <h2 className="font-serif text-[18px] font-medium text-[#131b2e]">
-              14. Link to Report / Slides
-            </h2>
+        <div id="sec-report" className="bg-white p-6 sm:p-8 rounded-xl border border-[#eaedff] shadow-xs space-y-5 scroll-mt-28">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f2f3ff] pb-4">
+            <div className="flex items-center space-x-3">
+              <FileText className="w-5 h-5 text-[#0037b0]" />
+              <h2 className="font-serif text-[20px] font-medium text-[#131b2e]">
+                14. Technical Report &amp; Deliverables
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#eef4ff] text-[#0037b0] border border-[#d0deff]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Official Report · 23 Pages
+            </span>
           </div>
-          <div className="p-4 bg-[#faf8ff] rounded-lg border border-dashed border-[#d0d7ff] text-[13px] text-[#515f74]">
-            Milestone 2 Draft metrics and methodologies are documented above. The formal LaTeX publication report (PDF) and presentation slide deck will be compiled and uploaded here prior to Milestone 3 (Final Release deadline: 11 Nov 2026).
+
+          {/* Overview Metadata Card */}
+          <div className="p-5 sm:p-6 bg-[#fbfcfe] rounded-xl border border-[#eaedff] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 bg-[#dcfce7] text-[#166534] font-mono text-[10px] font-bold uppercase rounded border border-[#bbf7d0]">
+                    Milestone 3 Deliverable
+                  </span>
+                  <span className="text-[12px] font-mono text-[#515f74]">
+                    20.3 MB · 23 Pages
+                  </span>
+                </div>
+                <h3 className="text-[16px] font-semibold text-[#131b2e] leading-snug">
+                  Monocular Metric Depth Estimation on SUN RGB-D: From Convolutional Baselines to Vision Transformer Foundation Models
+                </h3>
+                <p className="text-[12px] text-[#515f74]">
+                  Document: <code className="font-mono text-[11px] bg-[#f2f3ff] px-1.5 py-0.5 rounded text-[#0037b0] font-semibold">&lt;Murph&gt;_A2_Report.pdf</code> · Author: {COURSE_INFO.author} ({COURSE_INFO.studentId}) · Advisor: {COURSE_INFO.instructor}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href={`${base}Murph_A2_Report.pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs cursor-pointer"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>View Full Report (PDF)</span>
+                  <ExternalLink className="w-3 h-3 opacity-80" />
+                </a>
+                <a
+                  href={`${base}Murph_A2_Report.pdf`}
+                  download="<Murph>_A2_Report.pdf"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#0037b0]" />
+                  <span>Download PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#f2f3ff] text-[12px]">
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Scope &amp; Methodology</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">CNN U-Net Baseline vs. Depth Anything V2 (E0–E3)</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Dataset &amp; Split Protocol</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">SUN RGB-D (10,335 Pairs, Disjoint Room ID Split)</span>
+              </div>
+              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
+                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Key Experimental Findings</span>
+                <span className="text-[#131b2e] font-medium mt-0.5 block">E3 SOTA: AbsRel 0.1444 · &delta; &lt; 1.25 83.69% · 53.2 FPS</span>
+              </div>
+            </div>
           </div>
         </div>
 
