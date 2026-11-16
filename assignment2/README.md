@@ -70,6 +70,7 @@ assignment2/
 │   ├── 02_Training_and_Evaluation.ipynb  # Clean, modular training benchmark (E0–E3) with 1-click export
 │   └── depth-estimation.ipynb            # Kaggle executed pipeline containing full inline outputs
 ├── checkpoints/            # Saved PyTorch model checkpoints (.pth)
+│   ├── best_model_E0.pth                  # Pretrained weights: Depth Anything V2 (Zero-shot)
 │   ├── best_model_E1.pth                  # Best weights: Simple CNN U-Net
 │   ├── best_model_E2.pth                  # Best weights: Depth Anything V2 (Head Only)
 │   └── best_model_E3.pth                  # Best weights: Depth Anything V2 (Full FT)
