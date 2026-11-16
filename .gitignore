@@ -7,3 +7,7 @@ coverage/
 .env*
 !.env.example
 .vscode/
+
+# Assignment 2 large checkpoints (>90MB)
+assignment2/checkpoints/*.pth
+
