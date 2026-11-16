@@ -158,13 +158,13 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           {/* Quick Deliverable Action Links */}
           <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
-              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+              href="https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
             >
               <Github className="w-4 h-4" />
-              <span>GitHub Repo</span>
+              <span>GitHub Repo (Assignment 2)</span>
               <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
             </a>
 
@@ -1050,7 +1050,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     <tr className="bg-[#f0fdf4] font-medium border-t-2 border-[#bbf7d0]">
                       <td className="py-2.5 px-3 font-mono font-bold text-[#166534] flex items-center gap-1.5">
                         <span>E3</span>
-                        <span className="text-[10px] bg-[#166534] text-white px-1.5 py-0.2 rounded font-normal">SOTA</span>
+                        <span className="text-[10px] bg-[#166534] text-white px-1.5 py-0.2 rounded font-normal">best</span>
                       </td>
                       <td className="py-2.5 px-3 font-bold text-[#131b2e]">Depth Anything V2 (Small)</td>
                       <td className="py-2.5 px-3 text-[#166534] font-semibold text-[12px]">Full End-to-End Fine-Tuning (15 ep)</td>
@@ -1424,7 +1424,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             All dataset profiling, training pipelines, evaluation routines, and pre-trained weights wrappers are fully open-sourced in our GitHub repository and packaged as ready-to-run Jupyter Notebooks:
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* EDA Notebook Card */}
             <div className="p-4 bg-[#f8faff] rounded-xl border border-[#eaedff] flex flex-col justify-between space-y-3">
               <div className="space-y-1.5">
@@ -1433,7 +1433,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                   <span className="font-mono text-[12px] font-bold text-[#131b2e]">01_Dataset_EDA.ipynb</span>
                 </div>
                 <p className="text-[12.5px] text-[#515f74]">
-                  Comprehensive exploratory data analysis notebook: bit-shift decoding restoration, depth histograms, missing-pixel statistics, zero-drop filtering, and scene categorization.
+                  EDA &amp; Data Pipeline: Bit-shift decoding, depth histograms, missing-pixel statistics, zero-drop filtering, and manifest generator.
                 </p>
               </div>
               <a
@@ -1442,19 +1442,40 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 className="inline-flex items-center justify-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[12.5px] font-semibold transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Download EDA Notebook (.ipynb)</span>
+                <span>Download EDA Notebook</span>
               </a>
             </div>
 
-            {/* Training Benchmark Notebook Card */}
+            {/* Clean Training Benchmark Notebook Card */}
+            <div className="p-4 bg-[#f8faff] rounded-xl border border-[#eaedff] flex flex-col justify-between space-y-3">
+              <div className="space-y-1.5">
+                <div className="flex items-center space-x-2">
+                  <Code className="w-4 h-4 text-[#0037b0]" />
+                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">02_Training_and_Evaluation.ipynb</span>
+                </div>
+                <p className="text-[12.5px] text-[#515f74]">
+                  Production Training Benchmark: Clean, modular Colab/Kaggle code across all 4 experiments (E0–E3), error heatmaps &amp; 1-click zip export.
+                </p>
+              </div>
+              <a
+                href={getAssetUrl('assignment2/notebooks/02_Training_and_Evaluation.ipynb')}
+                download="02_Training_and_Evaluation.ipynb"
+                className="inline-flex items-center justify-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[12.5px] font-semibold transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download Training Code</span>
+              </a>
+            </div>
+
+            {/* Executed Benchmark Notebook Card */}
             <div className="p-4 bg-[#f8faff] rounded-xl border border-[#eaedff] flex flex-col justify-between space-y-3">
               <div className="space-y-1.5">
                 <div className="flex items-center space-x-2">
                   <Code className="w-4 h-4 text-[#166534]" />
-                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">depth-estimation.ipynb (02)</span>
+                  <span className="font-mono text-[12px] font-bold text-[#131b2e]">depth-estimation.ipynb (Executed)</span>
                 </div>
                 <p className="text-[12.5px] text-[#515f74]">
-                  Complete benchmark execution pipeline: PyTorch datasets, SILog + Gradient loss, Simple CNN U-Net (E1), Depth Anything V2 (E0, E2, E3), metrics evaluation, and qualitative grid visualization.
+                  Kaggle Executed Pipeline: Full interactive execution containing rendered outputs, loss curves, test-set grids &amp; diagnostics.
                 </p>
               </div>
               <a
@@ -1463,7 +1484,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 className="inline-flex items-center justify-center space-x-2 px-3.5 py-2 bg-[#166534] hover:bg-[#14532d] text-white rounded-lg text-[12.5px] font-semibold transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Download Training Benchmark (.ipynb)</span>
+                <span>Download Executed Notebook</span>
               </a>
             </div>
           </div>
@@ -1471,12 +1492,12 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px] gap-2 pt-3">
             <span className="text-[#434655] font-medium">Assignment 2 Official GitHub Repository:</span>
             <a
-              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+              href="https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-1.5 text-[#0037b0] hover:underline font-mono text-[12px] font-semibold"
             >
-              <span>https://github.com/nguyendangcole/nguyen-assignment2-deeplearning</span>
+              <span>https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -1498,14 +1519,14 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               1-Click Setup &amp; Benchmark Reproduction Guide:
             </span>
             <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto space-y-1">
-              <div className="text-[#94a3b8]"># 1. Clone Assignment 2 repository</div>
-              <div>git clone https://github.com/nguyendangcole/nguyen-assignment2-deeplearning.git</div>
-              <div>cd nguyen-assignment2-deeplearning</div>
+              <div className="text-[#94a3b8]"># 1. Clone repository &amp; enter assignment 2 directory</div>
+              <div>git clone https://github.com/nguyendangcole/deeplearning-assignment.git</div>
+              <div>cd deeplearning-assignment/assignment2</div>
               <div className="text-[#94a3b8] pt-1"># 2. Launch interactive Jupyter Notebook</div>
-              <div>jupyter notebook depth-estimation.ipynb</div>
+              <div>jupyter notebook notebooks/02_Training_and_Evaluation.ipynb</div>
             </div>
             <p className="text-[12px] text-[#64748b]">
-              Pre-trained PyTorch model weights checkpoints (<code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E1.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E2.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E3.pth</code>) will be hosted on GitHub Releases and Google Drive for final milestone grading.
+              Pre-trained PyTorch model weights checkpoints (<code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E1.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E2.pth</code>, <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">best_model_E3.pth</code>) are saved under <code className="font-mono text-[11.5px] bg-[#f2f3ff] px-1 py-0.5 rounded text-[#0037b0]">assignment2/checkpoints/</code> and hosted on GitHub Releases and Google Drive for final milestone grading.
             </p>
           </div>
         </div>

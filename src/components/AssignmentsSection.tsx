@@ -77,7 +77,7 @@ export default function AssignmentsSection({ onNavigateView }: AssignmentsSectio
                       Depth Anything V2
                     </span>
                     <a
-                      href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+                      href="https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2"
                       target="_blank"
                       rel="noreferrer"
                       className="px-2 py-0.5 bg-[#1e293b]/10 text-[#1e293b] hover:bg-[#1e293b]/20 rounded font-semibold transition-colors inline-flex items-center gap-0.5"

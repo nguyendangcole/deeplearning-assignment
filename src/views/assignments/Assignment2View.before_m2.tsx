@@ -173,7 +173,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           {/* Quick Deliverable Action Links */}
           <div className="flex flex-wrap items-center gap-2.5 pt-2">
             <a
-              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+              href="https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#0037b0] hover:bg-[#00257a] text-white rounded-lg text-[13px] font-medium transition-colors shadow-xs"
@@ -738,7 +738,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
             </h2>
           </div>
           <p className="text-[13.5px] text-[#475569] leading-relaxed">
-            Controlled experiments will quantify: (1) Performance gap between Scratch CNN (E1) vs. Frozen ViT (E2) vs. Fine-tuned SOTA (E3); (2) Sensitivity of RMSE and AbsRel to invalid sensor pixel ratios; (3) Computational efficiency comparing training throughput and VRAM footprint on Google Colab L4 vs. T4 GPUs.
+            Controlled experiments will quantify: (1) Performance gap between Scratch CNN (E1) vs. Frozen ViT (E2) vs. Fine-tuned (E3); (2) Sensitivity of RMSE and AbsRel to invalid sensor pixel ratios; (3) Computational efficiency comparing training throughput and VRAM footprint on Google Colab L4 vs. T4 GPUs.
           </p>
         </div>
 
@@ -800,12 +800,12 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-[#faf8ff] rounded-lg border border-[#eaedff] text-[13px] gap-2">
             <span className="text-[#434655]">Assignment 2 GitHub Repository:</span>
             <a
-              href="https://github.com/nguyendangcole/nguyen-assignment2-deeplearning"
+              href="https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center space-x-1.5 text-[#0037b0] hover:underline font-mono text-[12px] font-semibold"
             >
-              <span>https://github.com/nguyendangcole/nguyen-assignment2-deeplearning</span>
+              <span>https://github.com/nguyendangcole/deeplearning-assignment/tree/main/assignment2</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -826,7 +826,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               Repository Setup &amp; Reproduction:
             </span>
             <div className="p-3 bg-[#1e293b] text-[#f8fafc] font-mono text-[12px] rounded-lg overflow-x-auto">
-              <code>git clone https://github.com/nguyendangcole/nguyen-assignment2-deeplearning.git &amp;&amp; cd sunrgbd-depth-estimation</code>
+              <code>git clone https://github.com/nguyendangcole/deeplearning-assignment.git &amp;&amp; cd deeplearning-assignment/assignment2</code>
             </div>
             <p className="text-[12px] text-[#64748b]">
               Model weight checkpoints (.pth) will be linked here upon final milestone release.
