@@ -1812,21 +1812,6 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 </a>
               </div>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#f2f3ff] text-[12px]">
-              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
-                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Scope &amp; Methodology</span>
-                <span className="text-[#131b2e] font-medium mt-0.5 block">CNN U-Net Baseline vs. Depth Anything V2 (E0–E3)</span>
-              </div>
-              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
-                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Dataset &amp; Split Protocol</span>
-                <span className="text-[#131b2e] font-medium mt-0.5 block">SUN RGB-D (10,335 Pairs, Disjoint Room ID Split)</span>
-              </div>
-              <div className="bg-white p-3 rounded-lg border border-[#eaedff]">
-                <span className="font-mono text-[10px] text-[#515f74] uppercase font-semibold block">Key Experimental Findings</span>
-                <span className="text-[#131b2e] font-medium mt-0.5 block">E3 SOTA: AbsRel 0.1444 · &delta; &lt; 1.25 83.69% · 53.2 FPS</span>
-              </div>
-            </div>
           </div>
         </div>
 
