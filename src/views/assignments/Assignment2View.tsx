@@ -489,23 +489,12 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
 
                 <div className="bg-[#fcfcff] p-3 rounded-lg border border-[#eaedff] space-y-2">
                   <img
-                    src={getAssetUrl('assignment2/figures/scene_distribution.png')}
-                    alt="Scene Category Distribution"
-                    className="w-full rounded border border-[#eaedff]"
-                  />
-                  <p className="text-[12px] font-mono text-[#515f74] text-center">
-                    Figure 2: Scene Category Breakdown across 10,335 Pairs (Bedroom: 1,822, Office: 1,543, Living Room: 1,058, Classroom: 985, etc.).
-                  </p>
-                </div>
-
-                <div className="bg-[#fcfcff] p-3 rounded-lg border border-[#eaedff] space-y-2">
-                  <img
                     src={getAssetUrl('assignment2/figures/sample_triplets_evidence.png')}
                     alt="Qualitative Sample Triplets"
                     className="w-full rounded border border-[#eaedff]"
                   />
                   <p className="text-[12px] font-mono text-[#515f74] text-center">
-                    Figure 3: Qualitative Triplets (Column 1: Input RGB Frame | Column 2: Continuous Metric Depth | Column 3: Binary Validity Mask).
+                    Figure 2: Qualitative Triplets (Column 1: Input RGB Frame | Column 2: Continuous Metric Depth | Column 3: Binary Validity Mask).
                   </p>
                 </div>
               </div>
