@@ -1799,6 +1799,16 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                   <Download className="w-3.5 h-3.5 text-[#0037b0]" />
                   <span>Download PDF</span>
                 </a>
+                <a
+                  href={`${COURSE_INFO.repoUrl}/blob/main/assignment2/%3CMurph%3E_A2_Report.pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f8faff] hover:bg-[#eaedff] text-[#475569] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
+                >
+                  <Github className="w-3.5 h-3.5 text-[#131b2e]" />
+                  <span>GitHub File</span>
+                  <ExternalLink className="w-3 h-3 opacity-70" />
+                </a>
               </div>
             </div>
           </div>

@@ -64,6 +64,7 @@ To thoroughly evaluate the paradigm shift from classical Convolutional Neural Ne
 ```text
 assignment2/
 ├── README.md               # Assignment 2 comprehensive documentation (this file)
+├── <Murph>_A2_Report.pdf   # Official LaTeX Technical Report (23 pages, 20.1 MB)
 ├── dataset_proposal.md     # Official M1 Proposal (task formulation, split, leakage prevention)
 ├── notebooks/              # Interactive Jupyter / Colab notebooks
 │   ├── 01_Dataset_EDA.ipynb               # Bit-shift decoding, distribution histograms & manifest
