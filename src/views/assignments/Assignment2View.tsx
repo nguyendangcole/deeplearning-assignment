@@ -1399,7 +1399,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 className="w-full rounded-lg border border-[#eaedff] bg-white p-1"
               />
               <p className="text-[12px] font-mono text-[#515f74] text-center">
-                Figure 7: Pixel-wise absolute residual error heatmaps (<InlineMath math="|Y - \hat{Y}|" />) for top failure test cases. High error concentrations correspond to specular wardrobe reflections, extreme corridor apertures (&gt; 7.5m), and thin transparent surfaces.
+                Figure 7: Pixel-wise absolute residual error heatmaps (<InlineMath math="|Y - \hat{Y}|" />) for top failure test cases. High error concentrations correspond to specular classroom tiled floors, distant amphitheater lecture halls, thin furniture legs, dark computer monitors, and infrared-absorbing plush blue armchairs.
               </p>
             </div>
           </div>
