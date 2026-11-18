@@ -284,6 +284,38 @@ export default function AssignmentModals({
                 <p className="text-[#434655]">
                   Assignment 02 focuses on scaling deep architectures across distributed hardware nodes and training specialized Vision Transformers (ViT) and sequence models on multi-GPU setups.
                 </p>
+                <div className="flex flex-wrap items-center gap-3 pt-2 text-[12px]">
+                  <a
+                    href={`${((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '')}/Murph_A2_Report.pdf`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline flex items-center gap-1 font-medium text-[#0037b0]"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>View PDF Report</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                  <a
+                    href={`${((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '')}/assignment2_slides.pdf`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline flex items-center gap-1 font-medium text-[#0037b0]"
+                  >
+                    <Presentation className="w-3.5 h-3.5" />
+                    <span>View Slides (PDF)</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                  <a
+                    href={`${COURSE_INFO.repoUrl}/tree/main/assignment2`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline flex items-center gap-1 font-medium text-[#131b2e]"
+                  >
+                    <Code className="w-3.5 h-3.5" />
+                    <span>Assignment 2 Repo</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                </div>
               </div>
 
               <section className="space-y-2">

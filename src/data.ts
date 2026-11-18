@@ -99,10 +99,13 @@ export const VIDEO_PRESENTATIONS: VideoPresentation[] = [
   {
     id: 'vid-02',
     assignmentTag: 'ASSIGNMENT 02 DEFENSE',
-    title: 'Large-Scale Training & Specialized Tasks',
+    title: 'Monocular Metric Depth Estimation on SUN RGB-D',
     description:
-      'Distributed data-parallel scaling, gradient accumulation ablation, and vision transformer convergence.',
+      'Official oral defense walkthrough and comparative benchmark of CNN U-Net Baseline vs. Depth Anything V2 (E0–E3) on SUN RGB-D (10,335 pairs).',
     duration: 'TBD',
+    slidesUrl: 'assignment2_slides.pdf',
+    slidesFilename: 'CO3133-Semester-261 – Group [2352821] – Assignment [2].pdf',
+    slidesCount: 16,
     isUpcoming: true,
   },
   {
