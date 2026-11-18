@@ -1221,7 +1221,34 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 className="w-full rounded-lg border border-[#eaedff] bg-white p-1"
               />
               <p className="text-[12px] font-mono text-[#515f74] text-center">
-                Figure 6: Qualitative evaluation on representative SUN RGB-D test rooms. Columns show: (1) Input RGB optical frame; (2) Sensor Ground Truth Depth; (3) E0 Zero-shot; (4) E1 Scratch CNN Baseline; (5) E2 Frozen ViT; (6) E3 Full Fine-tuned; (7) Error Residual Difference Map.
+                Figure 6: Qualitative evaluation on representative SUN RGB-D test rooms. Columns show: (1) Input RGB optical frame; (2) Ground Truth Depth (depth_bfx); (3) E0: Pretrained ViT; (4) E1: Simple CNN Baseline; (5) E2: ViT Linear Probe; (6) E3: ViT Full Fine-tuned.
+              </p>
+            </div>
+
+            {/* Detailed Zoom-in Patch Comparison: Inductive Bias */}
+            <div className="bg-[#fcfcff] p-4 sm:p-5 rounded-xl border border-[#eaedff] space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <span className="font-mono text-[12px] font-bold text-[#131b2e] uppercase flex items-center gap-1.5">
+                  <Eye className="w-4 h-4 text-[#0037b0]" />
+                  Figure 6b: Zoom-in Patch Analysis: CNN Depth Bleeding vs. ViT Contour Sharpness
+                </span>
+                <a
+                  href={getAssetUrl('assignment2/figures/qualitative_detailed_discussion.png')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-1 text-[12px] text-[#0037b0] hover:underline font-mono"
+                >
+                  <span>View High-Res Crop</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+              <img
+                src={getAssetUrl('assignment2/figures/qualitative_detailed_discussion.png')}
+                alt="Detailed Inductive Bias Comparison"
+                className="w-full rounded-lg border border-[#eaedff] bg-white p-1"
+              />
+              <p className="text-[12px] font-mono text-[#515f74] text-center">
+                Figure 6b: High-magnification structural zoom: Classical CNN U-Net (E1) dilates depth across object boundaries (depth bleeding), whereas ViT DPT (E3) resolves millimeter-sharp silhouettes around chair legs and desk partitions.
               </p>
             </div>
 
@@ -1393,31 +1420,40 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                 </thead>
                 <tbody className="divide-y divide-[#f2f3ff] bg-white">
                   <tr>
+                    <td className="py-2.5 px-3 font-semibold text-[#64748b]">E0 (Zero-shot ViT)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#515f74]">24.79 M (Head: 2.73M)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#64748b]">480.1 MB</td>
+                    <td className="py-2.5 px-3 font-mono text-[#64748b]">N/A (Pretrained)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#64748b]">N/A</td>
+                    <td className="py-2.5 px-3 font-mono text-[#64748b]">N/A (0 min)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#0037b0]">17.62 ms (56.8 FPS)</td>
+                  </tr>
+                  <tr>
                     <td className="py-2.5 px-3 font-semibold text-[#131b2e]">E1 (CNN Baseline)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#515f74]">7.83 M</td>
-                    <td className="py-2.5 px-3 font-mono text-[#166534]">~2.1 GB</td>
-                    <td className="py-2.5 px-3 font-mono">~276 pairs/sec</td>
-                    <td className="py-2.5 px-3 font-mono">~28 sec</td>
-                    <td className="py-2.5 px-3 font-mono">9.3 minutes (20 ep)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#166534]">12.4 ms (~80.6 FPS)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#515f74]">7.85 M (Scratch)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#166534]">514.3 MB</td>
+                    <td className="py-2.5 px-3 font-mono">~52 pairs/sec</td>
+                    <td className="py-2.5 px-3 font-mono">~148 sec</td>
+                    <td className="py-2.5 px-3 font-mono">49.3 minutes (20 ep)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#166534]">19.86 ms (50.4 FPS)</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 px-3 font-semibold text-[#0284c7]">E2 (Frozen ViT)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#515f74]">24.81 M (Head: 3.2M)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#0284c7]">~3.8 GB</td>
-                    <td className="py-2.5 px-3 font-mono">~184 pairs/sec</td>
-                    <td className="py-2.5 px-3 font-mono">~42 sec</td>
-                    <td className="py-2.5 px-3 font-mono">10.5 minutes (15 ep)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#0284c7]">18.8 ms (~53.2 FPS)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#515f74]">24.79 M (Head: 2.73M)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#0284c7]">480.1 MB</td>
+                    <td className="py-2.5 px-3 font-mono">~42 pairs/sec</td>
+                    <td className="py-2.5 px-3 font-mono">~184 sec</td>
+                    <td className="py-2.5 px-3 font-mono">46.0 minutes (15 ep)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#0284c7]">17.71 ms (56.5 FPS)</td>
                   </tr>
                   <tr className="bg-[#f0fdf4]/40 font-medium">
                     <td className="py-2.5 px-3 font-bold text-[#166534]">E3 (Full Fine-Tune)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#166534]">24.81 M (Full)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#166534]">~5.6 GB</td>
-                    <td className="py-2.5 px-3 font-mono">~108 pairs/sec</td>
-                    <td className="py-2.5 px-3 font-mono">~72 sec</td>
-                    <td className="py-2.5 px-3 font-mono font-bold text-[#166534]">18.0 minutes (15 ep)</td>
-                    <td className="py-2.5 px-3 font-mono text-[#166534]">18.8 ms (~53.2 FPS)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#166534]">24.79 M (Full)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#166534]">480.1 MB</td>
+                    <td className="py-2.5 px-3 font-mono">~42 pairs/sec</td>
+                    <td className="py-2.5 px-3 font-mono">~186 sec</td>
+                    <td className="py-2.5 px-3 font-mono font-bold text-[#166534]">46.5 minutes (15 ep)</td>
+                    <td className="py-2.5 px-3 font-mono text-[#166534]">17.80 ms (56.2 FPS)</td>
                   </tr>
                 </tbody>
               </table>

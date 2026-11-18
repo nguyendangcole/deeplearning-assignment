@@ -1,3 +1,5 @@
 Experiment,Architecture,Total Params,Trainable Params,Peak VRAM,Latency (ms) ↓,Throughput (FPS) ↑,Train Time/Epoch,Total Train Time
-E0,Depth Anything V2 (Zero-shot),24.79M,2.73M,353.8 MB,17.33 ms,57.7 FPS,N/A,N/A
-E3,Depth Anything V2 (Full Fine-Tune),24.79M,24.79M,353.8 MB,17.37 ms,57.6 FPS,~186s,~46.5 min
+E0,Depth Anything V2 (Zero-shot),24.79M,2.73M,480.1 MB,17.62 ms,56.8 FPS,N/A,N/A
+E1,Simple Custom CNN U-Net,7.85M,7.85M,514.3 MB,19.86 ms,50.4 FPS,~148s,~49.3 min
+E2,Depth Anything V2 (Freeze ViT),24.79M,2.73M,480.1 MB,17.71 ms,56.5 FPS,~184s,~46.0 min
+E3,Depth Anything V2 (Full Fine-Tune),24.79M,24.79M,480.1 MB,17.80 ms,56.2 FPS,~186s,~46.5 min
