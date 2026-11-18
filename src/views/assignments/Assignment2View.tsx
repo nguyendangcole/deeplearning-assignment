@@ -195,7 +195,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
               className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-[#f2f3ff] hover:bg-[#e6e8ff] text-[#131b2e] rounded-lg text-[13px] font-medium transition-colors border border-[#eaedff] cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-[#0037b0]" />
-              <span>Download Report (23p, 20.1MB)</span>
+              <span>Download Report (23p, 22.4MB)</span>
             </a>
 
             <div
@@ -1805,7 +1805,7 @@ export default function Assignment2View({ onNavigate }: AssignmentViewProps) {
                     Milestone 3 Deliverable
                   </span>
                   <span className="text-[12px] font-mono text-[#515f74]">
-                    20.1 MB · 23 Pages
+                    22.4 MB · 23 Pages
                   </span>
                 </div>
                 <h3 className="text-[16px] font-semibold text-[#131b2e] leading-snug">
